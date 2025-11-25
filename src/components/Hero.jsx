@@ -1,5 +1,5 @@
 import React from "react";
-import CurvedLoop from "./CurvedLoop.jsx";
+import CurvedLoop from "./CurvedLoop";
 
 const Hero = () => {
   return (
@@ -24,7 +24,7 @@ const Hero = () => {
         />
       </div>
 
-      
+
 
     </section>
   );
