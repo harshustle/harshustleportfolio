@@ -1,7 +1,7 @@
 import CardNav from './CardNav'
 import logo from '../assets/logos/HarshPng.png';
 
-const Navbar= () => {
+const Navbar = () => {
   const items = [
     {
       label: "About",
@@ -13,7 +13,7 @@ const Navbar= () => {
       ]
     },
     {
-      label: "Projects", 
+      label: "Projects",
       bgColor: "#170D27",
       textColor: "#fff",
       links: [
@@ -23,7 +23,7 @@ const Navbar= () => {
     },
     {
       label: "Contact",
-      bgColor: "#271E37", 
+      bgColor: "#271E37",
       textColor: "#fff",
       links: [
         { label: "Email", ariaLabel: "Email us" },

@@ -7,28 +7,40 @@ const features = [
     title: "Composable layouts",
     description:
       "Design once, reuse everywhere. Mix and match sections without rewriting your layout.",
-    layout: "md:col-span-3 md:row-span-2", // big card
+    layout: "md:col-span-3 md:row-span-2",
+    gradient: "from-purple-900/20 to-pink-900/20",
+    border: "border-purple-500/30",
+    hoverBorder: "hover:border-purple-500/60"
   },
   {
     icon: Zap,
     title: "Motion-ready",
     description:
       "Works seamlessly with GSAP, Framer Motion, and any custom animation pipeline.",
-    layout: "md:col-span-3 md:row-span-1", // wide short card
+    layout: "md:col-span-3 md:row-span-1",
+    gradient: "from-yellow-900/20 to-orange-900/20",
+    border: "border-yellow-500/30",
+    hoverBorder: "hover:border-yellow-500/60"
   },
   {
     icon: Sparkles,
     title: "Pixel-perfect visuals",
     description:
       "Sharp typography, spacing, and composition so your UI feels premium out of the box.",
-    layout: "md:col-span-2 md:row-span-1", // medium card
+    layout: "md:col-span-2 md:row-span-1",
+    gradient: "from-pink-900/20 to-rose-900/20",
+    border: "border-pink-500/30",
+    hoverBorder: "hover:border-pink-500/60"
   },
   {
     icon: Workflow,
     title: "Production-focused",
     description:
       "A structure that stays maintainable when the project grows and requirements change.",
-    layout: "md:col-span-4 md:row-span-1", // wide bottom card
+    layout: "md:col-span-4 md:row-span-1",
+    gradient: "from-blue-900/20 to-cyan-900/20",
+    border: "border-blue-500/30",
+    hoverBorder: "hover:border-blue-500/60"
   },
 ];
 
@@ -39,54 +51,56 @@ function FeaturesGrid() {
         grid gap-4
         grid-cols-1
         md:grid-cols-6
-        auto-rows-[minmax(130px,auto)]
+        auto-rows-[minmax(160px,auto)]
       "
     >
-      {features.map(({ icon: Icon, title, description, layout }, index) => (
+      {features.map(({ icon: Icon, title, description, layout, gradient, border, hoverBorder }, index) => (
         <article
           key={title}
           className={`
             group relative overflow-hidden
-            rounded-2xl border border-white
-            bg-[#dabbff]
-            p-5 sm:p-6
+            rounded-2xl border ${border} ${hoverBorder}
+            bg-gradient-to-br ${gradient}
+            p-6 sm:p-8
             flex flex-col justify-between
             transition-all duration-300 ease-out
-            hover:-translate-y-1 hover:border-white/40 hover:bg-black
+            hover:-translate-y-2 hover:shadow-lg
             ${layout}
           `}
         >
-          {/* subtle top accent line */}
-          <div className="absolute inset-x-0 top-0 h-px bg-white" />
+          {/* Glow effect on hover */}
+          <div className="absolute inset-0 bg-gradient-to-br from-white/0 to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
           {/* content */}
-          <div className="flex items-start gap-3 mb-4">
-            <div
-              className="
-                h-9 w-9 flex items-center justify-center
-                border border-white rounded-md
-                transition-transform duration-300
-                group-hover:scale-110 group-hover:-translate-y-0.5
-              "
-            >
-              <Icon className="h-4 w-4 text-black group-hover:text-white transition-colors" />
-            </div>
-            <div>
-              <h3 className="text-sm font-semibold text-black tracking-tight group-hover:text-white transition-colors">
-                {title}
-              </h3>
-              <p className="mt-1 text-[11px] text-black leading-relaxed group-hover:text-white transition-colors">
-                {description}
-              </p>
+          <div className="relative">
+            <div className="flex items-start gap-4 mb-4">
+              <div
+                className="
+                  h-12 w-12 flex items-center justify-center
+                  bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl
+                  transition-all duration-300
+                  group-hover:scale-110 group-hover:bg-white/20
+                "
+              >
+                <Icon className="h-6 w-6 text-white" />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg font-bold text-white tracking-tight mb-2">
+                  {title}
+                </h3>
+                <p className="text-sm text-gray-300 leading-relaxed">
+                  {description}
+                </p>
+              </div>
             </div>
           </div>
 
           {/* footer / index tag */}
-          <div className="flex items-center justify-between text-[10px] text-white">
-            <span className="uppercase tracking-[0.18em]">
+          <div className="relative flex items-center justify-between text-xs text-gray-400 pt-4 border-t border-white/10">
+            <span className="uppercase tracking-wider">
               Feature {String(index + 1).padStart(2, "0")}
             </span>
-            <span className="h-px w-8 bg-white group-hover:w-12 group-hover:bg-white transition-all duration-300" />
+            <div className="h-px w-12 bg-white/30 group-hover:w-20 group-hover:bg-white/60 transition-all duration-300" />
           </div>
         </article>
       ))}
