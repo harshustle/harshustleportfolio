@@ -2,17 +2,17 @@ import { useEffect, useState } from "react";
 
 function MetricsStrip() {
   const metrics = [
-    { label: "Components", value: 20 },
-    { label: "Projects shipped", value: 50 },
-    { label: "Hours saved", value: 3200 },
-    { label: "Global teams", value: 15 },
+    { label: "Projects", value: 20, icon: "🚀", color: "bg-white", suffix: "+" },
+    { label: "Hours", value: 50, icon: "⏱️", color: "bg-white", suffix: "+" },
+    { label: "Satisfaction", value: 97, icon: "⭐", color: "bg-white", suffix: "%" },
+    { label: "Team", value: 4, icon: "👥", color: "bg-white", suffix: "" },
   ];
 
   const [counts, setCounts] = useState(metrics.map(() => 0));
 
   // Smooth count animation
   useEffect(() => {
-    const duration = 1500;
+    const duration = 2000;
     const fps = 60;
     const steps = Math.round((duration / 1000) * fps);
 
@@ -35,25 +35,32 @@ function MetricsStrip() {
   }, []);
 
   return (
-    <div className="
-      rounded-3xl border border-white/10 bg-black/40 backdrop-blur-md
-      p-6 grid grid-cols-2 sm:grid-cols-4 gap-8 shadow-lg animate-fadeIn
-    ">
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
       {metrics.map((m, i) => (
         <div
           key={m.label}
-          className="flex flex-col group transition-all duration-300 hover:scale-[1.04]"
+          className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-white/5 to-white/10 hover:from-white/10 hover:to-white/15 border border-white/10 hover:border-white/20 p-6 transition-all duration-300 hover:scale-105 hover:-translate-y-1"
         >
-          <span className="text-xs uppercase tracking-wider text-center text-white/40">
-            {m.label}
-          </span>
+          {/* Gradient overlay on hover */}
+          <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
 
-          <span
-            className="text-3xl font-bold mt-1 text-white
-                       group-hover:tracking-tight transition-all duration-300 text-center"
-          >
-            {counts[i]}+
-          </span>
+          {/* Icon */}
+          <div className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
+            {m.icon}
+          </div>
+
+          {/* Value */}
+          <div className="text-4xl md:text-5xl font-bold mb-2 text-white">
+            {counts[i]}{m.suffix}
+          </div>
+
+          {/* Label */}
+          <div className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors">
+            {m.label}
+          </div>
+
+          {/* Decorative element */}
+          <div className="absolute bottom-0 left-0 h-1 w-0 group-hover:w-full bg-white transition-all duration-500" />
         </div>
       ))}
     </div>

@@ -1,77 +1,51 @@
 // src/App.jsx
+import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import BentoLayout from "./components/BentoLayout";
-import Stack from "./components/Stack";
-import Cards from "./components/Cards";
-
-import Section from "./components/Section";
-import FeaturesGrid from "./components/FeaturesGrid";
-import MetricsStrip from "./components/MetricsStrip";
-import UseCases from "./components/UseCases";
-import Testimonials from "./components/Testimonials";
-import Pricing from "./components/Pricing";
-import FAQ from "./components/FAQ";
 import Footer from "./components/Footer";
+
+// Import all pages
+import Home from "./pages/Home";
+import Services from "./pages/Services";
+import Portfolio from "./pages/Portfolio";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import HighValueAddons from "./pages/HighValueAddons";
+import CaseStudies from "./pages/CaseStudies";
+import Process from "./pages/Process";
+import Resources from "./pages/Resources";
+import TechStack from "./pages/TechStack";
+import Reviews from "./pages/Reviews";
+import BookCall from "./pages/BookCall";
+import Careers from "./pages/Careers";
+import Blog from "./pages/Blog";
+import FAQPage from "./pages/FAQPage";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsConditions from "./pages/TermsConditions";
 
 function App() {
   return (
     <div className="min-h-screen bg-black">
       <Navbar />
 
-
-      {/* HERO */}
-      
-      <Hero />
-
-      <main className=" max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-20">
-        {/* METRICS / SOCIAL PROOF STRIP */}
-        <Section>
-          <MetricsStrip />
-        </Section>
-
-        {/* FEATURE GRID */}
-        <Section id="features" title="Powerful building blocks" eyebrow="Features">
-          <FeaturesGrid />
-        </Section>
-
-        {/* BENTO + STACK (your existing visual components) */}
-        <Section >
-          <div className="grid gap-8 lg:grid-cols-">
-            <BentoLayout />
-          </div>
-        </Section>
-
-        {/* USE CASES + CARDS */}
-        <Section
-          id="use-cases"
-          title="Plug these components into real products"
-          eyebrow="Use cases"
-        >
-          <div className="grid  gap-12 lg:gap-x-16 lg:grid-cols-[2fr,3fr]">
-            <UseCases />
-            <Cards />
-          </div>
-        </Section>
-
-
-       
-
-        {/* TESTIMONIALS */}
-        <Section id="testimonials" title="Designers & devs who tried it, stayed">
-          <Testimonials />
-        </Section>
-
-        {/* PRICING */}
-        <Section id="pricing" title="Simple pricing for serious projects">
-          <Pricing />
-        </Section>
-
-        {/* FAQ */}
-        <Section id="faq" title="Questions? We’ve got answers.">
-          <FAQ />
-        </Section>
-      </main>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/portfolio" element={<Portfolio />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/high-value-addons" element={<HighValueAddons />} />
+        <Route path="/case-studies" element={<CaseStudies />} />
+        <Route path="/process" element={<Process />} />
+        <Route path="/resources" element={<Resources />} />
+        <Route path="/tech-stack" element={<TechStack />} />
+        <Route path="/reviews" element={<Reviews />} />
+        <Route path="/book-a-call" element={<BookCall />} />
+        <Route path="/careers" element={<Careers />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/faq" element={<FAQPage />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms-conditions" element={<TermsConditions />} />
+      </Routes>
 
       <Footer />
     </div>
