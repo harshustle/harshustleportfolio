@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 
 function MetricsStrip() {
   const metrics = [
-    { label: "Projects", value: 20, icon: "🚀", color: "from-purple-500 to-purple-400", suffix: "+" },
-    { label: "Hours", value: 50, icon: "⏱️", color: "from-purple-500 to-purple-400", suffix: "+" },
-    { label: "Satisfaction", value: 97, icon: "⭐", color: "from-purple-600 to-purple-500", suffix: "%" },
-    { label: "Team", value: 4, icon: "👥", color: "from-purple-400 to-purple-300", suffix: "" },
+    { label: "Projects", value: 20, icon: "🚀", color: "bg-white", suffix: "+" },
+    { label: "Hours", value: 50, icon: "⏱️", color: "bg-white", suffix: "+" },
+    { label: "Satisfaction", value: 97, icon: "⭐", color: "bg-white", suffix: "%" },
+    { label: "Team", value: 4, icon: "👥", color: "bg-white", suffix: "" },
   ];
 
   const [counts, setCounts] = useState(metrics.map(() => 0));
@@ -42,7 +42,7 @@ function MetricsStrip() {
           className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-white/5 to-white/10 hover:from-white/10 hover:to-white/15 border border-white/10 hover:border-white/20 p-6 transition-all duration-300 hover:scale-105 hover:-translate-y-1"
         >
           {/* Gradient overlay on hover */}
-          <div className={`absolute inset-0 bg-gradient-to-br ${m.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
+          <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
 
           {/* Icon */}
           <div className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
@@ -50,7 +50,7 @@ function MetricsStrip() {
           </div>
 
           {/* Value */}
-          <div className={`text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r ${m.color} bg-clip-text text-transparent`}>
+          <div className="text-4xl md:text-5xl font-bold mb-2 text-white">
             {counts[i]}{m.suffix}
           </div>
 
@@ -60,7 +60,7 @@ function MetricsStrip() {
           </div>
 
           {/* Decorative element */}
-          <div className="absolute bottom-0 left-0 h-1 w-0 group-hover:w-full bg-gradient-to-r ${m.color} transition-all duration-500" />
+          <div className="absolute bottom-0 left-0 h-1 w-0 group-hover:w-full bg-white transition-all duration-500" />
         </div>
       ))}
     </div>

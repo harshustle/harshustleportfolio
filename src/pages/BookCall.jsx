@@ -3,7 +3,7 @@ import Section from "../components/Section";
 
 function BookCall() {
     return (
-        <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
             <Section title="Book a Call" eyebrow="Let's Talk">
                 <div className="grid md:grid-cols-2 gap-12">
                     <div className="space-y-6">

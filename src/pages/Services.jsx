@@ -1,7 +1,7 @@
 // src/pages/Services.jsx
 import Section from "../components/Section";
 
-function Services() {
+function Services({ isSection = false }) {
     const services = [
         {
             icon: "🎨",
@@ -49,35 +49,37 @@ function Services() {
 
     return (
         <div className="min-h-screen">
-            {/* Hero Section */}
-            <section className="relative py-20 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-pink-900/20 to-blue-900/20" />
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(120,0,255,0.1),transparent_50%)]" />
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(255,0,128,0.1),transparent_50%)]" />
+            {/* Hero Section - Only show if not embedded as a section */}
+            {!isSection && (
+                <section className="relative py-20 overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-pink-900/20 to-blue-900/20" />
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(120,0,255,0.1),transparent_50%)]" />
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(255,0,128,0.1),transparent_50%)]" />
 
-                <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <div className="inline-block px-4 py-2 bg-purple-500/10 border border-purple-500/20 rounded-full text-purple-300 text-sm font-semibold mb-6">
-                        Our Services
+                    <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 text-center">
+                        <div className="inline-block px-4 py-2 bg-purple-500/10 border border-purple-500/20 rounded-full text-purple-300 text-sm font-semibold mb-6">
+                            Our Services
+                        </div>
+                        <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
+                            Transform Your
+                            <span className="block bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+                                Digital Presence
+                            </span>
+                        </h1>
+                        <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+                            From concept to launch, we provide end-to-end digital solutions that help your business thrive in the modern world.
+                        </p>
+                        <div className="flex flex-wrap justify-center gap-4">
+                            <button className="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-lg transition-all transform hover:scale-105">
+                                Get Started
+                            </button>
+                            <button className="px-8 py-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-white font-semibold rounded-lg transition-all">
+                                View Pricing
+                            </button>
+                        </div>
                     </div>
-                    <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
-                        Transform Your
-                        <span className="block bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
-                            Digital Presence
-                        </span>
-                    </h1>
-                    <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
-                        From concept to launch, we provide end-to-end digital solutions that help your business thrive in the modern world.
-                    </p>
-                    <div className="flex flex-wrap justify-center gap-4">
-                        <button className="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-lg transition-all transform hover:scale-105">
-                            Get Started
-                        </button>
-                        <button className="px-8 py-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-white font-semibold rounded-lg transition-all">
-                            View Pricing
-                        </button>
-                    </div>
-                </div>
-            </section>
+                </section>
+            )}
 
             {/* Services Grid */}
             <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

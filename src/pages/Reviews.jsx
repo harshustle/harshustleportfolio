@@ -62,7 +62,7 @@ function Reviews() {
     return (
         <div className="min-h-screen">
             {/* Hero */}
-            <section className="relative py-20 overflow-hidden">
+            <section className="relative py-32 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-amber-900/20 via-yellow-900/20 to-orange-900/20" />
 
                 <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -81,7 +81,7 @@ function Reviews() {
                 </div>
             </section>
 
-            <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
                 {/* Overall Rating */}
                 <div className="grid md:grid-cols-3 gap-8 mb-16">
                     <div className="md:col-span-1 p-8 bg-gradient-to-br from-amber-900/20 to-yellow-900/20 rounded-2xl border border-amber-500/20 text-center">

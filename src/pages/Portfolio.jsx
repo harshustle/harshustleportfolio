@@ -71,7 +71,7 @@ function Portfolio() {
     return (
         <div className="min-h-screen">
             {/* Hero */}
-            <section className="relative py-20 overflow-hidden">
+            <section className="relative py-52  overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-pink-900/20" />
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,100,255,0.1),transparent_50%)]" />
 
@@ -99,8 +99,8 @@ function Portfolio() {
                             key={cat}
                             onClick={() => setActiveFilter(cat)}
                             className={`px-6 py-3 rounded-lg font-semibold capitalize transition-all ${activeFilter === cat
-                                    ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white"
-                                    : "bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border border-white/10"
+                                ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white"
+                                : "bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border border-white/10"
                                 }`}
                         >
                             {cat}

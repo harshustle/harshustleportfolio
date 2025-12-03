@@ -3,7 +3,7 @@ import Section from "../components/Section";
 
 function PrivacyPolicy() {
     return (
-        <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
             <Section title="Privacy Policy" eyebrow="Legal">
                 <div className="text-gray-300 space-y-6 leading-relaxed">
                     <p className="text-sm text-gray-500">Last updated: November 26, 2025</p>

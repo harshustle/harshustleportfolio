@@ -3,7 +3,7 @@ import Section from "../components/Section";
 
 function HighValueAddons() {
     return (
-        <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
             <Section title="High-Value Add-ons" eyebrow="Premium Features">
                 <div className="text-gray-300 space-y-4">
                     <p>

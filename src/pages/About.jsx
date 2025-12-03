@@ -22,7 +22,7 @@ function About() {
             <section className="relative py-20 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/20 via-purple-900/20 to-pink-900/20" />
 
-                <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
                     <div className="grid lg:grid-cols-2 gap-12 items-center">
                         <div>
                             <div className="inline-block px-4 py-2 bg-indigo-500/10 border border-indigo-500/20 rounded-full text-indigo-300 text-sm font-semibold mb-6">

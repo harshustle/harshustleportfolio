@@ -1,17 +1,54 @@
-// src/pages/Home.jsx
+import { useState } from 'react';
 import Hero from "../components/Hero";
 import BentoLayout from "../components/BentoLayout";
 import Stack from "../components/Stack";
-import Cards from "../components/Cards";
+import Stepper, { Step } from '../components/parts/Stepper';
 import Section from "../components/Section";
 import FeaturesGrid from "../components/FeaturesGrid";
 import MetricsStrip from "../components/MetricsStrip";
-import UseCases from "../components/UseCases";
-import Testimonials from "../components/Testimonials";
+
+
 import Pricing from "../components/Pricing";
 import FAQ from "../components/FAQ";
 
 function Home() {
+    const [formData, setFormData] = useState({
+        email: '',
+        phone: '',
+        service: '',
+        businessInfo: ''
+    });
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
+    };
+
+    const handleServiceSelect = (service) => {
+        setFormData(prev => ({ ...prev, service }));
+    };
+
+    const homeServices = [
+        {
+            icon: "🎨",
+            title: "UI/UX Design",
+            description: "Create stunning, user-friendly interfaces that delight your customers and drive conversions.",
+            features: ["User Research", "Wireframing", "Prototyping", "Design Systems"]
+        },
+        {
+            icon: "💻",
+            title: "Web Design",
+            description: "Build beautiful, responsive, and high-converting websites tailored to your brand.",
+            features: ["Modern UI", "Responsive Layouts", "SEO Optimized", "Fast Performance"]
+        },
+        {
+            icon: "🤖",
+            title: "Automation",
+            description: "Streamline your business processes with intelligent workflows and integrations.",
+            features: ["Workflow Automation", "CRM Integration", "Email Sequences", "Task Management"]
+        }
+    ];
+
     return (
         <>
             {/* HERO */}
@@ -23,10 +60,47 @@ function Home() {
                     <MetricsStrip />
                 </Section>
 
-                {/* FEATURE GRID */}
-                <Section id="features" title="Powerful building blocks" eyebrow="Features">
-                    <FeaturesGrid />
+                {/* SERVICES PREVIEW */}
+                <Section title="Our Core Services" eyebrow="What We Do">
+                    <div className="grid md:grid-cols-3 gap-8 mt-12 relative">
+                        {/* Background glow for the grid */}
+                        <div className="absolute inset-0 bg-purple-500/5 blur-3xl -z-10 rounded-full pointer-events-none" />
+
+                        {homeServices.map((service, index) => (
+                            <div
+                                key={index}
+                                className="group p-8 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-purple-500/30 rounded-2xl shadow-lg transition-all duration-300 transform hover:-translate-y-2 hover:shadow-purple-500/10 backdrop-blur-sm flex flex-col"
+                            >
+                                <div className="h-14 w-14 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 group-hover:bg-purple-500/20">
+                                    <span className="text-3xl">{service.icon}</span>
+                                </div>
+
+                                <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-purple-300 transition-colors">
+                                    {service.title}
+                                </h3>
+
+                                <p className="text-gray-400 mb-6 leading-relaxed flex-grow">
+                                    {service.description}
+                                </p>
+
+                                <ul className="space-y-3 mb-8">
+                                    {service.features.map((feature, idx) => (
+                                        <li key={idx} className="flex items-center text-gray-300 text-sm group-hover:text-gray-200 transition-colors">
+                                            <span className="mr-3 text-purple-400 bg-purple-500/10 rounded-full p-1 h-5 w-5 flex items-center justify-center text-xs border border-purple-500/20">✓</span>
+                                            {feature}
+                                        </li>
+                                    ))}
+                                </ul>
+
+                                <a href="/services" className="inline-flex items-center justify-center w-full px-6 py-3 bg-white/5 hover:bg-purple-500/10 border border-white/10 hover:border-purple-500/30 text-white font-semibold rounded-lg transition-all group-hover:shadow-lg group-hover:shadow-purple-500/10">
+                                    Learn More <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+                                </a>
+                            </div>
+                        ))}
+                    </div>
                 </Section>
+
+
 
                 {/* BENTO + STACK (your existing visual components) */}
                 <Section>
@@ -35,26 +109,88 @@ function Home() {
                     </div>
                 </Section>
 
-                {/* USE CASES + CARDS */}
-                <Section
-                    id="use-cases"
-                    title="Plug these components into real products"
-                    eyebrow="Use cases"
-                >
-                    <div className="grid gap-12 lg:gap-x-16 lg:grid-cols-[2fr,3fr]">
-                        <UseCases />
-                        <Cards />
-                    </div>
-                </Section>
-
-                {/* TESTIMONIALS */}
-                <Section id="testimonials" title="Designers & devs who tried it, stayed">
-                    <Testimonials />
-                </Section>
-
                 {/* PRICING */}
-                <Section id="pricing" title="Simple pricing for serious projects">
-                    <Pricing />
+                <Pricing />
+
+                <Section title="Start Your Journey" eyebrow="Get in Touch">
+                    <Stepper
+                        initialStep={1}
+                        onStepChange={(step) => console.log("Step changed to:", step)}
+                        onFinalStepCompleted={() => console.log("Form submitted:", formData)}
+                        backButtonText="Back"
+                        nextButtonText="Next"
+                    >
+                        <Step>
+                            <div className="space-y-4 w-full max-w-md mx-auto">
+                                <h2 className="text-2xl font-bold text-white">Contact Details</h2>
+                                <p className="text-gray-400">Please provide your contact information so we can reach you.</p>
+                                <div className="space-y-3">
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        value={formData.email}
+                                        onChange={handleInputChange}
+                                        placeholder="Email Address"
+                                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-purple-500 focus:outline-none transition-colors placeholder-gray-500"
+                                    />
+                                    <input
+                                        type="tel"
+                                        name="phone"
+                                        value={formData.phone}
+                                        onChange={handleInputChange}
+                                        placeholder="Phone Number"
+                                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-purple-500 focus:outline-none transition-colors placeholder-gray-500"
+                                    />
+                                </div>
+                            </div>
+                        </Step>
+                        <Step>
+                            <div className="space-y-4 w-full max-w-md mx-auto">
+                                <h2 className="text-2xl font-bold text-white">Choose a Service</h2>
+                                <p className="text-gray-400">Select the service you are interested in.</p>
+                                <div className="grid gap-3">
+                                    {['UI/UX Design', 'Web Design', 'Automation'].map((service) => (
+                                        <div
+                                            key={service}
+                                            onClick={() => handleServiceSelect(service)}
+                                            className={`p-4 rounded-lg border cursor-pointer transition-all flex items-center justify-between ${formData.service === service
+                                                ? 'bg-purple-500/20 border-purple-500 text-white'
+                                                : 'bg-white/5 border-white/10 text-gray-300 hover:border-purple-500/50'
+                                                }`}
+                                        >
+                                            <span>{service}</span>
+                                            {formData.service === service && <span className="text-purple-400">✓</span>}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </Step>
+                        <Step>
+                            <div className="space-y-4 w-full max-w-md mx-auto">
+                                <h2 className="text-2xl font-bold text-white">Business Info</h2>
+                                <p className="text-gray-400">Tell us a bit about your business and goals.</p>
+                                <textarea
+                                    name="businessInfo"
+                                    value={formData.businessInfo}
+                                    onChange={handleInputChange}
+                                    placeholder="Business Name, Industry, and Project Goals..."
+                                    rows={4}
+                                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-purple-500 focus:outline-none transition-colors resize-none placeholder-gray-500"
+                                />
+                            </div>
+                        </Step>
+                        <Step>
+                            <div className="text-center space-y-4 py-8 w-full max-w-md mx-auto">
+                                <div className="h-20 w-20 bg-green-500/10 border border-green-500/20 text-green-400 rounded-full flex items-center justify-center mx-auto mb-6">
+                                    <span className="text-4xl">✓</span>
+                                </div>
+                                <h2 className="text-3xl font-bold text-white">Thank You!</h2>
+                                <p className="text-gray-400 leading-relaxed">
+                                    We have received your details. Our team will review your request and respond shortly with a thank you message and next steps.
+                                </p>
+                            </div>
+                        </Step>
+                    </Stepper>
                 </Section>
 
                 {/* FAQ */}

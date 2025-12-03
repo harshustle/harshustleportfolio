@@ -36,7 +36,7 @@ function Contact() {
             <section className="relative py-20 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/20 via-teal-900/20 to-cyan-900/20" />
 
-                <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 text-center">
                     <div className="inline-block px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-300 text-sm font-semibold mb-6">
                         Get In Touch
                     </div>
