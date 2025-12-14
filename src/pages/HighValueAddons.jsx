@@ -29,9 +29,12 @@ function HighValueAddons() {
                                     Get exclusive access to {addon.name.toLowerCase()} and take your
                                     business to the next level.
                                 </p>
-                                <button className="px-6 py-2 bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-700 hover:to-orange-700 text-white font-semibold rounded-lg transition-all">
-                                    Learn More
-                                </button>
+                                <a
+                                    href={`/book-a-call?utm_source=high_value_addons&utm_content=${addon.name.toLowerCase().replace(/\s+/g, '_')}`}
+                                    className="inline-block px-6 py-2 bg-gradient-to-r from-yellow-600 to-orange-600 hover:from-yellow-700 hover:to-orange-700 text-white font-semibold rounded-lg transition-all"
+                                >
+                                    Book a Demo
+                                </a>
                             </div>
                         ))}
                     </div>

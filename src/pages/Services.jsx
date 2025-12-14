@@ -1,54 +1,115 @@
+
 // src/pages/Services.jsx
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import Section from "../components/Section";
+import ServiceProcessModal from "../components/ServiceProcessModal";
 
 function Services({ isSection = false }) {
+    const [selectedService, setSelectedService] = useState(null);
+
     const services = [
         {
-            icon: "🎨",
-            title: "UI/UX Design",
-            description: "Create stunning, user-friendly interfaces that delight your customers and drive conversions.",
-            features: ["User Research", "Wireframing", "Prototyping", "Design Systems"],
-            price: "Starting at $5,000"
+            icon: "✨",
+            title: "AI Content Creation",
+            description: "Generate high-quality, engaging content instantly with our advanced AI tools tailored to your brand voice.",
+            features: ["Blog Writing", "Social Media Posts", "SEO Optimization", "Multi-language Support"],
+            price: "Starting at $1,500/mo",
+            processSteps: [
+                { title: "Brand Analysis", description: "We analyze your brand voice, target audience, and content goals to train our AI models." },
+                { title: "Topic ideation", description: "Generating relevant, high-impact topics based on market trends and SEO data." },
+                { title: "AI Generation", description: "Creating initial drafts using advanced language models tailored to your tone." },
+                { title: "Human Polish", description: "Expert editors review and refine the content for nuance, accuracy, and flow." },
+                { title: "Publishing", description: "Formatting and scheduling the content across your chosen platforms." }
+            ],
+            paymentLink: "#" // TODO: Add your Stripe/PhonePe link here
         },
         {
             icon: "💻",
             title: "Web Development",
             description: "Build fast, scalable, and responsive web applications using modern technologies.",
             features: ["React & Next.js", "Node.js Backend", "API Integration", "Performance Optimization"],
-            price: "Starting at $8,000"
+            price: "Starting at $8,000",
+            processSteps: [
+                { title: "Requirement Gathering", description: "Understanding your functional and non-functional requirements." },
+                { title: "Architecture Design", description: "Planning the database schema, API structure, and frontend components." },
+                { title: "Development Sprints", description: "Building the application in agile sprints with regular updates." },
+                { title: "Testing & QA", description: "Rigorous testing for bugs, performance, and security vulnerabilities." },
+                { title: "Deployment", description: "Launching your application to a live production environment." }
+            ],
+            paymentLink: "#" // TODO: Add your Stripe/PhonePe link here
         },
         {
             icon: "📱",
             title: "Mobile Apps",
             description: "Develop native-quality mobile applications for iOS and Android platforms.",
             features: ["React Native", "Cross-platform", "App Store Deployment", "Push Notifications"],
-            price: "Starting at $12,000"
+            price: "Starting at $12,000",
+            processSteps: [
+                { title: "Wireframing", description: "Mapping out the user journey and screen flows." },
+                { title: "UI Design", description: "Creating high-fidelity mockups of the app interface." },
+                { title: "App Development", description: "Coding the mobile application using React Native framework." },
+                { title: "Beta Testing", description: "Distributing builds to testers via TestFlight or Play Console." },
+                { title: "Store Submission", description: "Handling the app store review process for Apple and Google." }
+            ],
+            paymentLink: "#" // TODO: Add your Stripe/PhonePe link here
         },
         {
-            icon: "🚀",
-            title: "DevOps & Cloud",
-            description: "Set up robust infrastructure and automated deployment pipelines for your applications.",
-            features: ["AWS/Azure Setup", "CI/CD Pipelines", "Docker & Kubernetes", "Monitoring & Logging"],
-            price: "Starting at $6,000"
+            icon: "📢",
+            title: "Social Media Management",
+            description: "Full-service management of your social profiles to build community and drive engagement.",
+            features: ["Community Management", "Strategy Development", "Influencer Collaboration", "Paid Ad Campaigns"],
+            price: "Starting at $2,000/mo",
+            processSteps: [
+                { title: "Audit", description: "Reviewing your current social media presence and performance." },
+                { title: "Strategy Deck", description: "Creating a comprehensive plan for content pillars and frequency." },
+                { title: "Content Calendar", description: "Planning posts a month in advance for your approval." },
+                { title: "Engagement", description: "Actively replying to comments and engaging with your community." },
+                { title: "Monthly Report", description: "Detailed analytics report on growth and engagement metrics." }
+            ],
+            paymentLink: "#" // TODO: Add your Stripe/PhonePe link here
         },
         {
-            icon: "📊",
-            title: "Digital Marketing",
-            description: "Grow your online presence with data-driven marketing strategies and campaigns.",
-            features: ["SEO Optimization", "Social Media", "Email Marketing", "Analytics & Reporting"],
-            price: "Starting at $3,000/mo"
+            icon: "🤖",
+            title: "Social Media Automation",
+            description: "Automate your social growth with AI-driven content, scheduling, and analytics. Tools: Hootsuite AI, Buffer, Predis.ai.",
+            features: ["Content ideas generation", "Post scheduling", "Hashtag & caption suggestions", "Analytics & performance prediction"],
+            price: "Starting at $3,000/mo",
+            processSteps: [
+                { title: "Tool Setup", description: "Configuring automation tools (Zapier, Buffer, etc.) for your accounts." },
+                { title: "Workflow Creation", description: "Building automated workflows for posting and cross-promotion." },
+                { title: "Content Feeding", description: "Setting up data sources to feed your content pipeline." },
+                { title: "Testing", description: "Verifying that triggers and actions fire correctly." },
+                { title: "Monitoring", description: "Ongoing oversight to ensure the automation runs smoothly." }
+            ],
+            paymentLink: "#" // TODO: Add your Stripe/PhonePe link here
         },
         {
-            icon: "🔒",
-            title: "Security Audit",
-            description: "Comprehensive security assessment and penetration testing for your applications.",
-            features: ["Vulnerability Scanning", "Code Review", "Security Reports", "Compliance Consulting"],
-            price: "Starting at $4,000"
+            icon: "🎬",
+            title: "Video Editing",
+            description: "Professional video editing for Reels, Shorts, and long-form content to capture attention.",
+            features: ["Reels & Shorts", "Color Grading", "Motion Graphics", "Sound Design"],
+            price: "Starting at $1,000/project",
+            processSteps: [
+                { title: "Raw Footage Ingest", description: "Organizing and reviewing your raw video files." },
+                { title: "Rough Cut", description: " assembling the narrative structure and selecting the best takes." },
+                { title: "Visuals & Audio", description: "Adding transitions, effects, color grade, and sound mixing." },
+                { title: "Feedback Loop", description: "Sharing drafts for your review and implementing changes." },
+                { title: "Final Render", description: "Exporting the video in high-quality formats optimized for platforms." }
+            ],
+            paymentLink: "#" // TODO: Add your Stripe/PhonePe link here
         }
     ];
 
     return (
         <div className="min-h-screen">
+            {/* Modal */}
+            <ServiceProcessModal
+                isOpen={!!selectedService}
+                onClose={() => setSelectedService(null)}
+                service={selectedService}
+            />
+
             {/* Hero Section - Only show if not embedded as a section */}
             {!isSection && (
                 <section className="relative py-20 overflow-hidden">
@@ -70,25 +131,25 @@ function Services({ isSection = false }) {
                             From concept to launch, we provide end-to-end digital solutions that help your business thrive in the modern world.
                         </p>
                         <div className="flex flex-wrap justify-center gap-4">
-                            <button className="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-lg transition-all transform hover:scale-105">
+                            <Link to="/book-a-call" className="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-lg transition-all transform hover:scale-105">
                                 Get Started
-                            </button>
-                            <button className="px-8 py-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-white font-semibold rounded-lg transition-all">
+                            </Link>
+                            <a href="#services-grid" className="px-8 py-3 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-white font-semibold rounded-lg transition-all">
                                 View Pricing
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </section>
             )}
 
             {/* Services Grid */}
-            <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12" id="services-grid">
                 <Section title="What We Offer" eyebrow="Services">
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
                         {services.map((service, index) => (
                             <div
                                 key={index}
-                                className="group p-8 bg-gradient-to-br from-purple-900/10 to-pink-900/10 hover:from-purple-900/20 hover:to-pink-900/20 rounded-2xl border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300 transform hover:-translate-y-2"
+                                className="group p-8 bg-gradient-to-br from-purple-900/10 to-pink-900/10 hover:from-purple-900/20 hover:to-pink-900/20 rounded-2xl border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300 transform hover:-translate-y-2 flex flex-col"
                             >
                                 <div className="text-6xl mb-6 group-hover:scale-110 transition-transform duration-300">
                                     {service.icon}
@@ -96,7 +157,7 @@ function Services({ isSection = false }) {
                                 <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-purple-300 transition-colors">
                                     {service.title}
                                 </h3>
-                                <p className="text-gray-400 mb-6 leading-relaxed">
+                                <p className="text-gray-400 mb-6 leading-relaxed flex-grow">
                                     {service.description}
                                 </p>
                                 <ul className="space-y-2 mb-6">
@@ -107,11 +168,18 @@ function Services({ isSection = false }) {
                                         </li>
                                     ))}
                                 </ul>
-                                <div className="pt-6 border-t border-purple-500/20">
-                                    <p className="text-purple-300 font-semibold mb-4">{service.price}</p>
-                                    <button className="w-full px-6 py-3 bg-gradient-to-r from-purple-600/20 to-pink-600/20 hover:from-purple-600/40 hover:to-pink-600/40 border border-purple-500/30 hover:border-purple-500/50 text-white font-semibold rounded-lg transition-all">
-                                        Learn More →
-                                    </button>
+                                <div className="pt-6 border-t border-purple-500/20 mt-auto">
+                                    <div className="flex w-full rounded-lg overflow-hidden shadow-lg shadow-purple-500/5 group-hover:shadow-purple-500/10 transition-all">
+                                        <button
+                                            onClick={() => setSelectedService(service)}
+                                            className="w-[70%] px-4 py-3 bg-[#A855F7] hover:bg-[#9333ea] text-white font-semibold transition-all flex items-center justify-center gap-2 rounded-l-lg"
+                                        >
+                                            Learn More <span className="transition-transform group-hover:translate-x-1">→</span>
+                                        </button>
+                                        <div className="w-[30%] px-2 py-3 bg-white/5 border border-purple-500/30 text-purple-300 font-bold flex items-center justify-center text-xs text-center leading-tight rounded-r-lg border-l-0">
+                                            {service.price.replace("Starting at ", "")}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         ))}

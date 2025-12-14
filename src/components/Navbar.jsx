@@ -8,8 +8,8 @@ const Navbar = () => {
       bgColor: "#0D0716",
       textColor: "#fff",
       links: [
-        { label: "Company", ariaLabel: "About Company" },
-        { label: "Careers", ariaLabel: "About Careers" }
+        { label: "Company", ariaLabel: "About Company", href: "/about" },
+        { label: "Careers", ariaLabel: "About Careers", href: "/careers" }
       ]
     },
     {
@@ -17,8 +17,8 @@ const Navbar = () => {
       bgColor: "#170D27",
       textColor: "#fff",
       links: [
-        { label: "Featured", ariaLabel: "Featured Projects" },
-        { label: "Case Studies", ariaLabel: "Project Case Studies" }
+        { label: "Featured", ariaLabel: "Featured Projects", href: "/portfolio" },
+        { label: "Case Studies", ariaLabel: "Project Case Studies", href: "/case-studies" }
       ]
     },
     {
@@ -26,9 +26,11 @@ const Navbar = () => {
       bgColor: "#271E37",
       textColor: "#fff",
       links: [
-        { label: "Email", ariaLabel: "Email us" },
-        { label: "Twitter", ariaLabel: "Twitter" },
-        { label: "LinkedIn", ariaLabel: "LinkedIn" }
+        { label: "Email", ariaLabel: "Email us", href: "mailto:hello@company.com" },
+        { label: "Twitter", ariaLabel: "Twitter", href: "https://twitter.com/harshustle" },
+        { label: "LinkedIn", ariaLabel: "LinkedIn", href: "https://www.linkedin.com/in/harshustle/" },
+        { label: "Instagram", ariaLabel: "Instagram", href: "https://www.instagram.com/harshustle/" },
+        { label: "GitHub", ariaLabel: "GitHub", href: "https://github.com/harshustle" }
       ]
     }
   ];

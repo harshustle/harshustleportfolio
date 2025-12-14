@@ -11,8 +11,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import HighValueAddons from "./pages/HighValueAddons";
 import CaseStudies from "./pages/CaseStudies";
-import Process from "./pages/Process";
-import Resources from "./pages/Resources";
+
 import TechStack from "./pages/TechStack";
 import Reviews from "./pages/Reviews";
 import BookCall from "./pages/BookCall";
@@ -35,8 +34,8 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/high-value-addons" element={<HighValueAddons />} />
         <Route path="/case-studies" element={<CaseStudies />} />
-        <Route path="/process" element={<Process />} />
-        <Route path="/resources" element={<Resources />} />
+
+
         <Route path="/tech-stack" element={<TechStack />} />
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/book-a-call" element={<BookCall />} />
