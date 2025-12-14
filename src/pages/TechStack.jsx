@@ -3,6 +3,10 @@ import Section from "../components/Section";
 
 function TechStack() {
     const technologies = [
+        { name: "n8n", category: "Automation" },
+        { name: "OpenAI API", category: "Artificial Intelligence" },
+        { name: "Zapier", category: "Automation" },
+        { name: "Claude (Anthropic)", category: "Artificial Intelligence" },
         { name: "React", category: "Frontend" },
         { name: "Node.js", category: "Backend" },
         { name: "TypeScript", category: "Language" },
@@ -29,16 +33,16 @@ function TechStack() {
                         {technologies.map((tech, index) => (
                             <div
                                 key={index}
-                                className="p-6 bg-gradient-to-br from-violet-900/20 to-fuchsia-900/20 rounded-xl border border-violet-500/20 hover:border-violet-500/40 transition-all text-center group"
+                                className="p-6 bg-gradient-to-br from-cyan-900/20 to-blue-900/20 rounded-xl border border-cyan-500/20 hover:border-cyan-500/40 transition-all text-center group"
                             >
-                                <h3 className="text-lg font-semibold text-white mb-1 group-hover:text-violet-300 transition-colors">
+                                <h3 className="text-lg font-semibold text-white mb-1 group-hover:text-cyan-300 transition-colors">
                                     {tech.name}
                                 </h3>
                                 <p className="text-sm text-gray-500">{tech.category}</p>
                             </div>
                         ))}
                     </div>
-                    <div className="mt-12 p-8 bg-gradient-to-br from-violet-900/20 to-fuchsia-900/20 rounded-xl border border-violet-500/20">
+                    <div className="mt-12 p-8 bg-gradient-to-br from-cyan-900/20 to-blue-900/20 rounded-xl border border-cyan-500/20">
                         <h3 className="text-2xl font-semibold text-white mb-4">
                             Why Our Tech Stack?
                         </h3>

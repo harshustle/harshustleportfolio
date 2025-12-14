@@ -1,5 +1,5 @@
 // src/pages/Blog.jsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Section from "../components/Section";
 
 function Blog() {
@@ -8,83 +8,42 @@ function Blog() {
 
     const categories = ["all", "development", "design", "business", "tutorials", "news"];
 
-    const posts = [
-        {
-            id: 1,
-            title: "Building Scalable React Applications in 2025",
-            excerpt: "Learn the best practices and patterns for building large-scale React applications that can grow with your business.",
-            author: "Sarah Johnson",
-            authorImage: "https://i.pravatar.cc/150?img=1",
-            date: "Jan 15, 2025",
-            readTime: "8 min read",
-            category: "development",
-            image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&auto=format",
-            tags: ["React", "JavaScript", "Architecture"]
-        },
-        {
-            id: 2,
-            title: "The Future of UI/UX Design: Trends to Watch",
-            excerpt: "Explore the emerging design trends that will shape the digital landscape in the coming years.",
-            author: "Michael Chen",
-            authorImage: "https://i.pravatar.cc/150?img=13",
-            date: "Jan 12, 2025",
-            readTime: "6 min read",
-            category: "design",
-            image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&auto=format",
-            tags: ["UI/UX", "Design Trends", "Innovation"]
-        },
-        {
-            id: 3,
-            title: "How to Scale Your Startup: A Complete Guide",
-            excerpt: "Practical strategies and insights from founders who successfully scaled their startups from zero to millions.",
-            author: "Emily Davis",
-            authorImage: "https://i.pravatar.cc/150?img=5",
-            date: "Jan 10, 2025",
-            readTime: "12 min read",
-            category: "business",
-            image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format",
-            tags: ["Startup", "Growth", "Strategy"]
-        },
-        {
-            id: 4,
-            title: "Mastering TypeScript: Advanced Patterns",
-            excerpt: "Deep dive into advanced TypeScript patterns that will make your code more robust and maintainable.",
-            author: "David Wilson",
-            authorImage: "https://i.pravatar.cc/150?img=12",
-            date: "Jan 8, 2025",
-            readTime: "10 min read",
-            category: "tutorials",
-            image: "https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=800&auto=format",
-            tags: ["TypeScript", "Programming", "Best Practices"]
-        },
-        {
-            id: 5,
-            title: "AI in Web Development: What's Changing?",
-            excerpt: "How artificial intelligence is transforming the way we build websites and applications.",
-            author: "Lisa Anderson",
-            authorImage: "https://i.pravatar.cc/150?img=9",
-            date: "Jan 5, 2025",
-            readTime: "7 min read",
-            category: "news",
-            image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&auto=format",
-            tags: ["AI", "Technology", "Web Development"]
-        },
-        {
-            id: 6,
-            title: "CSS Grid vs Flexbox: When to Use Each",
-            excerpt: "A comprehensive comparison of CSS Grid and Flexbox with real-world examples and use cases.",
-            author: "James Martinez",
-            authorImage: "https://i.pravatar.cc/150?img=15",
-            date: "Jan 3, 2025",
-            readTime: "9 min read",
-            category: "tutorials",
-            image: "https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?w=800&auto=format",
-            tags: ["CSS", "Layout", "Frontend"]
-        }
-    ];
+    const [posts, setPosts] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchPosts = async () => {
+            try {
+                const response = await fetch("https://dev.to/api/articles?tag=webdev&top=30");
+                const data = await response.json();
+
+                const formattedPosts = data.map(article => ({
+                    id: article.id,
+                    title: article.title,
+                    excerpt: article.description,
+                    author: article.user.name,
+                    authorImage: article.user.profile_image,
+                    date: new Date(article.published_at).toLocaleDateString(),
+                    readTime: `${article.reading_time_minutes} min read`,
+                    category: article.tag_list[0] || "tech", // Use first tag as category
+                    image: article.cover_image || "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&auto=format", // Fallback image
+                    tags: article.tag_list,
+                    url: article.url // Link to actual article
+                }));
+
+                setPosts(formattedPosts);
+                setLoading(false);
+            } catch (error) {
+                console.error("Error fetching posts:", error);
+                setLoading(false);
+            }
+        };
+
+        fetchPosts();
+    }, []);
 
     const filteredPosts = posts.filter(post => {
-        const matchesCategory = selectedCategory === "all" || post.category === selectedCategory;
+        const matchesCategory = selectedCategory === "all" || post.tags.includes(selectedCategory);
         const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
             post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
         return matchesCategory && matchesSearch;
@@ -134,8 +93,8 @@ function Blog() {
                             key={cat}
                             onClick={() => setSelectedCategory(cat)}
                             className={`px-6 py-2 rounded-full font-semibold capitalize transition-all ${selectedCategory === cat
-                                    ? "bg-gradient-to-r from-violet-600 to-purple-600 text-white"
-                                    : "bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border border-white/10"
+                                ? "bg-gradient-to-r from-violet-600 to-purple-600 text-white"
+                                : "bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border border-white/10"
                                 }`}
                         >
                             {cat}
@@ -174,9 +133,14 @@ function Blog() {
                                             <div className="text-gray-500 text-sm">{filteredPosts[0].date} · {filteredPosts[0].readTime}</div>
                                         </div>
                                     </div>
-                                    <button className="px-6 py-3 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-semibold rounded-lg transition-all w-fit">
+                                    <a
+                                        href={filteredPosts[0].url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="px-6 py-3 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-semibold rounded-lg transition-all w-fit block text-center"
+                                    >
                                         Read Article →
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -186,9 +150,12 @@ function Blog() {
                 {/* Blog Grid */}
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {filteredPosts.slice(1).map((post) => (
-                        <article
+                        <a
+                            href={post.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
                             key={post.id}
-                            className="group bg-gradient-to-br from-violet-900/10 to-purple-900/10 hover:from-violet-900/20 hover:to-purple-900/20 rounded-2xl border border-violet-500/20 hover:border-violet-500/40 overflow-hidden transition-all duration-300 transform hover:-translate-y-2"
+                            className="group bg-gradient-to-br from-violet-900/10 to-purple-900/10 hover:from-violet-900/20 hover:to-purple-900/20 rounded-2xl border border-violet-500/20 hover:border-violet-500/40 overflow-hidden transition-all duration-300 transform hover:-translate-y-2 block"
                         >
                             <div className="relative aspect-video overflow-hidden">
                                 <img
@@ -234,7 +201,7 @@ function Blog() {
                                     <span className="text-xs text-gray-500">{post.readTime}</span>
                                 </div>
                             </div>
-                        </article>
+                        </a>
                     ))}
                 </div>
 

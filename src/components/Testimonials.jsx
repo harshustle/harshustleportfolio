@@ -2,22 +2,22 @@
 function Testimonials() {
   const testimonials = [
     {
-      name: "Aarav Mehta",
-      role: "Frontend Engineer",
+      name: "Rohan Das",
+      role: "CEO, TechFlow",
       quote:
-        "These components took my landing page from basic to premium in a weekend. I mostly just plugged them in.",
+        "Harsh didn't just build a website; he totally automated our lead generation. We're saving 20 hours a week thanks to his AI workflows.",
     },
     {
-      name: "Kriti Sharma",
-      role: "Product Designer",
+      name: "Sarah Jenkins",
+      role: "Founder, Artistry",
       quote:
-        "The layouts give enough structure without boxing you in. It feels like a design system that respects creativity.",
+        "I was worried about working with a developer who didn't 'get' design. Harsh proved me wrong. The visuals are stunning and the animations are silky smooth.",
     },
     {
-      name: "Liam Parker",
-      role: "Indie Maker",
+      name: "Mike Chen",
+      role: "SaaS Entrepreneur",
       quote:
-        "I hate rebuilding the same hero and pricing over and over. Now I just tweak the copy and ship.",
+        "Speed is an understatement. He delivered the MVP in 4 days, and it was cleaner than codebases I've seen from expensive agencies.",
     },
   ];
 

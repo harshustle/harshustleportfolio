@@ -5,7 +5,7 @@ function BookCall() {
     return (
         <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
             <Section title="Book a Call" eyebrow="Let's Talk">
-                <div className="grid md:grid-cols-2 gap-12">
+                <div className="grid md:grid-cols-2 gap-12 items-start">
                     <div className="space-y-6">
                         <p className="text-gray-300 text-lg">
                             Schedule a free consultation to discuss your project and how we can help
@@ -41,29 +41,16 @@ function BookCall() {
                             </ul>
                         </div>
                     </div>
-                    <div className="bg-gradient-to-br from-emerald-900/20 to-teal-900/20 rounded-xl border border-emerald-500/20 p-8">
-                        <h3 className="text-2xl font-semibold text-white mb-6">
-                            Select a Time Slot
-                        </h3>
-                        <div className="space-y-3">
-                            {[
-                                "Monday, 10:00 AM - 10:30 AM",
-                                "Tuesday, 2:00 PM - 2:30 PM",
-                                "Wednesday, 11:00 AM - 11:30 AM",
-                                "Thursday, 3:00 PM - 3:30 PM",
-                                "Friday, 9:00 AM - 9:30 AM",
-                            ].map((slot, index) => (
-                                <button
-                                    key={index}
-                                    className="w-full p-4 bg-black/50 border border-gray-700 hover:border-emerald-500 rounded-lg text-left text-white transition-all hover:bg-emerald-900/20"
-                                >
-                                    {slot}
-                                </button>
-                            ))}
+                    <div className="group relative w-full h-[460px] rounded-2xl bg-gradient-to-b from-white/10 to-white/5 p-[1px] shadow-2xl shadow-purple-900/20">
+                        <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/100 to-purple-500/80 blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
+                        <div className="relative h-full w-full rounded-2xl bg-black/60 overflow-hidden backdrop-blur-xl">
+                            <iframe
+                                src="https://cal.com/harshustle"
+                                style={{ width: "100%", height: "calc(100% + 200px)", marginTop: "-90px" }}
+                                frameBorder="0"
+                                title="Book a Call"
+                            ></iframe>
                         </div>
-                        <button className="w-full mt-6 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-semibold py-3 px-6 rounded-lg transition-all">
-                            Confirm Booking
-                        </button>
                     </div>
                 </div>
             </Section>

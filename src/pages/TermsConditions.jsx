@@ -3,7 +3,7 @@ import Section from "../components/Section";
 
 function TermsConditions() {
     return (
-        <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
+        <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-3 2">
             <Section title="Terms & Conditions" eyebrow="Legal">
                 <div className="text-gray-300 space-y-6 leading-relaxed">
                     <p className="text-sm text-gray-500">Last updated: November 26, 2025</p>
