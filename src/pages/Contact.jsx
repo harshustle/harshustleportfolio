@@ -11,15 +11,51 @@ function Contact() {
         message: ""
     });
 
-    const handleSubmit = (e) => {
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    // Reuse the Google Script URL
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw3ehsXZDXLZOZpXXe2LegrlDBmqdowtiahl9cyCdbd9JvcDFnkMUdaWrIYmZMTcIOMjQ/exec";
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Form submitted:", formData);
+        setIsSubmitting(true);
+
+        // Send data to "Sheet2" in the Google Spreadsheet
+        const payload = {
+            ...formData,
+            sheetName: "Sheet2"
+        };
+
+        try {
+            await fetch(GOOGLE_SCRIPT_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: {
+                    "Content-Type": "text/plain",
+                },
+                body: JSON.stringify(payload),
+            });
+            console.log("Form submitted to Google Sheets");
+            alert("Message sent successfully!");
+            setFormData({
+                name: "",
+                email: "",
+                company: "",
+                budget: "",
+                message: ""
+            });
+        } catch (error) {
+            console.error("Error submitting to Google Sheets:", error);
+            alert("Something went wrong. Please try again.");
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     const contactInfo = [
-        { icon: "📧", label: "Email", value: "hello@company.com", link: "mailto:hello@company.com" },
-        { icon: "📞", label: "Phone", value: "+1 (555) 123-4567", link: "tel:+15551234567" },
-        { icon: "📍", label: "Office", value: "123 Innovation Street, San Francisco, CA 94105", link: "#" },
+        { icon: "📧", label: "Email", value: "harshustle@gmail.com", link: "mailto:harshustle@gmail.com" },
+        { icon: "📞", label: "Phone", value: "+91 78396 61372", link: "tel:+917839661372" },
+        { icon: "📍", label: "Office", value: "Delhi, India", link: "#" },
         { icon: "💬", label: "Live Chat", value: "Available 24/7", link: "#" }
     ];
 
@@ -135,9 +171,10 @@ function Contact() {
 
                                 <button
                                     type="submit"
-                                    className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-semibold py-4 px-6 rounded-lg transition-all transform hover:scale-105"
+                                    disabled={isSubmitting}
+                                    className={`w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-semibold py-4 px-6 rounded-lg transition-all transform hover:scale-105 ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
                                 >
-                                    Send Message →
+                                    {isSubmitting ? 'Sending...' : 'Send Message →'}
                                 </button>
                             </form>
                         </div>

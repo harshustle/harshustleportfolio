@@ -12,12 +12,21 @@ Follow these steps to collect data from your website form directly into a Google
    - Cell D1: `Service`
    - Cell E1: `Business Info`
 
+4. **Create a second sheet (tab)** at the bottom named `Sheet2`.
+5. In the first row of `Sheet2`, add headers:
+   - Cell A1: `Date`
+   - Cell B1: `Name`
+   - Cell C1: `Email`
+   - Cell D1: `Company`
+   - Cell E1: `Budget`
+   - Cell F1: `Message`
+
 ## Step 2: Create the Google Apps Script
 1. In your Google Sheet, go to **Extensions** > **Apps Script**.
 2. Delete any code in the `Code.js` file and paste the following:
 
 ```javascript
-var SHEET_NAME = "Sheet1"; // Make sure this matches your sheet tab name
+var DEFAULT_SHEET = "Sheet1";
 
 function doPost(e) {
   var lock = LockService.getScriptLock();
@@ -25,27 +34,38 @@ function doPost(e) {
 
   try {
     var doc = SpreadsheetApp.getActiveSpreadsheet();
-    var sheet = doc.getSheetByName(SHEET_NAME);
+    
+    // Parse the incoming data
+    var postData = JSON.parse(e.postData.contents);
+    
+    // Determine which sheet to use (default to Sheet1 if not specified)
+    var targetSheetName = postData.sheetName || DEFAULT_SHEET;
+    var sheet = doc.getSheetByName(targetSheetName);
+
+    if (!sheet) {
+      return ContentService
+        .createTextOutput(JSON.stringify({ 'result': 'error', 'error': 'Sheet not found: ' + targetSheetName }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
 
     var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
     var nextRow = sheet.getLastRow() + 1;
 
     var newRow = headers.map(function(header) {
       if (header === 'Date') return new Date();
-      // Map form fields to headers (case-insensitive key matching)
-      // The form sends: email, phone, service, businessInfo
-      // Headers should match these roughly
       
-      var key = header.toLowerCase();
+      var key = header.toLowerCase().replace(/\s/g, ''); // Normalize header (e.g., "Business Info" -> "businessinfo")
       
-      // Handle the incoming parsed data (assuming we send JSON)
-      var postData = JSON.parse(e.postData.contents);
-      
-      if (key === 'date') return new Date();
-      if (key === 'email') return postData.email;
-      if (key === 'phone') return postData.phone;
-      if (key === 'service') return postData.service;
-      if (key === 'business info' || key === 'businessinfo') return postData.businessInfo;
+      // Match incoming data keys to normalized headers
+      // Common mapping attempts:
+      if (key === 'email') return postData.email || "";
+      if (key === 'phone') return postData.phone || "";
+      if (key === 'service') return postData.service || "";
+      if (key === 'businessinfo') return postData.businessInfo || "";
+      if (key === 'name') return postData.name || "";
+      if (key === 'company') return postData.company || "";
+      if (key === 'budget') return postData.budget || "";
+      if (key === 'message') return postData.message || "";
       
       return "";
     });
@@ -59,7 +79,7 @@ function doPost(e) {
 
   catch (e) {
     return ContentService
-      .createTextOutput(JSON.stringify({ 'result': 'error', 'error': e }))
+      .createTextOutput(JSON.stringify({ 'result': 'error', 'error': e.toString() }))
       .setMimeType(ContentService.MimeType.JSON);
   }
 

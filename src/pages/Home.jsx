@@ -32,7 +32,7 @@ function Home() {
     };
 
     // Replace with your Web App URL from Google Apps Script
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwWzWkspcQeP8FzfSEnXXShZYOjANlp9CzX-Y_6KzOI0zjvm9bm809Mw_59GFkDWgZRzA/exec";
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw3ehsXZDXLZOZpXXe2LegrlDBmqdowtiahl9cyCdbd9JvcDFnkMUdaWrIYmZMTcIOMjQ/exec";
 
     const submitToGoogleSheets = async () => {
         if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes("YOUR_GOOGLE_SCRIPT_URL_HERE")) {
@@ -206,91 +206,115 @@ function Home() {
 
 
                 <Section title="Start Your Journey" eyebrow="Get in Touch">
-                    <Stepper
-                        initialStep={1}
-                        onStepChange={(step) => {
-                            if (step === 4) submitToGoogleSheets();
-                        }}
-                        onFinalStepCompleted={() => console.log("Form process completed")}
-                        backButtonText="Back"
-                        nextButtonText="Next"
-                        hideFooterOnLastStep={true}
-                    >
-                        <Step>
-                            <div className="space-y-4 w-full max-w-md mx-auto">
-                                <h2 className="text-2xl font-bold text-white">Contact Details</h2>
-                                <p className="text-gray-400">Please provide your contact information so we can reach you.</p>
-                                <div className="space-y-3">
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        value={formData.email}
-                                        onChange={handleInputChange}
-                                        placeholder="Email Address"
-                                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-purple-500 focus:outline-none transition-colors placeholder-gray-500"
-                                    />
-                                    <input
-                                        type="tel"
-                                        name="phone"
-                                        value={formData.phone}
-                                        onChange={handleInputChange}
-                                        placeholder="Phone Number"
-                                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-purple-500 focus:outline-none transition-colors placeholder-gray-500"
-                                    />
-                                </div>
-                            </div>
-                        </Step>
-                        <Step>
-                            <div className="space-y-4 w-full max-w-md mx-auto">
-                                <h2 className="text-2xl font-bold text-white">Choose a Service</h2>
-                                <p className="text-gray-400">Select the service you are interested in.</p>
-                                <div className="grid gap-3">
-                                    {['AI Content Creation', 'Web Design', 'Automation'].map((service) => (
-                                        <div
-                                            key={service}
-                                            onClick={() => handleServiceSelect(service)}
-                                            className={`p-4 rounded-lg border cursor-pointer transition-all flex items-center justify-between ${formData.service === service
-                                                ? 'bg-purple-500/20 border-purple-500 text-white'
-                                                : 'bg-white/5 border-white/10 text-gray-300 hover:border-purple-500/50'
-                                                }`}
-                                        >
-                                            <span>{service}</span>
-                                            {formData.service === service && <span className="text-purple-400">✓</span>}
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </Step>
-                        <Step>
-                            <div className="space-y-4 w-full max-w-md mx-auto">
-                                <h2 className="text-2xl font-bold text-white">Business Info</h2>
-                                <p className="text-gray-400">Tell us a bit about your business and goals.</p>
-                                <textarea
-                                    name="businessInfo"
-                                    value={formData.businessInfo}
-                                    onChange={handleInputChange}
-                                    placeholder="Business Name, Industry, and Project Goals..."
-                                    rows={4}
-                                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-purple-500 focus:outline-none transition-colors resize-none placeholder-gray-500"
-                                />
-                            </div>
-                        </Step>
-                        <Step>
-                            <div className="text-center space-y-4 py-8 w-full max-w-md mx-auto">
-                                <div className="h-20 w-20 bg-green-500/10 border border-green-500/20 text-green-400 rounded-full flex items-center justify-center mx-auto mb-6">
-                                    <span className="text-4xl">✓</span>
-                                </div>
-                                <h2 className="text-3xl font-bold text-white">Thank You!</h2>
-                                <p className="text-gray-400 leading-relaxed mb-6">
-                                    We have received your details. Our team will review your request and respond shortly with a thank you message and next steps.
+                    <div className="grid md:grid-cols-2 gap-8 items-center mt-8">
+                        {/* Left Side: Image */}
+                        <div className="hidden md:block relative h-full min-h-[500px] w-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl group">
+                            <img
+                                src="https://images.pexels.com/photos/3283142/pexels-photo-3283142.jpeg"
+                                alt="Start Your Journey"
+                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            />
+                            {/* Overlay */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+
+                            <div className="absolute bottom-0 left-0 right-0 p-8 transform transition-transform duration-500">
+                                <h3 className="text-3xl font-bold text-white mb-2">Ready to transform?</h3>
+                                <p className="text-gray-300 leading-relaxed">
+                                    Let's build something extraordinary together. Your vision, our expertise.
                                 </p>
-                                <div className="inline-flex items-center gap-2 text-yellow-400 bg-yellow-400/10 px-4 py-2 rounded-full border border-yellow-400/20 animate-pulse">
-                                    <span>⚡</span>
-                                    <span className="font-medium">Expect a reply shortly!</span>
-                                </div>
                             </div>
-                        </Step>
-                    </Stepper>
+                        </div>
+
+                        {/* Right Side: Stepper */}
+                        <div className="relative">
+                            <Stepper
+                                initialStep={1}
+                                onStepChange={(step) => {
+                                    if (step === 4) submitToGoogleSheets();
+                                }}
+                                onFinalStepCompleted={() => console.log("Form process completed")}
+                                backButtonText="Back"
+                                nextButtonText="Next"
+                                hideFooterOnLastStep={true}
+                                className="w-full" // Override default aspect ratio and centering if needed, or let it adapt
+                            >
+                                <Step>
+                                    <div className="space-y-4 w-full max-w-md mx-auto">
+                                        <h2 className="text-2xl font-bold text-white">Contact Details</h2>
+                                        <p className="text-gray-400">Please provide your contact information so we can reach you.</p>
+                                        <div className="space-y-3">
+                                            <input
+                                                type="email"
+                                                name="email"
+                                                value={formData.email}
+                                                onChange={handleInputChange}
+                                                placeholder="Email Address"
+                                                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-purple-500 focus:outline-none transition-colors placeholder-gray-500"
+                                            />
+                                            <input
+                                                type="tel"
+                                                name="phone"
+                                                value={formData.phone}
+                                                onChange={handleInputChange}
+                                                placeholder="Phone Number"
+                                                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-purple-500 focus:outline-none transition-colors placeholder-gray-500"
+                                            />
+                                        </div>
+                                    </div>
+                                </Step>
+                                <Step>
+                                    <div className="space-y-4 w-full max-w-md mx-auto">
+                                        <h2 className="text-2xl font-bold text-white">Choose a Service</h2>
+                                        <p className="text-gray-400">Select the service you are interested in.</p>
+                                        <div className="grid gap-3">
+                                            {['AI Content Creation', 'Web Design', 'Automation'].map((service) => (
+                                                <div
+                                                    key={service}
+                                                    onClick={() => handleServiceSelect(service)}
+                                                    className={`p-4 rounded-lg border cursor-pointer transition-all flex items-center justify-between ${formData.service === service
+                                                        ? 'bg-purple-500/20 border-purple-500 text-white'
+                                                        : 'bg-white/5 border-white/10 text-gray-300 hover:border-purple-500/50'
+                                                        }`}
+                                                >
+                                                    <span>{service}</span>
+                                                    {formData.service === service && <span className="text-purple-400">✓</span>}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </Step>
+                                <Step>
+                                    <div className="space-y-4 w-full max-w-md mx-auto">
+                                        <h2 className="text-2xl font-bold text-white">Business Info</h2>
+                                        <p className="text-gray-400">Tell us a bit about your business and goals.</p>
+                                        <textarea
+                                            name="businessInfo"
+                                            value={formData.businessInfo}
+                                            onChange={handleInputChange}
+                                            placeholder="Business Name, Industry, and Project Goals..."
+                                            rows={4}
+                                            className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-purple-500 focus:outline-none transition-colors resize-none placeholder-gray-500"
+                                        />
+                                    </div>
+                                </Step>
+                                <Step>
+                                    <div className="text-center space-y-4 py-8 w-full max-w-md mx-auto">
+                                        <div className="h-20 w-20 bg-green-500/10 border border-green-500/20 text-green-400 rounded-full flex items-center justify-center mx-auto mb-6">
+                                            <span className="text-4xl">✓</span>
+                                        </div>
+                                        <h2 className="text-3xl font-bold text-white">Thank You!</h2>
+                                        <p className="text-gray-400 leading-relaxed mb-6">
+                                            We have received your details. Our team will review your request and respond shortly with a thank you message and next steps.
+                                        </p>
+                                        <div className="inline-flex items-center gap-2 text-yellow-400 bg-yellow-400/10 px-4 py-2 rounded-full border border-yellow-400/20 animate-pulse">
+                                            <span>⚡</span>
+                                            <span className="font-medium">Expect a reply shortly!</span>
+                                        </div>
+                                    </div>
+                                </Step>
+                            </Stepper>
+                        </div>
+                    </div>
                 </Section>
 
 
