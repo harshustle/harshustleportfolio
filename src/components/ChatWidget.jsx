@@ -83,7 +83,8 @@ export default function ChatWidget() {
             }
 
             const genAI = new GoogleGenerativeAI(API_KEY);
-            const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+            // Try the specific version 001 of 1.5 Flash
+            const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-001" });
 
             const chat = model.startChat({
                 history: [
@@ -110,7 +111,8 @@ export default function ChatWidget() {
             setMessages(prev => [...prev, { role: "model", text }]);
         } catch (error) {
             console.error("Chat Error:", error);
-            setMessages(prev => [...prev, { role: "model", text: "I apologize, but I'm having trouble connecting right now. Please try again later or contact us directly via email." }]);
+            // Display the actual error for debugging (User can remove this later)
+            setMessages(prev => [...prev, { role: "model", text: `Error: ${error.message || "Connection failed"}. Please try again.` }]);
         } finally {
             setIsLoading(false);
         }
