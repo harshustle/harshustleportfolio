@@ -9,7 +9,7 @@ import ReactMarkdown from "react-markdown";
 // IMPORTANT: In a production app, you should NEVER expose your API key on the client side.
 // You should use a backend proxy. For this demo (client-side only), we will use an env var.
 // Ensure you have VITE_GEMINI_API_KEY in your .env file
-const API_KEY = import.meta.env.VITE_GEMINI_API_KEY || "AIzaSyDUYxqBpZpxEBoBh-biDLYWwQ1f2mYQljY";
+const API_KEY = import.meta.env.VITE_GEMINI_API_KEY || "AIzaSyBBoreRnlw2oeK64I5juIczam8phsbYc5k";
 
 // Website Knowledge Base - This feeds the AI with context about your site
 const WEBSITE_CONTEXT = `
@@ -51,6 +51,7 @@ export default function ChatWidget() {
     ]);
     const [input, setInput] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    const [validModel, setValidModel] = useState("gemini-pro"); // Default Fallback to stable model
     const messagesEndRef = useRef(null);
 
     // Scroll to bottom
@@ -62,10 +63,46 @@ export default function ChatWidget() {
         scrollToBottom();
     }, [messages, isOpen]);
 
-    // Listen for custom event to open chat from other components
+    // Listen for custom event to open chat and auto-detect valid model
     useEffect(() => {
         const handleOpenChat = () => setIsOpen(true);
         window.addEventListener('open-chat', handleOpenChat);
+
+        // AUTO-DETECT: Find the best working model for this specific Key
+        const detectModel = async () => {
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${API_KEY}`);
+                const data = await response.json();
+
+                if (data.models) {
+                    // Filter for models that support text generation
+                    const textModels = data.models.filter(m => m.supportedGenerationMethods.includes("generateContent"));
+                    console.log("Available Text Models:", textModels.map(m => m.name));
+
+                    // Filter out "latest" or "exp" to avoid quota issues
+                    const stableModels = textModels.filter(m => !m.name.includes("latest") && !m.name.includes("exp"));
+
+                    // Simple Selection: Grab the first available 'flash' or 'pro' model
+                    const bestModel = stableModels.find(m => m.name.includes("flash")) ||
+                        stableModels.find(m => m.name.includes("pro"));
+
+                    if (bestModel) {
+                        const cleanName = bestModel.name.replace("models/", "");
+                        console.log("Auto-selected Model:", cleanName);
+                        setValidModel(cleanName);
+                    } else {
+                        console.warn("No specific stable model found, checking all text models...");
+                        if (textModels.length > 0) {
+                            setValidModel(textModels[0].name.replace("models/", ""));
+                        }
+                    }
+                }
+            } catch (e) {
+                console.error("Model detection warning", e);
+            }
+        };
+        detectModel();
+
         return () => window.removeEventListener('open-chat', handleOpenChat);
     }, []);
 
@@ -83,8 +120,8 @@ export default function ChatWidget() {
             }
 
             const genAI = new GoogleGenerativeAI(API_KEY);
-            // Try the specific version 001 of 1.5 Flash
-            const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-001" });
+            // Use the auto-detected valid model
+            const model = genAI.getGenerativeModel({ model: validModel });
 
             const chat = model.startChat({
                 history: [
@@ -96,7 +133,6 @@ export default function ChatWidget() {
                         role: "model",
                         parts: [{ text: "Understood. I am ready to assist visitors of HarshHustle." }],
                     },
-                    // Convert existing history to Gemini format (excluding the very first greeting if it was local only, but here we just append local history)
                     ...messages.slice(1).map(msg => ({
                         role: msg.role === 'user' ? 'user' : 'model',
                         parts: [{ text: msg.text }]
@@ -110,9 +146,9 @@ export default function ChatWidget() {
 
             setMessages(prev => [...prev, { role: "model", text }]);
         } catch (error) {
-            console.error("Chat Error:", error);
-            // Display the actual error for debugging (User can remove this later)
-            setMessages(prev => [...prev, { role: "model", text: `Error: ${error.message || "Connection failed"}. Please try again.` }]);
+            console.error("Chat Error Full Details:", error);
+            // Debugging mode: Show exact error to understand why it is failing
+            setMessages(prev => [...prev, { role: "model", text: `Debug Error: ${error.message} \n\n Code: ${JSON.stringify(error)}` }]);
         } finally {
             setIsLoading(false);
         }
