@@ -56,7 +56,16 @@ function Contact() {
         { icon: "📧", label: "Email", value: "harshustle@gmail.com", link: "mailto:harshustle@gmail.com" },
         { icon: "📞", label: "Phone", value: "+91 78396 61372", link: "tel:+917839661372" },
         { icon: "📍", label: "Office", value: "Delhi, India", link: "#" },
-        { icon: "💬", label: "Live Chat", value: "Available 24/7", link: "#" }
+        {
+            icon: "💬",
+            label: "Live Chat",
+            value: "Available 24/7",
+            link: "#",
+            onClick: (e) => {
+                e.preventDefault();
+                window.dispatchEvent(new Event('open-chat'));
+            }
+        }
     ];
 
     const socialLinks = [
@@ -195,6 +204,7 @@ function Contact() {
                                 <a
                                     key={i}
                                     href={item.link}
+                                    onClick={item.onClick}
                                     className="flex items-start gap-4 p-4 bg-gradient-to-br from-emerald-900/10 to-teal-900/10 hover:from-emerald-900/20 hover:to-teal-900/20 rounded-xl border border-emerald-500/20 hover:border-emerald-500/40 transition-all group"
                                 >
                                     <div className="w-12 h-12 rounded-lg bg-emerald-500/10 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
