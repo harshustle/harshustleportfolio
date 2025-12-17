@@ -9,7 +9,7 @@ import ReactMarkdown from "react-markdown";
 // IMPORTANT: In a production app, you should NEVER expose your API key on the client side.
 // You should use a backend proxy. For this demo (client-side only), we will use an env var.
 // Ensure you have VITE_GEMINI_API_KEY in your .env file
-const API_KEY = import.meta.env.VITE_GEMINI_API_KEY || "AIzaSyBBoreRnlw2oeK64I5juIczam8phsbYc5k";
+const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 
 // Website Knowledge Base - This feeds the AI with context about your site
 const WEBSITE_CONTEXT = `
