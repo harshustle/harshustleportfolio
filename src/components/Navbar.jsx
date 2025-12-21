@@ -13,12 +13,12 @@ const Navbar = () => {
       ]
     },
     {
-      label: "Projects",
+      label: "Services",
       bgColor: "#170D27",
       textColor: "#fff",
       links: [
-        { label: "Featured", ariaLabel: "Featured Projects", href: "/portfolio" },
-        { label: "Case Studies", ariaLabel: "Project Case Studies", href: "/case-studies" }
+        { label: "Our Services", ariaLabel: "View All Services", href: "/services" },
+        { label: "Add-ons", ariaLabel: "High Value Add-ons", href: "/high-value-addons" }
       ]
     },
     {

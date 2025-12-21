@@ -4,71 +4,35 @@ import Section from "../components/Section";
 function Careers({ isSection = false }) {
     const openings = [
         {
-            title: "Senior Full Stack Developer",
+            title: "Full Stack Developer",
             department: "Engineering",
             location: "Remote",
             type: "Full-time",
-            salary: "$120k - $180k",
-            description: "We're looking for an experienced full-stack developer to join our growing engineering team.",
-            requirements: ["5+ years experience", "React & Node.js", "Database design", "API development"]
+            salary: "Competitive",
+            description: "We're looking for an experienced full-stack developer to build scalable web applications.",
+            requirements: ["React & Node.js", "Modern Tech Stack", "Database Design", "API Development"]
         },
         {
-            title: "UI/UX Designer",
-            department: "Design",
-            location: "San Francisco, CA",
-            type: "Full-time",
-            salary: "$90k - $130k",
-            description: "Join our design team to create beautiful and intuitive user experiences.",
-            requirements: ["3+ years experience", "Figma & Adobe Suite", "User research", "Prototyping"]
-        },
-        {
-            title: "Product Manager",
-            department: "Product",
-            location: "New York, NY",
-            type: "Full-time",
-            salary: "$110k - $160k",
-            description: "Lead product strategy and execution for our flagship products.",
-            requirements: ["4+ years PM experience", "Agile/Scrum", "Data-driven", "Cross-functional leadership"]
-        },
-        {
-            title: "DevOps Engineer",
-            department: "Engineering",
+            title: "Senior Video Editor",
+            department: "Content",
             location: "Remote",
-            type: "Full-time",
-            salary: "$100k - $150k",
-            description: "Build and maintain our cloud infrastructure and deployment pipelines.",
-            requirements: ["AWS/Azure", "Docker & Kubernetes", "CI/CD", "Infrastructure as Code"]
+            type: "Contract / Full-time",
+            salary: "Competitive",
+            description: "Create engaging, high-retention video content for our brand and clients.",
+            requirements: ["Premiere Pro / After Effects", "Motion Graphics", "Short-form Content Mastery", "Storytelling"]
         },
         {
-            title: "Marketing Specialist",
-            department: "Marketing",
-            location: "Austin, TX",
-            type: "Full-time",
-            salary: "$70k - $100k",
-            description: "Drive our marketing campaigns and grow our brand presence.",
-            requirements: ["2+ years experience", "SEO/SEM", "Content creation", "Analytics"]
-        },
-        {
-            title: "Customer Success Manager",
-            department: "Customer Success",
+            title: "n8n Automation Expert",
+            department: "Automation",
             location: "Remote",
-            type: "Full-time",
-            salary: "$80k - $110k",
-            description: "Ensure our customers achieve their goals and maximize value from our platform.",
-            requirements: ["3+ years experience", "SaaS background", "Excellent communication", "Problem-solving"]
+            type: "Project-based",
+            salary: "Competitive",
+            description: "Design and implement complex automation workflows using n8n and AI agents.",
+            requirements: ["n8n Mastery", "API Integration", "JavaScript/TypeScript", "Workflow Optimization"]
         }
     ];
 
-    const benefits = [
-        { icon: "💰", title: "Competitive Salary", desc: "Top market rates + equity" },
-        { icon: "🏥", title: "Health & Wellness", desc: "Comprehensive medical coverage" },
-        { icon: "🏖️", title: "Unlimited PTO", desc: "Take time when you need it" },
-        { icon: "🏠", title: "Remote Work", desc: "Work from anywhere" },
-        { icon: "📚", title: "Learning Budget", desc: "$2,000/year for courses" },
-        { icon: "💻", title: "Latest Equipment", desc: "MacBook Pro + accessories" },
-        { icon: "🎯", title: "Career Growth", desc: "Clear advancement paths" },
-        { icon: "🍕", title: "Team Events", desc: "Regular team outings & retreats" }
-    ];
+
 
     return (
         <div className="min-h-screen">
@@ -98,48 +62,7 @@ function Careers({ isSection = false }) {
             )}
 
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
-                {/* Why Join Us */}
-                <Section title="Why Join Us" eyebrow="Perks & Benefits">
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
-                        {benefits.map((benefit, i) => (
-                            <div
-                                key={i}
-                                className="p-6 bg-gradient-to-br from-rose-900/10 to-pink-900/10 hover:from-rose-900/20 hover:to-pink-900/20 rounded-xl border border-rose-500/20 hover:border-rose-500/40 transition-all text-center group"
-                            >
-                                <div className="text-5xl mb-4 group-hover:scale-110 transition-transform">{benefit.icon}</div>
-                                <h3 className="text-white font-semibold mb-2">{benefit.title}</h3>
-                                <p className="text-gray-400 text-sm">{benefit.desc}</p>
-                            </div>
-                        ))}
-                    </div>
-                </Section>
 
-                {/* Our Culture */}
-                <section className="my-20">
-                    <div className="grid md:grid-cols-3 gap-8">
-                        <div className="p-8 bg-gradient-to-br from-rose-900/20 to-pink-900/20 rounded-2xl border border-rose-500/20">
-                            <div className="text-4xl mb-4">🚀</div>
-                            <h3 className="text-2xl font-bold text-white mb-3">Innovation First</h3>
-                            <p className="text-gray-400">
-                                We push boundaries and embrace cutting-edge technologies to solve complex problems.
-                            </p>
-                        </div>
-                        <div className="p-8 bg-gradient-to-br from-pink-900/20 to-orange-900/20 rounded-2xl border border-pink-500/20">
-                            <div className="text-4xl mb-4">🤝</div>
-                            <h3 className="text-2xl font-bold text-white mb-3">Collaborative</h3>
-                            <p className="text-gray-400">
-                                Work with talented individuals in a supportive environment where everyone's voice matters.
-                            </p>
-                        </div>
-                        <div className="p-8 bg-gradient-to-br from-orange-900/20 to-rose-900/20 rounded-2xl border border-orange-500/20">
-                            <div className="text-4xl mb-4">🌱</div>
-                            <h3 className="text-2xl font-bold text-white mb-3">Growth-Focused</h3>
-                            <p className="text-gray-400">
-                                Continuous learning opportunities and clear paths for professional development.
-                            </p>
-                        </div>
-                    </div>
-                </section>
 
                 {/* Open Positions */}
                 <Section title="Open Positions" eyebrow="We're Hiring">

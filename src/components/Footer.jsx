@@ -15,21 +15,13 @@ function Footer() {
         ],
         work: [
             { label: "Services", path: "/services" },
-            { label: "Portfolio", path: "/portfolio" },
-            { label: "Case Studies", path: "/case-studies" },
-
             { label: "High-Value Add-ons", path: "/high-value-addons" }
         ],
         resources: [
             { label: "Blog", path: "/blog" },
-
-            { label: "Tech Stack", path: "/tech-stack" },
-            { label: "FAQ", path: "/faq" }
+            { label: "Tech Stack", path: "/tech-stack" }
         ],
-        legal: [
-            { label: "Privacy Policy", path: "/privacy-policy" },
-            { label: "Terms & Conditions", path: "/terms-conditions" }
-        ]
+        legal: []
     };
 
     return (
@@ -51,7 +43,7 @@ function Footer() {
                             <a href="https://www.linkedin.com/in/harshustle/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-purple-500/20 hover:text-purple-400 transition-all border border-white/10 hover:border-purple-500/30">
                                 <Linkedin size={18} />
                             </a>
-                            <a href="https://www.instagram.com/harshustle/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-purple-500/20 hover:text-purple-400 transition-all border border-white/10 hover:border-purple-500/30">
+                            <a href="https://www.instagram.com/harshustler/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-purple-500/20 hover:text-purple-400 transition-all border border-white/10 hover:border-purple-500/30">
                                 <Instagram size={18} />
                             </a>
                             <a href="https://github.com/harshustle" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-purple-500/20 hover:text-purple-400 transition-all border border-white/10 hover:border-purple-500/30">
@@ -97,17 +89,7 @@ function Footer() {
                                     </Link>
                                 </li>
                             ))}
-                            {/* Legal Links embedded here or separate? Let's separate if space, else append */}
-                            <li className="pt-4 mt-4 border-t border-white/10">
-                                <h4 className="font-bold text-white mb-3 text-xs uppercase tracking-wider">Legal</h4>
-                            </li>
-                            {footerLinks.legal.map((link) => (
-                                <li key={link.path}>
-                                    <Link to={link.path} className="text-gray-400 hover:text-purple-400 transition-colors text-sm">
-                                        {link.label}
-                                    </Link>
-                                </li>
-                            ))}
+
                         </ul>
                     </div>
                 </div>

@@ -10,7 +10,7 @@ import ServiceProcessModal from "../components/ServiceProcessModal";
 import BookCallPreview from "../components/BookCallPreview";
 
 
-import FAQ from "../components/FAQ";
+
 import Testimonials from "../components/Testimonials";
 
 function Home() {
@@ -76,7 +76,7 @@ function Home() {
             title: "Web Design",
             description: "Build beautiful, responsive, and high-converting websites tailored to your brand.",
             features: ["Modern UI", "Responsive Layouts", "SEO Optimized", "Fast Performance"],
-            price: "$8,000",
+            price: "$499",
             processSteps: [
                 { title: "Requirement Gathering", description: "Understanding your functional and non-functional requirements." },
                 { title: "UI/UX Design", description: "Creating high-fidelity mockups of the website interface." },
@@ -91,7 +91,7 @@ function Home() {
             title: "Automation",
             description: "Streamline your business processes with intelligent workflows and integrations.",
             features: ["Workflow Automation", "CRM Integration", "Email Sequences", "Task Management"],
-            price: "$3,000/mo",
+            price: "$799/mo",
             processSteps: [
                 { title: "Audit", description: "Reviewing your current processes to identify automation opportunities." },
                 { title: "Strategy", description: "Designing a custom automation workflow tailored to your needs." },
@@ -328,11 +328,7 @@ function Home() {
                             <p className="text-gray-400 text-sm">Explore our comprehensive range of professional services</p>
                         </a>
 
-                        <a href="/portfolio?utm_source=home&utm_medium=internal&utm_content=explore_portfolio" className="group p-6 bg-gradient-to-br from-purple-900/10 to-purple-700/10 hover:from-purple-900/20 hover:to-purple-700/20 rounded-xl border border-purple-500/20 hover:border-purple-500/40 transition-all transform hover:-translate-y-2">
-                            <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">💼</div>
-                            <h3 className="text-xl font-bold text-white mb-2 group-hover:text-purple-300 transition-colors">Portfolio</h3>
-                            <p className="text-gray-400 text-sm">View our featured projects and success stories</p>
-                        </a>
+
 
                         <a href="/about?utm_source=home&utm_medium=internal&utm_content=explore_about" className="group p-6 bg-gradient-to-br from-purple-900/10 to-purple-800/10 hover:from-purple-900/20 hover:to-purple-800/20 rounded-xl border border-purple-500/20 hover:border-purple-500/40 transition-all transform hover:-translate-y-2">
                             <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">👥</div>
@@ -352,11 +348,7 @@ function Home() {
                             <p className="text-gray-400 text-sm">Premium features to enhance your experience</p>
                         </a>
 
-                        <a href="/case-studies?utm_source=home&utm_medium=internal&utm_content=explore_casestudies" className="group p-6 bg-gradient-to-br from-purple-900/10 to-purple-700/10 hover:from-purple-900/20 hover:to-purple-700/20 rounded-xl border border-purple-500/20 hover:border-purple-500/40 transition-all transform hover:-translate-y-2">
-                            <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">📈</div>
-                            <h3 className="text-xl font-bold text-white mb-2 group-hover:text-purple-300 transition-colors">Case Studies</h3>
-                            <p className="text-gray-400 text-sm">Detailed client success stories and results</p>
-                        </a>
+
 
                         <a href="/tech-stack?utm_source=home&utm_medium=internal&utm_content=explore_techstack" className="group p-6 bg-gradient-to-br from-purple-900/10 to-purple-800/10 hover:from-purple-900/20 hover:to-purple-800/20 rounded-xl border border-purple-500/20 hover:border-purple-500/40 transition-all transform hover:-translate-y-2">
                             <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">💻</div>
@@ -376,11 +368,7 @@ function Home() {
                             <p className="text-gray-400 text-sm">Schedule a consultation with our team</p>
                         </a>
 
-                        <a href="/careers?utm_source=home&utm_medium=internal&utm_content=explore_careers" className="group p-6 bg-gradient-to-br from-rose-900/10 to-pink-900/10 hover:from-rose-900/20 hover:to-pink-900/20 rounded-xl border border-rose-500/20 hover:border-rose-500/40 transition-all transform hover:-translate-y-2">
-                            <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">🚀</div>
-                            <h3 className="text-xl font-bold text-white mb-2 group-hover:text-rose-300 transition-colors">Careers</h3>
-                            <p className="text-gray-400 text-sm">Join our growing team of innovators</p>
-                        </a>
+
 
                         <a href="/blog?utm_source=home&utm_medium=internal&utm_content=explore_blog" className="group p-6 bg-gradient-to-br from-violet-900/10 to-purple-900/10 hover:from-violet-900/20 hover:to-purple-900/20 rounded-xl border border-violet-500/20 hover:border-violet-500/40 transition-all transform hover:-translate-y-2">
                             <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">📝</div>
@@ -388,23 +376,7 @@ function Home() {
                             <p className="text-gray-400 text-sm">Latest insights and articles from our team</p>
                         </a>
 
-                        <a href="/faq?utm_source=home&utm_medium=internal&utm_content=explore_faq" className="group p-6 bg-gradient-to-br from-blue-900/10 to-indigo-900/10 hover:from-blue-900/20 hover:to-indigo-900/20 rounded-xl border border-blue-500/20 hover:border-blue-500/40 transition-all transform hover:-translate-y-2">
-                            <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">❓</div>
-                            <h3 className="text-xl font-bold text-white mb-2 group-hover:text-blue-300 transition-colors">FAQ</h3>
-                            <p className="text-gray-400 text-sm">Frequently asked questions answered</p>
-                        </a>
 
-                        <a href="/privacy-policy?utm_source=home&utm_medium=internal&utm_content=explore_privacypolicy" className="group p-6 bg-gradient-to-br from-gray-900/10 to-slate-900/10 hover:from-gray-900/20 hover:to-slate-900/20 rounded-xl border border-gray-500/20 hover:border-gray-500/40 transition-all transform hover:-translate-y-2">
-                            <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">🔒</div>
-                            <h3 className="text-xl font-bold text-white mb-2 group-hover:text-gray-300 transition-colors">Privacy Policy</h3>
-                            <p className="text-gray-400 text-sm">How we protect your information</p>
-                        </a>
-
-                        <a href="/terms-conditions?utm_source=home&utm_medium=internal&utm_content=explore_terms" className="group p-6 bg-gradient-to-br from-slate-900/10 to-zinc-900/10 hover:from-slate-900/20 hover:to-zinc-900/20 rounded-xl border border-slate-500/20 hover:border-slate-500/40 transition-all transform hover:-translate-y-2">
-                            <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">📄</div>
-                            <h3 className="text-xl font-bold text-white mb-2 group-hover:text-slate-300 transition-colors">Terms & Conditions</h3>
-                            <p className="text-gray-400 text-sm">Our terms of service and usage</p>
-                        </a>
                     </div>
                 </Section>
 
@@ -416,10 +388,7 @@ function Home() {
                     <Testimonials />
                 </Section>
 
-                {/* FAQ */}
-                <Section id="faq" title="Questions? We've got answers.">
-                    <FAQ />
-                </Section>
+
             </main>
         </>
     );
