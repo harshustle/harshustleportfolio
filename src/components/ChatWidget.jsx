@@ -261,7 +261,7 @@ export default function ChatWidget() {
     ]);
     const [input, setInput] = useState("");
     const [isLoading, setIsLoading] = useState(false);
-    const [validModel, setValidModel] = useState("gemini-pro"); // Default Fallback to stable model
+    const [validModel, setValidModel] = useState("gemini-1.5-flash"); // Default Fallback to stable model
     const messagesEndRef = useRef(null);
 
     // Scroll to bottom
@@ -280,6 +280,7 @@ export default function ChatWidget() {
 
         // AUTO-DETECT: Find the best working model for this specific Key
         const detectModel = async () => {
+            if (!API_KEY) return;
             try {
                 const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${API_KEY}`);
                 const data = await response.json();
@@ -300,15 +301,11 @@ export default function ChatWidget() {
                         const cleanName = bestModel.name.replace("models/", "");
                         console.log("Auto-selected Model:", cleanName);
                         setValidModel(cleanName);
-                    } else {
-                        console.warn("No specific stable model found, checking all text models...");
-                        if (textModels.length > 0) {
-                            setValidModel(textModels[0].name.replace("models/", ""));
-                        }
                     }
                 }
             } catch (e) {
                 console.error("Model detection warning", e);
+                setValidModel("gemini-1.5-flash");
             }
         };
         detectModel();
@@ -325,7 +322,7 @@ export default function ChatWidget() {
         setIsLoading(true);
 
         try {
-            if (API_KEY === "YOUR_GEMINI_API_KEY_HERE") {
+            if (!API_KEY || API_KEY === "YOUR_GEMINI_API_KEY_HERE") {
                 throw new Error("API Key not configured. Please add VITE_GEMINI_API_KEY to your .env file.");
             }
 

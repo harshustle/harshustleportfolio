@@ -76,7 +76,8 @@ function Home() {
             title: "Web Design",
             description: "Build beautiful, responsive, and high-converting websites tailored to your brand.",
             features: ["Modern UI", "Responsive Layouts", "SEO Optimized", "Fast Performance"],
-            price: "$499",
+            price: "$99",
+            highlight: true,
             processSteps: [
                 { title: "Requirement Gathering", description: "Understanding your functional and non-functional requirements." },
                 { title: "UI/UX Design", description: "Creating high-fidelity mockups of the website interface." },
@@ -129,8 +130,13 @@ function Home() {
                         {homeServices.map((service, index) => (
                             <div
                                 key={index}
-                                className="group p-8 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-purple-500/30 rounded-2xl shadow-lg transition-all duration-300 transform hover:-translate-y-2 hover:shadow-purple-500/10 backdrop-blur-sm flex flex-col"
+                                className={`group p-8 rounded-2xl shadow-lg transition-all duration-300 transform hover:-translate-y-2 backdrop-blur-sm flex flex-col ${service.highlight ? 'bg-white/10 border border-purple-500 shadow-2xl shadow-purple-500/20 scale-105 z-10' : 'bg-white/5 hover:bg-white/10 border border-white/10 hover:border-purple-500/30 hover:shadow-purple-500/10'}`}
                             >
+                                {service.highlight && (
+                                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-purple-600 to-purple-400 text-white text-xs font-bold uppercase tracking-wider rounded-full shadow-lg">
+                                        Best Value
+                                    </div>
+                                )}
                                 <div className="h-14 w-14 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 group-hover:bg-purple-500/20">
                                     <span className="text-3xl">{service.icon}</span>
                                 </div>
