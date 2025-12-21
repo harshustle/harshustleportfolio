@@ -14,7 +14,7 @@ function Services({ isSection = false }) {
             title: "AI Content Creation",
             description: "Generate high-quality, engaging content instantly with our advanced AI tools tailored to your brand voice.",
             features: ["Blog Writing", "Social Media Posts", "SEO Optimization", "Multi-language Support"],
-            price: "Starting at $1,500/mo",
+            price: "Starting at $299/mo",
             processSteps: [
                 { title: "Brand Analysis", description: "We analyze your brand voice, target audience, and content goals to train our AI models." },
                 { title: "Topic ideation", description: "Generating relevant, high-impact topics based on market trends and SEO data." },
@@ -29,7 +29,7 @@ function Services({ isSection = false }) {
             title: "Web Development",
             description: "Build fast, scalable, and responsive web applications using modern technologies.",
             features: ["React & Next.js", "Node.js Backend", "API Integration", "Performance Optimization"],
-            price: "Starting at $8,000",
+            price: "Starting at $99",
             processSteps: [
                 { title: "Requirement Gathering", description: "Understanding your functional and non-functional requirements." },
                 { title: "Architecture Design", description: "Planning the database schema, API structure, and frontend components." },
@@ -44,7 +44,7 @@ function Services({ isSection = false }) {
             title: "Mobile Apps",
             description: "Develop native-quality mobile applications for iOS and Android platforms.",
             features: ["React Native", "Cross-platform", "App Store Deployment", "Push Notifications"],
-            price: "Starting at $12,000",
+            price: "Starting at $149",
             processSteps: [
                 { title: "Wireframing", description: "Mapping out the user journey and screen flows." },
                 { title: "UI Design", description: "Creating high-fidelity mockups of the app interface." },
@@ -59,7 +59,7 @@ function Services({ isSection = false }) {
             title: "Social Media Management",
             description: "Full-service management of your social profiles to build community and drive engagement.",
             features: ["Community Management", "Strategy Development", "Influencer Collaboration", "Paid Ad Campaigns"],
-            price: "Starting at $2,000/mo",
+            price: "Starting at $199/mo",
             processSteps: [
                 { title: "Audit", description: "Reviewing your current social media presence and performance." },
                 { title: "Strategy Deck", description: "Creating a comprehensive plan for content pillars and frequency." },
@@ -74,7 +74,7 @@ function Services({ isSection = false }) {
             title: "Social Media Automation",
             description: "Automate your social growth with AI-driven content, scheduling, and analytics. Tools: Hootsuite AI, Buffer, Predis.ai.",
             features: ["Content ideas generation", "Post scheduling", "Hashtag & caption suggestions", "Analytics & performance prediction"],
-            price: "Starting at $3,000/mo",
+            price: "Starting at $50/mo",
             processSteps: [
                 { title: "Tool Setup", description: "Configuring automation tools (Zapier, Buffer, etc.) for your accounts." },
                 { title: "Workflow Creation", description: "Building automated workflows for posting and cross-promotion." },
@@ -89,7 +89,7 @@ function Services({ isSection = false }) {
             title: "Video Editing",
             description: "Professional video editing for Reels, Shorts, and long-form content to capture attention.",
             features: ["Reels & Shorts", "Color Grading", "Motion Graphics", "Sound Design"],
-            price: "Starting at $1,000/project",
+            price: "Starting at $25/project",
             processSteps: [
                 { title: "Raw Footage Ingest", description: "Organizing and reviewing your raw video files." },
                 { title: "Rough Cut", description: " assembling the narrative structure and selecting the best takes." },
@@ -180,6 +180,11 @@ function Services({ isSection = false }) {
                                             {service.price.replace("Starting at ", "")}
                                         </div>
                                     </div>
+                                    {service.title === "Web Development" && (
+                                        <p className="text-xs text-center text-gray-500 mt-2 italic">
+                                            * Prices vary based on add-ons
+                                        </p>
+                                    )}
                                 </div>
                             </div>
                         ))}
@@ -212,9 +217,9 @@ function Services({ isSection = false }) {
                     <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
                         Let's discuss how we can help you achieve your business goals with our expert services.
                     </p>
-                    <button className="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-lg transition-all transform hover:scale-105">
+                    <Link to="/book-a-call" className="inline-block px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-lg transition-all transform hover:scale-105">
                         Schedule a Free Consultation
-                    </button>
+                    </Link>
                 </section>
             </main>
         </div>

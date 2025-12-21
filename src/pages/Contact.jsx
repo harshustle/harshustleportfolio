@@ -259,13 +259,15 @@ function Contact() {
                 {/* Map Section (Placeholder) */}
                 <section className="mt-16">
                     <div className="relative h-96 rounded-2xl overflow-hidden border border-emerald-500/20">
-                        <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/20 to-teal-900/20 flex items-center justify-center">
-                            <div className="text-center">
-                                <div className="text-6xl mb-4">🗺️</div>
-                                <p className="text-gray-400">Map integration placeholder</p>
-                                <p className="text-sm text-gray-500 mt-2">San Francisco, CA</p>
-                            </div>
-                        </div>
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224345.83924376517!2d77.06889989932147!3d28.527280338786015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd5b347eb62d%3A0x37205b715389640!2sDelhi!5e0!3m2!1sen!2sin!4v1709849200000!5m2!1sen!2sin"
+                            width="100%"
+                            height="100%"
+                            style={{ border: 0, filter: "invert(90%) hue-rotate(180deg)" }}
+                            allowFullScreen=""
+                            loading="lazy"
+                            referrerPolicy="no-referrer-when-downgrade"
+                        ></iframe>
                     </div>
                 </section>
             </main>

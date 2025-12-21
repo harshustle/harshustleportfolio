@@ -92,12 +92,12 @@ function Reviews() {
                             ))}
                         </div>
                         <p className="text-gray-400 mb-2">Average Rating</p>
-                        <p className="text-gray-500 text-sm">Based on 500+ reviews</p>
+                        <p className="text-gray-500 text-sm">Based on 50+ reviews</p>
                     </div>
 
                     <div className="md:col-span-2 grid grid-cols-2 gap-4">
                         <div className="p-6 bg-gradient-to-br from-amber-900/10 to-yellow-900/10 rounded-xl border border-amber-500/20 text-center">
-                            <div className="text-4xl font-bold text-white mb-2">500+</div>
+                            <div className="text-4xl font-bold text-white mb-2">50+</div>
                             <div className="text-gray-400 text-sm">Total Reviews</div>
                         </div>
                         <div className="p-6 bg-gradient-to-br from-yellow-900/10 to-orange-900/10 rounded-xl border border-yellow-500/20 text-center">
@@ -109,7 +109,7 @@ function Reviews() {
                             <div className="text-gray-400 text-sm">Would Recommend</div>
                         </div>
                         <div className="p-6 bg-gradient-to-br from-amber-900/10 to-orange-900/10 rounded-xl border border-amber-500/20 text-center">
-                            <div className="text-4xl font-bold text-white mb-2">200+</div>
+                            <div className="text-4xl font-bold text-white mb-2">20+</div>
                             <div className="text-gray-400 text-sm">Happy Clients</div>
                         </div>
                     </div>

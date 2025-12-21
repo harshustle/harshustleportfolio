@@ -170,6 +170,11 @@ function Home() {
                                             {service.price}
                                         </div>
                                     </div>
+                                    {service.title === "Web Design" && (
+                                        <p className="text-xs text-center text-gray-500 mt-2 italic">
+                                            * Prices vary based on add-ons
+                                        </p>
+                                    )}
                                 </div>
                             </div>
                         ))}

@@ -64,70 +64,18 @@ function Careers({ isSection = false }) {
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
 
 
-                {/* Open Positions */}
+                {/* Open Positions - Currently Empty */}
                 <Section title="Open Positions" eyebrow="We're Hiring">
-                    <div className="space-y-4 mt-12">
-                        {openings.map((job, index) => (
-                            <div
-                                key={index}
-                                className="group p-6 bg-gradient-to-br from-rose-900/10 to-pink-900/10 hover:from-rose-900/20 hover:to-pink-900/20 rounded-xl border border-rose-500/20 hover:border-rose-500/40 transition-all"
-                            >
-                                <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-                                    <div className="flex-1">
-                                        <div className="flex flex-wrap gap-2 mb-3">
-                                            <span className="px-3 py-1 bg-rose-500/20 border border-rose-500/30 text-rose-300 text-xs font-semibold rounded-full">
-                                                {job.department}
-                                            </span>
-                                            <span className="px-3 py-1 bg-pink-500/20 border border-pink-500/30 text-pink-300 text-xs font-semibold rounded-full">
-                                                {job.type}
-                                            </span>
-                                        </div>
-                                        <h4 className="text-2xl font-bold text-white mb-2 group-hover:text-rose-300 transition-colors">
-                                            {job.title}
-                                        </h4>
-                                        <p className="text-gray-400 mb-4">{job.description}</p>
-                                        <div className="flex flex-wrap gap-4 text-sm text-gray-300 mb-4">
-                                            <span className="flex items-center gap-1">
-                                                <span className="text-rose-400">📍</span> {job.location}
-                                            </span>
-                                            <span className="flex items-center gap-1">
-                                                <span className="text-rose-400">💰</span> {job.salary}
-                                            </span>
-                                        </div>
-                                        <div className="flex flex-wrap gap-2">
-                                            {job.requirements.map((req, i) => (
-                                                <span
-                                                    key={i}
-                                                    className="text-xs px-2 py-1 bg-gray-800 text-gray-400 rounded"
-                                                >
-                                                    {req}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <button className="px-8 py-3 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white font-semibold rounded-lg transition-all whitespace-nowrap transform hover:scale-105">
-                                            Apply Now →
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
+                    <div className="text-center py-16 bg-white/5 border border-white/10 rounded-2xl mt-12">
+                        <div className="text-6xl mb-6">🔔</div>
+                        <h3 className="text-2xl font-bold text-white mb-4">No Open Positions</h3>
+                        <p className="text-gray-400 max-w-xl mx-auto">
+                            We currently have no open positions. We will post updates here when new opportunities arise.
+                        </p>
                     </div>
                 </Section>
 
-                {/* CTA */}
-                <section className="mt-20 p-12 bg-gradient-to-r from-rose-900/20 via-pink-900/20 to-orange-900/20 rounded-3xl border border-rose-500/20 text-center">
-                    <h2 className="text-4xl font-bold text-white mb-4">
-                        Don't See a Perfect Fit?
-                    </h2>
-                    <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
-                        We're always interested in hearing from talented people. Send us your resume and tell us about yourself.
-                    </p>
-                    <button className="px-8 py-4 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white font-semibold rounded-lg transition-all transform hover:scale-105">
-                        Submit General Application
-                    </button>
-                </section>
+
             </div>
         </div>
     );

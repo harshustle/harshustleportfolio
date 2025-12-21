@@ -214,25 +214,7 @@ function Blog() {
                     </div>
                 )}
 
-                {/* Newsletter CTA */}
-                <section className="mt-16 p-12 bg-gradient-to-r from-violet-900/20 via-purple-900/20 to-fuchsia-900/20 rounded-3xl border border-violet-500/20 text-center">
-                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                        Never Miss an Update
-                    </h2>
-                    <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
-                        Subscribe to our newsletter and get the latest articles delivered straight to your inbox.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-                        <input
-                            type="email"
-                            placeholder="your@email.com"
-                            className="flex-1 px-6 py-3 bg-black/50 border border-gray-700 focus:border-violet-500 focus:outline-none rounded-lg text-white"
-                        />
-                        <button className="px-8 py-3 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-semibold rounded-lg transition-all whitespace-nowrap">
-                            Subscribe
-                        </button>
-                    </div>
-                </section>
+
             </main>
         </div>
     );

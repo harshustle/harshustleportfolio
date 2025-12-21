@@ -21,6 +21,10 @@ import Careers from "./pages/Careers";
 import Blog from "./pages/Blog";
 
 
+import Terms from "./pages/Terms";
+import Privacy from "./pages/Privacy";
+
+
 function App() {
   return (
     <div className="min-h-screen bg-black">
@@ -41,6 +45,8 @@ function App() {
         <Route path="/book-a-call" element={<BookCall />} />
         <Route path="/careers" element={<Careers />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/privacy" element={<Privacy />} />
 
       </Routes>
 

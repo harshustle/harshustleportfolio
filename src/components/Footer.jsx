@@ -21,17 +21,20 @@ function Footer() {
             { label: "Blog", path: "/blog" },
             { label: "Tech Stack", path: "/tech-stack" }
         ],
-        legal: []
+        legal: [
+            { label: "Terms and Conditions", path: "/terms" },
+            { label: "Privacy Policy", path: "/privacy" }
+        ]
     };
 
     return (
         <footer className="border-t border-white/10 bg-black pt-16 pb-8">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-12">
+                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 mb-12">
                     {/* Brand Column */}
                     <div className="col-span-2 lg:col-span-2">
                         <Link to="/" className="text-2xl font-bold text-white mb-4 block">
-                            HARSH<span className="text-purple-500">UGC</span>
+                            HARSH<span className="text-purple-500">USTLE</span>
                         </Link>
                         <p className="text-gray-400 mb-6 max-w-sm">
                             Building digital experiences that transform businesses. Innovation, quality, and speed delivered.
@@ -89,7 +92,19 @@ function Footer() {
                                     </Link>
                                 </li>
                             ))}
+                        </ul>
+                    </div>
 
+                    <div>
+                        <h3 className="font-bold text-white mb-4">Legal</h3>
+                        <ul className="space-y-3">
+                            {footerLinks.legal.map((link) => (
+                                <li key={link.path}>
+                                    <Link to={link.path} className="text-gray-400 hover:text-purple-400 transition-colors text-sm">
+                                        {link.label}
+                                    </Link>
+                                </li>
+                            ))}
                         </ul>
                     </div>
                 </div>
