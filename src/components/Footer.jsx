@@ -15,7 +15,8 @@ function Footer() {
         ],
         work: [
             { label: "Services", path: "/services" },
-            { label: "High-Value Add-ons", path: "/high-value-addons" }
+            { label: "High-Value Add-ons", path: "/high-value-addons" },
+            { label: "Verify Payment", path: "/verify-payment" }
         ],
         resources: [
             { label: "Blog", path: "/blog" },
@@ -70,13 +71,19 @@ function Footer() {
                     </div>
 
                     <div>
-                        <h3 className="font-bold text-white mb-4">Work</h3>
+                        <h3 className="font-bold text-white mb-4">Services</h3>
                         <ul className="space-y-3">
                             {footerLinks.work.map((link) => (
                                 <li key={link.path}>
-                                    <Link to={link.path} className="text-gray-400 hover:text-purple-400 transition-colors text-sm">
-                                        {link.label}
-                                    </Link>
+                                    {link.label === "Verify Payment" ? (
+                                        <Link to={link.path} className="inline-block px-4 py-2 mt-1 bg-white/10 hover:bg-purple-600 border border-purple-500/30 text-white text-xs font-bold rounded-lg transition-all shadow-lg hover:shadow-purple-500/20">
+                                            {link.label}
+                                        </Link>
+                                    ) : (
+                                        <Link to={link.path} className="text-gray-400 hover:text-purple-400 transition-colors text-sm">
+                                            {link.label}
+                                        </Link>
+                                    )}
                                 </li>
                             ))}
                         </ul>

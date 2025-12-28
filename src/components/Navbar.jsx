@@ -18,7 +18,8 @@ const Navbar = () => {
       textColor: "#fff",
       links: [
         { label: "Our Services", ariaLabel: "View All Services", href: "/services" },
-        { label: "Add-ons", ariaLabel: "High Value Add-ons", href: "/high-value-addons" }
+        { label: "Add-ons", ariaLabel: "High Value Add-ons", href: "/high-value-addons" },
+        { label: "Verify Payment", ariaLabel: "Verify your recent payment", href: "/verify-payment" }
       ]
     },
     {

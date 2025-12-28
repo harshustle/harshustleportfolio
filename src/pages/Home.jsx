@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Hero from "../components/Hero";
+import { openRazorpayCheckout } from "../utils/razorpay";
 
 import Stack from "../components/Stack";
 import Stepper, { Step } from '../components/parts/Stepper';
@@ -7,6 +8,7 @@ import Section from "../components/Section";
 import FeaturesGrid from "../components/FeaturesGrid";
 import MetricsStrip from "../components/MetricsStrip";
 import ServiceProcessModal from "../components/ServiceProcessModal";
+import UserDetailsModal from "../components/UserDetailsModal";
 import BookCallPreview from "../components/BookCallPreview";
 
 
@@ -21,6 +23,20 @@ function Home() {
         businessInfo: ''
     });
     const [selectedService, setSelectedService] = useState(null);
+    const [buyService, setBuyService] = useState(null);
+
+    const handleBuySubmit = (name, phone) => {
+        if (buyService && buyService.priceAmount) {
+            openRazorpayCheckout(
+                buyService.priceAmount,
+                buyService.currency || "INR",
+                buyService.title,
+                buyService.description,
+                { name, contact: phone }
+            );
+            setBuyService(null);
+        }
+    };
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -32,7 +48,7 @@ function Home() {
     };
 
     // Replace with your Web App URL from Google Apps Script
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw3ehsXZDXLZOZpXXe2LegrlDBmqdowtiahl9cyCdbd9JvcDFnkMUdaWrIYmZMTcIOMjQ/exec";
+    const GOOGLE_SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
 
     const submitToGoogleSheets = async () => {
         if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes("YOUR_GOOGLE_SCRIPT_URL_HERE")) {
@@ -61,7 +77,10 @@ function Home() {
             title: "AI Content Creation",
             description: "Generate high-quality, engaging content instantly with our advanced AI tools tailored to your brand voice.",
             features: ["Blog Writing", "Social Media Posts", "SEO Optimization", "Multi-language Support"],
-            price: "$1,500/mo",
+            price: "$1,500 / ₹1,25,000 per mo",
+            priceAmount: 125000,
+            currency: "INR",
+            buyNow: true,
             processSteps: [
                 { title: "Brand Analysis", description: "We analyze your brand voice, target audience, and content goals to train our AI models." },
                 { title: "Topic ideation", description: "Generating relevant, high-impact topics based on market trends and SEO data." },
@@ -76,8 +95,9 @@ function Home() {
             title: "Web Design",
             description: "Build beautiful, responsive, and high-converting websites tailored to your brand.",
             features: ["Modern UI", "Responsive Layouts", "SEO Optimized", "Fast Performance"],
-            price: "$99",
-            highlight: true,
+            price: "$99 / ₹8,500",
+            priceAmount: 8500,
+            currency: "INR",
             processSteps: [
                 { title: "Requirement Gathering", description: "Understanding your functional and non-functional requirements." },
                 { title: "UI/UX Design", description: "Creating high-fidelity mockups of the website interface." },
@@ -85,6 +105,7 @@ function Home() {
                 { title: "Content Integration", description: "Populating the site with your content and optimizing for SEO." },
                 { title: "Launch", description: "Deploying your site to a live server and ensuring everything runs smoothly." }
             ],
+            buyNow: true,
             paymentLink: "#" // TODO: Add your Stripe/PhonePe link here
         },
         {
@@ -92,7 +113,10 @@ function Home() {
             title: "Automation",
             description: "Streamline your business processes with intelligent workflows and integrations.",
             features: ["Workflow Automation", "CRM Integration", "Email Sequences", "Task Management"],
-            price: "$799/mo",
+            price: "$799 / ₹65,000 per mo",
+            priceAmount: 65000,
+            currency: "INR",
+            buyNow: true,
             processSteps: [
                 { title: "Audit", description: "Reviewing your current processes to identify automation opportunities." },
                 { title: "Strategy", description: "Designing a custom automation workflow tailored to your needs." },
@@ -111,6 +135,13 @@ function Home() {
                 isOpen={!!selectedService}
                 onClose={() => setSelectedService(null)}
                 service={selectedService}
+            />
+            {/* User Details Modal */}
+            <UserDetailsModal
+                isOpen={!!buyService}
+                onClose={() => setBuyService(null)}
+                onSubmit={handleBuySubmit}
+                serviceName={buyService?.title}
             />
             {/* HERO */}
             <Hero />
@@ -162,12 +193,25 @@ function Home() {
                                     <div className="flex w-full rounded-lg overflow-hidden shadow-lg shadow-purple-500/5 group-hover:shadow-purple-500/10 transition-all">
                                         <button
                                             onClick={() => setSelectedService(service)}
-                                            className="w-[70%] px-4 py-3 bg-[#A855F7] hover:bg-[#9333ea] text-white font-semibold transition-all flex items-center justify-center gap-2 rounded-l-lg"
+                                            className="px-4 py-3 bg-[#A855F7] hover:bg-[#9333ea] text-white font-semibold transition-all flex items-center justify-center gap-2 rounded-l-lg flex-1 text-sm"
                                         >
                                             Learn More <span className="transition-transform group-hover:translate-x-1">→</span>
                                         </button>
+                                        <button
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                if (service.buyNow && service.priceAmount) {
+                                                    setBuyService(service);
+                                                } else {
+                                                    window.location.href = '/book-a-call';
+                                                }
+                                            }}
+                                            className="px-4 py-3 bg-white/10 hover:bg-white/20 border-l border-white/10 text-white font-bold flex items-center justify-center text-sm transition-all"
+                                        >
+                                            Buy
+                                        </button>
                                         <div className="w-[30%] px-2 py-3 bg-white/5 border border-purple-500/30 text-purple-300 font-bold flex items-center justify-center text-xs text-center leading-tight rounded-r-lg border-l-0">
-                                            {service.price}
+                                            {service.price.replace("Starting at ", "").replace("$1,500 / ₹1,25,000 per mo", "$1.5k / ₹1.25L")}
                                         </div>
                                     </div>
                                     {service.title === "Web Design" && (

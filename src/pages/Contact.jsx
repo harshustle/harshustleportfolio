@@ -14,7 +14,7 @@ function Contact() {
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     // Reuse the Google Script URL
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw3ehsXZDXLZOZpXXe2LegrlDBmqdowtiahl9cyCdbd9JvcDFnkMUdaWrIYmZMTcIOMjQ/exec";
+    const GOOGLE_SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
 
     const handleSubmit = async (e) => {
         e.preventDefault();

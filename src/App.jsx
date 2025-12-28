@@ -23,6 +23,8 @@ import Blog from "./pages/Blog";
 
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
+import Success from "./pages/Success";
+import VerifyPayment from "./pages/VerifyPayment";
 
 
 function App() {
@@ -47,6 +49,8 @@ function App() {
         <Route path="/blog" element={<Blog />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
+        <Route path="/success" element={<Success />} />
+        <Route path="/verify-payment" element={<VerifyPayment />} />
 
       </Routes>
 
