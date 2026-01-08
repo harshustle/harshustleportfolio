@@ -27,19 +27,7 @@ function Services({ isSection = false }) {
 
     const services = [
 
-        {
-            icon: "🧪",
-            title: "Test Service",
-            description: "A micro service for testing payment flows.",
-            features: ["Payment Verification", "Instant Success"],
-            price: "₹1",
-            priceAmount: 1,
-            currency: "INR",
-            buyNow: true,
-            processSteps: [
-                { title: "Test", description: "Verifying payment integration." }
-            ]
-        },
+
         {
             icon: "✨",
             title: "AI Content Creation",

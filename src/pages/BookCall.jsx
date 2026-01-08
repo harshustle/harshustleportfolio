@@ -41,12 +41,12 @@ function BookCall() {
                             </ul>
                         </div>
                     </div>
-                    <div className="group relative w-full h-[460px] rounded-2xl bg-gradient-to-b from-white/10 to-white/5 p-[1px] shadow-2xl shadow-purple-900/20">
+                    <div className="group relative w-full h-[600px] rounded-2xl bg-gradient-to-b from-white/10 to-white/5 p-[1px] shadow-2xl shadow-purple-900/20">
                         <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/100 to-purple-500/80 blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
                         <div className="relative h-full w-full rounded-2xl bg-black/60 overflow-hidden backdrop-blur-xl">
                             <iframe
                                 src="https://cal.com/harshustle"
-                                style={{ width: "100%", height: "calc(100% + 200px)", marginTop: "-90px" }}
+                                style={{ width: "100%", height: "calc(100% + 50px)" }}
                                 frameBorder="0"
                                 title="Book a Call"
                             ></iframe>
