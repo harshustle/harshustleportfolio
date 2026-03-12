@@ -1,82 +1,52 @@
-// src/pages/Careers.jsx
-import Section from "../components/Section";
-
-function Careers({ isSection = false }) {
-    const openings = [
-        {
-            title: "Full Stack Developer",
-            department: "Engineering",
-            location: "Remote",
-            type: "Full-time",
-            salary: "Competitive",
-            description: "We're looking for an experienced full-stack developer to build scalable web applications.",
-            requirements: ["React & Node.js", "Modern Tech Stack", "Database Design", "API Development"]
-        },
-        {
-            title: "Senior Video Editor",
-            department: "Content",
-            location: "Remote",
-            type: "Contract / Full-time",
-            salary: "Competitive",
-            description: "Create engaging, high-retention video content for our brand and clients.",
-            requirements: ["Premiere Pro / After Effects", "Motion Graphics", "Short-form Content Mastery", "Storytelling"]
-        },
-        {
-            title: "n8n Automation Expert",
-            department: "Automation",
-            location: "Remote",
-            type: "Project-based",
-            salary: "Competitive",
-            description: "Design and implement complex automation workflows using n8n and AI agents.",
-            requirements: ["n8n Mastery", "API Integration", "JavaScript/TypeScript", "Workflow Optimization"]
-        }
-    ];
-
-
-
+function Careers() {
     return (
-        <div className="min-h-screen">
-            {/* Hero */}
-            {!isSection && (
-                <section className="relative py-20 overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-rose-900/20 via-pink-900/20 to-orange-900/20" />
+        <div style={{ background: 'var(--c-bg)', minHeight: '100vh', paddingTop: '60px', transition: 'background 0.3s ease' }}>
+            <section style={{ padding: '6rem 1.5rem 4rem' }}>
+                <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+                    <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--c-text-faint)', marginBottom: '1rem' }}>careers</p>
+                    <h1 style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', fontWeight: 900, letterSpacing: '-0.03em', lineHeight: 1.05, color: 'var(--c-text)', marginBottom: '1.5rem' }}>
+                        build with<br /><span style={{ color: 'var(--c-text-dim)' }}>obsession.</span>
+                    </h1>
+                    <p style={{ fontSize: '1rem', color: 'var(--c-text-muted)', maxWidth: '480px', lineHeight: 1.7 }}>we're a small, high-output team. we hire for craft, speed, and intellectual curiosity — not credentials.</p>
+                </div>
+            </section>
 
-                    <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
-                        <div className="inline-block px-4 py-2 bg-rose-500/10 border border-rose-500/20 rounded-full text-rose-300 text-sm font-semibold mb-6">
-                            Join Our Team
-                        </div>
-                        <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
-                            Build Your Career
-                            <span className="block bg-gradient-to-r from-rose-400 via-pink-400 to-orange-400 bg-clip-text text-transparent">
-                                With Amazing People
-                            </span>
-                        </h1>
-                        <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
-                            We're always looking for talented individuals who share our passion for innovation and excellence.
-                        </p>
-                        <button className="px-8 py-4 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white font-semibold rounded-lg transition-all transform hover:scale-105">
-                            View Open Positions ↓
-                        </button>
+            <section style={{ borderTop: `1px solid var(--c-divider)`, padding: '5rem 1.5rem' }}>
+                <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+                    <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--c-text-faint)', marginBottom: '0.75rem' }}>how we work</p>
+                    <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 3rem)', fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--c-text)', marginBottom: '3rem' }}>
+                        the culture<br /><span style={{ color: 'var(--c-text-dim)' }}>we've built.</span>
+                    </h2>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1px', background: 'var(--c-grid)' }}>
+                        {[
+                            { icon: '🌍', title: '100% remote', desc: 'work from anywhere on earth. results matter, location doesn\'t.' },
+                            { icon: '⚡', title: 'async-first', desc: 'no pointless meetings. communication is thoughtful and written.' },
+                            { icon: '🚀', title: 'ship fast', desc: 'we move in sprints. build, learn, iterate. every week counts.' },
+                            { icon: '🤖', title: 'ai tools encouraged', desc: 'we use ai tools actively — it\'s not cheating, it\'s smart.' },
+                        ].map(c => (
+                            <div key={c.title} style={{ background: 'var(--c-bg-card)', padding: '2rem' }}>
+                                <p style={{ fontSize: '1.75rem', marginBottom: '1rem' }}>{c.icon}</p>
+                                <h3 style={{ fontWeight: 700, color: 'var(--c-text)', marginBottom: '0.75rem', fontSize: '1rem' }}>{c.title}</h3>
+                                <p style={{ fontSize: '0.875rem', color: 'var(--c-text-muted)', lineHeight: 1.7 }}>{c.desc}</p>
+                            </div>
+                        ))}
                     </div>
-                </section>
-            )}
+                </div>
+            </section>
 
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
-
-
-                {/* Open Positions - Currently Empty */}
-                <Section title="Open Positions" eyebrow="We're Hiring">
-                    <div className="text-center py-16 bg-white/5 border border-white/10 rounded-2xl mt-12">
-                        <div className="text-6xl mb-6">🔔</div>
-                        <h3 className="text-2xl font-bold text-white mb-4">No Open Positions</h3>
-                        <p className="text-gray-400 max-w-xl mx-auto">
-                            We currently have no open positions. We will post updates here when new opportunities arise.
-                        </p>
+            <section style={{ borderTop: `1px solid var(--c-divider)`, padding: '5rem 1.5rem' }}>
+                <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+                    <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--c-text-faint)', marginBottom: '1.5rem' }}>open positions</p>
+                    <div style={{ border: `1px solid var(--c-border)`, borderRadius: '12px', padding: '4rem 2rem', textAlign: 'center' }}>
+                        <p style={{ fontSize: '2.5rem', marginBottom: '1.25rem' }}>🔔</p>
+                        <h3 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--c-text)', marginBottom: '0.75rem', letterSpacing: '-0.01em' }}>no open positions right now.</h3>
+                        <p style={{ fontSize: '0.9rem', color: 'var(--c-text-muted)', maxWidth: '400px', margin: '0 auto 2rem', lineHeight: 1.7 }}>when we hire, we hire slow and with intention. send us your portfolio — we'll reach out when there's a fit.</p>
+                        <a href="mailto:harshustle@gmail.com?subject=Speculative Application" style={{ display: 'inline-block', padding: '0.75rem 1.5rem', border: `1px solid var(--c-border)`, borderRadius: '8px', color: 'var(--c-text)', fontWeight: 600, fontSize: '0.875rem', textDecoration: 'none' }}>
+                            send your portfolio →
+                        </a>
                     </div>
-                </Section>
-
-
-            </div>
+                </div>
+            </section>
         </div>
     );
 }

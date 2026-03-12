@@ -1,178 +1,64 @@
-// src/pages/Reviews.jsx
-import Section from "../components/Section";
+const reviews = [
+    { name: 'rohan das', role: 'ceo, techflow', rating: 5, project: 'automation + crm', quote: 'harsh didn\'t just build a website — he totally automated our lead generation. we\'re saving 20 hours a week thanks to his ai workflows. genuinely transformative.' },
+    { name: 'sarah jenkins', role: 'founder, artistry', rating: 5, project: 'web design', quote: 'i was worried about working with a developer who didn\'t "get" design. harsh proved me completely wrong. the visuals are stunning and the animations are silky smooth.' },
+    { name: 'mike chen', role: 'saas entrepreneur', rating: 5, project: 'saas mvp', quote: 'speed is an understatement. he delivered the mvp in 4 days, and it was cleaner than codebases i\'ve seen from expensive agencies charging 10x the price.' },
+    { name: 'priya sharma', role: 'marketing head, d2c brand', rating: 5, project: 'ai content system', quote: 'our content output tripled within the first month. the ai system harsh built publishes seo-optimized articles consistently without us lifting a finger.' },
+    { name: 'alex turner', role: 'cto, fintech startup', rating: 5, project: 'ai chatbot', quote: 'the chatbot handles 70% of our support tickets now. it\'s scarily good at qualifying leads and routing them to the right team. best investment this quarter.' },
+    { name: 'neha kapoor', role: 'founder, edtech platform', rating: 5, project: 'web + automation', quote: 'he understood our vision immediately and delivered something better than what we imagined. on time, on budget, zero drama. will definitely work again.' },
+];
+
+const stats = [
+    { value: '4.9', label: 'average rating' },
+    { value: '50+', label: 'total reviews' },
+    { value: '100%', label: 'recommend' },
+    { value: '25+', label: 'global clients' },
+];
 
 function Reviews() {
-    const reviews = [
-        {
-            name: "Sarah Johnson",
-            role: "CEO, TechCorp",
-            rating: 5,
-            text: "Working with this team was an absolute game-changer for our business. They delivered beyond our expectations and the results speak for themselves. Our user engagement increased by 300%!",
-            image: "https://i.pravatar.cc/150?img=1",
-            company: "TechCorp",
-            project: "E-Commerce Platform"
-        },
-        {
-            name: "Michael Chen",
-            role: "CTO, StartupXYZ",
-            rating: 5,
-            text: "Professional, efficient, and incredibly skilled. They transformed our vision into reality with exceptional attention to detail. The best development team we've ever worked with.",
-            image: "https://i.pravatar.cc/150?img=13",
-            company: "StartupXYZ",
-            project: "SaaS Dashboard"
-        },
-        {
-            name: "Emily Davis",
-            role: "Product Manager, InnovateCo",
-            rating: 5,
-            text: "Outstanding work from start to finish. They understood our requirements perfectly and delivered a product that exceeded all our goals. Highly recommended!",
-            image: "https://i.pravatar.cc/150?img=5",
-            company: "InnovateCo",
-            project: "Mobile App"
-        },
-        {
-            name: "David Wilson",
-            role: "Founder, GrowthLabs",
-            rating: 5,
-            text: "Incredible results in record time. Their expertise and professionalism made the entire process smooth and enjoyable. We saw immediate impact on our metrics.",
-            image: "https://i.pravatar.cc/150?img=12",
-            company: "GrowthLabs",
-            project: "Marketing Platform"
-        },
-        {
-            name: "Lisa Anderson",
-            role: "Marketing Director, BrandCo",
-            rating: 5,
-            text: "They completely transformed our digital presence. The new design is stunning and has significantly improved our conversion rates. Couldn't be happier!",
-            image: "https://i.pravatar.cc/150?img=9",
-            company: "BrandCo",
-            project: "Brand Redesign"
-        },
-        {
-            name: "James Martinez",
-            role: "VP Engineering, ScaleTech",
-            rating: 5,
-            text: "Top-notch quality and excellent communication throughout the project. They went above and beyond to ensure everything was perfect. True professionals!",
-            image: "https://i.pravatar.cc/150?img=15",
-            company: "ScaleTech",
-            project: "Cloud Infrastructure"
-        }
-    ];
-
     return (
-        <div className="min-h-screen">
-            {/* Hero */}
-            <section className="relative py-32 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-amber-900/20 via-yellow-900/20 to-orange-900/20" />
+        <div style={{ background: 'var(--c-bg)', minHeight: '100vh', paddingTop: '60px', transition: 'background 0.3s ease' }}>
 
-                <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <div className="inline-block px-4 py-2 bg-amber-500/10 border border-amber-500/20 rounded-full text-amber-300 text-sm font-semibold mb-6">
-                        Client Reviews
-                    </div>
-                    <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
-                        Trusted by
-                        <span className="block bg-gradient-to-r from-amber-400 via-yellow-400 to-orange-400 bg-clip-text text-transparent">
-                            Industry Leaders
-                        </span>
+            <section style={{ padding: '6rem 1.5rem 4rem' }}>
+                <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+                    <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--c-text-faint)', marginBottom: '1rem' }}>reviews</p>
+                    <h1 style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', fontWeight: 900, letterSpacing: '-0.03em', lineHeight: 1.05, color: 'var(--c-text)', marginBottom: '1.5rem' }}>
+                        don't take<br /><span style={{ color: 'var(--c-text-dim)' }}>our word for it.</span>
                     </h1>
-                    <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-                        Don't just take our word for it. Here's what our clients have to say about working with us.
-                    </p>
                 </div>
             </section>
 
-            <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
-                {/* Overall Rating */}
-                <div className="grid md:grid-cols-3 gap-8 mb-16">
-                    <div className="md:col-span-1 p-8 bg-gradient-to-br from-amber-900/20 to-yellow-900/20 rounded-2xl border border-amber-500/20 text-center">
-                        <div className="text-7xl font-bold text-amber-400 mb-4">4.9</div>
-                        <div className="flex justify-center gap-1 text-3xl mb-4">
-                            {[...Array(5)].map((_, i) => (
-                                <span key={i} className="text-yellow-400">★</span>
-                            ))}
+            {/* Stats Row */}
+            <section style={{ borderTop: `1px solid var(--c-divider)`, borderBottom: `1px solid var(--c-divider)` }}>
+                <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', background: 'var(--c-bg-subtle)' }}>
+                    {stats.map((s, i) => (
+                        <div key={s.label} style={{ padding: '2.5rem 2rem', borderRight: i < stats.length - 1 ? `1px solid var(--c-divider)` : 'none', textAlign: 'center' }}>
+                            <p style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 900, color: 'var(--c-text)', letterSpacing: '-0.03em', marginBottom: '0.25rem' }}>{s.value}</p>
+                            <p style={{ fontSize: '0.75rem', color: 'var(--c-text-dim)', letterSpacing: '0.05em' }}>{s.label}</p>
                         </div>
-                        <p className="text-gray-400 mb-2">Average Rating</p>
-                        <p className="text-gray-500 text-sm">Based on 50+ reviews</p>
-                    </div>
-
-                    <div className="md:col-span-2 grid grid-cols-2 gap-4">
-                        <div className="p-6 bg-gradient-to-br from-amber-900/10 to-yellow-900/10 rounded-xl border border-amber-500/20 text-center">
-                            <div className="text-4xl font-bold text-white mb-2">50+</div>
-                            <div className="text-gray-400 text-sm">Total Reviews</div>
-                        </div>
-                        <div className="p-6 bg-gradient-to-br from-yellow-900/10 to-orange-900/10 rounded-xl border border-yellow-500/20 text-center">
-                            <div className="text-4xl font-bold text-white mb-2">98%</div>
-                            <div className="text-gray-400 text-sm">5-Star Ratings</div>
-                        </div>
-                        <div className="p-6 bg-gradient-to-br from-orange-900/10 to-amber-900/10 rounded-xl border border-orange-500/20 text-center">
-                            <div className="text-4xl font-bold text-white mb-2">100%</div>
-                            <div className="text-gray-400 text-sm">Would Recommend</div>
-                        </div>
-                        <div className="p-6 bg-gradient-to-br from-amber-900/10 to-orange-900/10 rounded-xl border border-amber-500/20 text-center">
-                            <div className="text-4xl font-bold text-white mb-2">20+</div>
-                            <div className="text-gray-400 text-sm">Happy Clients</div>
-                        </div>
-                    </div>
+                    ))}
                 </div>
+            </section>
 
-                {/* Reviews Grid */}
-                <Section title="What Our Clients Say" eyebrow="Testimonials">
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-                        {reviews.map((review, index) => (
-                            <div
-                                key={index}
-                                className="group p-6 bg-gradient-to-br from-amber-900/10 to-yellow-900/10 hover:from-amber-900/20 hover:to-yellow-900/20 rounded-2xl border border-amber-500/20 hover:border-amber-500/40 transition-all"
-                            >
-                                {/* Rating Stars */}
-                                <div className="flex gap-1 mb-4">
-                                    {[...Array(review.rating)].map((_, i) => (
-                                        <span key={i} className="text-yellow-400 text-xl">★</span>
-                                    ))}
-                                </div>
-
-                                {/* Review Text */}
-                                <p className="text-gray-300 mb-6 leading-relaxed italic">
-                                    "{review.text}"
-                                </p>
-
-                                {/* Project Badge */}
-                                <div className="mb-4">
-                                    <span className="px-3 py-1 bg-amber-500/20 border border-amber-500/30 text-amber-300 text-xs font-semibold rounded-full">
-                                        {review.project}
-                                    </span>
-                                </div>
-
-                                {/* Author Info */}
-                                <div className="flex items-center gap-4 pt-6 border-t border-amber-500/20">
-                                    <img
-                                        src={review.image}
-                                        alt={review.name}
-                                        className="w-14 h-14 rounded-full border-2 border-amber-500/30"
-                                    />
-                                    <div>
-                                        <div className="text-white font-semibold">{review.name}</div>
-                                        <div className="text-gray-400 text-sm">{review.role}</div>
-                                        <div className="text-gray-500 text-xs">{review.company}</div>
-                                    </div>
-                                </div>
+            {/* Reviews Grid */}
+            <section style={{ padding: '5rem 1.5rem' }}>
+                <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '1px', background: 'var(--c-grid)' }}>
+                    {reviews.map(r => (
+                        <div key={r.name} style={{ background: 'var(--c-bg-card)', padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                            <div style={{ display: 'flex', gap: '2px' }}>
+                                {[...Array(r.rating)].map((_, i) => <span key={i} style={{ color: 'var(--accent)', fontSize: '0.875rem' }}>★</span>)}
                             </div>
-                        ))}
-                    </div>
-                </Section>
-
-                {/* CTA */}
-                <section className="mt-20 p-12 bg-gradient-to-r from-amber-900/20 via-yellow-900/20 to-orange-900/20 rounded-3xl border border-amber-500/20 text-center">
-                    <h2 className="text-4xl font-bold text-white mb-4">
-                        Ready to Join Our Success Stories?
-                    </h2>
-                    <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
-                        Let's create something amazing together and add you to our list of happy clients.
-                    </p>
-                    <button className="px-8 py-4 bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-700 hover:to-yellow-700 text-white font-semibold rounded-lg transition-all transform hover:scale-105">
-                        Start Your Project
-                    </button>
-                </section>
-            </main>
+                            <p style={{ fontSize: '0.9rem', color: 'var(--c-text-body)', lineHeight: 1.8, fontStyle: 'italic' }}>"{r.quote}"</p>
+                            <div style={{ marginTop: 'auto', paddingTop: '1.25rem', borderTop: `1px solid var(--c-border-subtle)`, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                                <div>
+                                    <p style={{ fontWeight: 700, color: 'var(--c-text)', fontSize: '0.875rem' }}>{r.name}</p>
+                                    <p style={{ fontSize: '0.75rem', color: 'var(--c-text-dim)' }}>{r.role}</p>
+                                </div>
+                                <span style={{ fontSize: '0.65rem', fontWeight: 700, padding: '0.2rem 0.6rem', border: '1px solid rgba(168,85,247,0.25)', borderRadius: '4px', color: 'rgba(168,85,247,0.7)', letterSpacing: '0.08em' }}>{r.project}</span>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </section>
         </div>
     );
 }

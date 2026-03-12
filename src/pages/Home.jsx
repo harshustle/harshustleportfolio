@@ -1,451 +1,223 @@
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import Hero from "../components/Hero";
-import { openRazorpayCheckout } from "../utils/razorpay";
+import MetricsStrip from '../components/MetricsStrip';
+import Testimonials from '../components/Testimonials';
+import FAQ from '../components/FAQ';
+import BookCallPreview from '../components/BookCallPreview';
+import UserDetailsModal from '../components/UserDetailsModal';
+import { openRazorpayCheckout } from '../utils/razorpay';
 
-import Stack from "../components/Stack";
-import Stepper, { Step } from '../components/parts/Stepper';
-import Section from "../components/Section";
-import FeaturesGrid from "../components/FeaturesGrid";
-import MetricsStrip from "../components/MetricsStrip";
-import ServiceProcessModal from "../components/ServiceProcessModal";
-import UserDetailsModal from "../components/UserDetailsModal";
-import BookCallPreview from "../components/BookCallPreview";
+const services = [
+    {
+        tag: 'WEB DESIGN',
+        title: 'sites that convert.',
+        desc: 'premium modern ui. fully responsive. seo optimized. conversion-focused. built to impress and perform — not just look good.',
+        price: '₹41,500', priceNote: 'one-time', priceAmount: 41500,
+        features: ['dark-mode focused ui', 'react + tailwindcss', 'seo optimized', '<14 day delivery'],
+    },
+    {
+        tag: 'AI CONTENT',
+        title: 'content on autopilot.',
+        desc: 'blog writing · social posts · ugc-style videos · seo long-form. ai-powered content systems that scale without a large team.',
+        price: '₹1,25,000', priceNote: '/month', priceAmount: 125000,
+        features: ['ai + human polish', 'multi-platform', 'seo optimized', 'monthly retainer'],
+        featured: true,
+    },
+    {
+        tag: 'AUTOMATION',
+        title: 'systems, not chaos.',
+        desc: 'crm integrations · lead follow-ups · email & whatsapp automation · ai internal tools. eliminate manual busywork for good.',
+        price: '₹66,400', priceNote: '/month', priceAmount: 66400,
+        features: ['n8n / zapier', 'api integrations', 'workflow audit', '3-7 day setup'],
+    },
+];
 
+const whyUs = [
+    { n: '01', title: 'speed is non-negotiable.', desc: 'most web projects ship in under 14 days. automations in 3-7. we run in sprints, not months.' },
+    { n: '02', title: 'direct access. no layers.', desc: 'you work directly with the builder — no project managers, no miscommunication, no delays.' },
+    { n: '03', title: 'built for scale.', desc: 'every system we build is designed to handle 10x growth. we\'re building assets, not deliverables.' },
+    { n: '04', title: 'ai-first approach.', desc: 'we integrate ai into everything — from content generation to automation workflows to design systems.' },
+];
 
-
-import Testimonials from "../components/Testimonials";
+const stackBadges = ['react', 'next.js', 'node.js', 'tailwind', 'openai', 'anthropic', 'n8n', 'zapier', 'figma', 'typescript', 'aws', 'docker'];
 
 function Home() {
-    const [formData, setFormData] = useState({
-        email: '',
-        phone: '',
-        service: '',
-        businessInfo: ''
-    });
-    const [selectedService, setSelectedService] = useState(null);
     const [buyService, setBuyService] = useState(null);
 
     const handleBuySubmit = (name, phone) => {
-        if (buyService && buyService.priceAmount) {
-            openRazorpayCheckout(
-                buyService.priceAmount,
-                buyService.currency || "INR",
-                buyService.title,
-                buyService.description,
-                { name, contact: phone }
-            );
+        if (buyService) {
+            openRazorpayCheckout(buyService.priceAmount, 'INR', buyService.title, buyService.tag, { name, contact: phone });
             setBuyService(null);
         }
     };
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
-    };
-
-    const handleServiceSelect = (service) => {
-        setFormData(prev => ({ ...prev, service }));
-    };
-
-    // Replace with your Web App URL from Google Apps Script
-    const GOOGLE_SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
-
-    const submitToGoogleSheets = async () => {
-        if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL.includes("YOUR_GOOGLE_SCRIPT_URL_HERE")) {
-            console.warn("Google Script URL not set. Please follow instructions in GOOGLE_SHEETS_SETUP.md");
-            return;
-        }
-
-        try {
-            await fetch(GOOGLE_SCRIPT_URL, {
-                method: "POST",
-                mode: "no-cors",
-                headers: {
-                    "Content-Type": "text/plain",
-                },
-                body: JSON.stringify(formData),
-            });
-            console.log("Form submitted to Google Sheets");
-        } catch (error) {
-            console.error("Error submitting to Google Sheets:", error);
-        }
-    };
-
-    const homeServices = [
-        {
-            icon: "✨",
-            title: "AI Content Creation",
-            description: "Generate high-quality, engaging content instantly with our advanced AI tools tailored to your brand voice.",
-            features: ["Blog Writing", "Social Media Posts", "SEO Optimization", "Multi-language Support"],
-            price: "$1,500 / ₹1,25,000 per mo",
-            priceAmount: 125000,
-            currency: "INR",
-            buyNow: true,
-            processSteps: [
-                { title: "Brand Analysis", description: "We analyze your brand voice, target audience, and content goals to train our AI models." },
-                { title: "Topic ideation", description: "Generating relevant, high-impact topics based on market trends and SEO data." },
-                { title: "AI Generation", description: "Creating initial drafts using advanced language models tailored to your tone." },
-                { title: "Human Polish", description: "Expert editors review and refine the content for nuance, accuracy, and flow." },
-                { title: "Publishing", description: "Formatting and scheduling the content across your chosen platforms." }
-            ],
-            paymentLink: "#" // TODO: Add your Stripe/PhonePe link here
-        },
-        {
-            icon: "💻",
-            title: "Web Design",
-            description: "Build beautiful, responsive, and high-converting websites tailored to your brand.",
-            features: ["Modern UI", "Responsive Layouts", "SEO Optimized", "Fast Performance"],
-            price: "$99 / ₹8,500",
-            priceAmount: 8500,
-            currency: "INR",
-            processSteps: [
-                { title: "Requirement Gathering", description: "Understanding your functional and non-functional requirements." },
-                { title: "UI/UX Design", description: "Creating high-fidelity mockups of the website interface." },
-                { title: "Development", description: "Building the website using modern frameworks and best practices." },
-                { title: "Content Integration", description: "Populating the site with your content and optimizing for SEO." },
-                { title: "Launch", description: "Deploying your site to a live server and ensuring everything runs smoothly." }
-            ],
-            buyNow: true,
-            paymentLink: "#" // TODO: Add your Stripe/PhonePe link here
-        },
-        {
-            icon: "🤖",
-            title: "Automation",
-            description: "Streamline your business processes with intelligent workflows and integrations.",
-            features: ["Workflow Automation", "CRM Integration", "Email Sequences", "Task Management"],
-            price: "$799 / ₹65,000 per mo",
-            priceAmount: 65000,
-            currency: "INR",
-            buyNow: true,
-            processSteps: [
-                { title: "Audit", description: "Reviewing your current processes to identify automation opportunities." },
-                { title: "Strategy", description: "Designing a custom automation workflow tailored to your needs." },
-                { title: "Implementation", description: "Setting up and configuring the automation tools." },
-                { title: "Testing", description: "Rigorous testing to ensure all workflows trigger correctly." },
-                { title: "Review", description: "Monitoring performance and making necessary adjustments." }
-            ],
-            paymentLink: "#" // TODO: Add your Stripe/PhonePe link here
-        }
-    ];
-
     return (
-        <>
-            {/* Modal */}
-            <ServiceProcessModal
-                isOpen={!!selectedService}
-                onClose={() => setSelectedService(null)}
-                service={selectedService}
-            />
-            {/* User Details Modal */}
-            <UserDetailsModal
-                isOpen={!!buyService}
-                onClose={() => setBuyService(null)}
-                onSubmit={handleBuySubmit}
-                serviceName={buyService?.title}
-            />
-            {/* HERO */}
-            <Hero />
+        <div style={{ background: 'var(--c-bg)', minHeight: '100vh', transition: 'background 0.3s ease' }}>
 
-            <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-20">
-                {/* METRICS / SOCIAL PROOF STRIP */}
-                <Section>
+            {/* ─── HERO ─────────────────────────────── */}
+            <section style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '8rem 1.5rem 4rem', position: 'relative', overflow: 'hidden' }}>
+                <div style={{ position: 'absolute', top: '30%', left: '50%', transform: 'translate(-50%,-50%)', width: '600px', height: '600px', background: 'radial-gradient(circle, rgba(168,85,247,0.08) 0%, transparent 70%)', pointerEvents: 'none' }} />
+
+                <div style={{ maxWidth: '900px', position: 'relative', zIndex: 1 }}>
+                    <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.25rem 0.75rem', border: `1px solid var(--c-border)`, borderRadius: '999px', fontSize: '0.7rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--c-text-muted)', marginBottom: '2rem' }}>
+                        <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#22c55e', display: 'inline-block' }} />
+                        available for new projects
+                    </div>
+
+                    <h1 style={{ fontSize: 'clamp(2.5rem, 8vw, 6rem)', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-0.03em', marginBottom: '1.5rem', color: 'var(--c-text)' }}>
+                        web. content.<br />
+                        <span style={{ color: 'var(--c-text-dim)' }}>automation.</span>
+                    </h1>
+
+                    <p style={{ fontSize: 'clamp(1rem, 2vw, 1.2rem)', color: 'var(--c-text-muted)', maxWidth: '520px', margin: '0 auto 2.5rem', lineHeight: 1.7 }}>
+                        one studio. every digital system you need. ai-powered, speed-obsessed, built to scale.
+                    </p>
+
+                    <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+                        <Link to="/book-a-call" style={{ padding: '0.85rem 1.75rem', background: 'var(--c-btn-bg)', color: 'var(--c-btn-text)', fontWeight: 700, borderRadius: '8px', fontSize: '0.875rem', display: 'inline-block' }}>
+                            book a free call
+                        </Link>
+                        <Link to="/services" style={{ padding: '0.85rem 1.75rem', border: `1px solid var(--c-border)`, color: 'var(--c-text)', fontWeight: 600, borderRadius: '8px', fontSize: '0.875rem', display: 'inline-block' }}>
+                            view services →
+                        </Link>
+                    </div>
+                </div>
+            </section>
+
+            {/* ─── METRICS ─────────────────────────── */}
+            <section style={{ borderTop: `1px solid var(--c-divider)`, padding: '4rem 1.5rem' }}>
+                <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
                     <MetricsStrip />
-                </Section>
+                </div>
+            </section>
 
-                {/* SERVICES PREVIEW */}
-                <Section title="Our Core Services" eyebrow="What We Do">
-                    <div className="grid md:grid-cols-3 gap-8 mt-12 relative">
-                        {/* Background glow for the grid */}
-                        <div className="absolute inset-0 bg-purple-500/5 blur-3xl -z-10 rounded-full pointer-events-none" />
+            {/* ─── SERVICES ────────────────────────── */}
+            <section style={{ padding: '6rem 1.5rem', borderTop: `1px solid var(--c-divider)` }}>
+                <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+                    <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--c-text-faint)', marginBottom: '0.75rem' }}>what we do</p>
+                    <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 3rem)', fontWeight: 800, letterSpacing: '-0.02em', marginBottom: '3rem', color: 'var(--c-text)' }}>
+                        three services.<br />
+                        <span style={{ color: 'var(--c-text-dim)' }}>one obsession.</span>
+                    </h2>
 
-                        {homeServices.map((service, index) => (
-                            <div
-                                key={index}
-                                className={`group p-8 rounded-2xl shadow-lg transition-all duration-300 transform hover:-translate-y-2 backdrop-blur-sm flex flex-col ${service.highlight ? 'bg-white/10 border border-purple-500 shadow-2xl shadow-purple-500/20 scale-105 z-10' : 'bg-white/5 hover:bg-white/10 border border-white/10 hover:border-purple-500/30 hover:shadow-purple-500/10'}`}
-                            >
-                                {service.highlight && (
-                                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-purple-600 to-purple-400 text-white text-xs font-bold uppercase tracking-wider rounded-full shadow-lg">
-                                        Best Value
-                                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1px', background: 'var(--c-grid)' }}>
+                        {services.map(s => (
+                            <div key={s.tag} style={{ background: s.featured ? 'var(--accent-dim)' : 'var(--c-bg-card)', padding: '2.5rem', display: 'flex', flexDirection: 'column', gap: '1rem', position: 'relative' }}>
+                                {s.featured && (
+                                    <div style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.15em', padding: '0.2rem 0.5rem', background: 'rgba(168,85,247,0.2)', border: '1px solid rgba(168,85,247,0.3)', borderRadius: '4px', color: 'var(--accent)' }}>POPULAR</div>
                                 )}
-                                <div className="h-14 w-14 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 group-hover:bg-purple-500/20">
-                                    <span className="text-3xl">{service.icon}</span>
-                                </div>
-
-                                <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-purple-300 transition-colors">
-                                    {service.title}
-                                </h3>
-
-                                <p className="text-gray-400 mb-6 leading-relaxed flex-grow">
-                                    {service.description}
-                                </p>
-
-                                <ul className="space-y-3 mb-8">
-                                    {service.features.map((feature, idx) => (
-                                        <li key={idx} className="flex items-center text-gray-300 text-sm group-hover:text-gray-200 transition-colors">
-                                            <span className="mr-3 text-purple-400 bg-purple-500/10 rounded-full p-1 h-5 w-5 flex items-center justify-center text-xs border border-purple-500/20">✓</span>
-                                            {feature}
+                                <p style={{ fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.2em', color: 'var(--c-text-faint)' }}>{s.tag}</p>
+                                <h3 style={{ fontSize: '1.5rem', fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--c-text)' }}>{s.title}</h3>
+                                <p style={{ fontSize: '0.875rem', color: 'var(--c-text-muted)', lineHeight: 1.7 }}>{s.desc}</p>
+                                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: '0.5rem' }}>
+                                    {s.features.map(f => (
+                                        <li key={f} style={{ fontSize: '0.8rem', color: 'var(--c-text-dim)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                            <span style={{ color: 'var(--accent)' }}>—</span> {f}
                                         </li>
                                     ))}
                                 </ul>
-
-                                <div className="pt-6 border-t border-purple-500/20 mt-auto">
-                                    <div className="flex w-full rounded-lg overflow-hidden shadow-lg shadow-purple-500/5 group-hover:shadow-purple-500/10 transition-all">
-                                        <button
-                                            onClick={() => setSelectedService(service)}
-                                            className="px-4 py-3 bg-[#A855F7] hover:bg-[#9333ea] text-white font-semibold transition-all flex items-center justify-center gap-2 rounded-l-lg flex-1 text-sm"
-                                        >
-                                            Learn More <span className="transition-transform group-hover:translate-x-1">→</span>
-                                        </button>
-                                        <button
-                                            onClick={(e) => {
-                                                e.stopPropagation();
-                                                if (service.buyNow && service.priceAmount) {
-                                                    setBuyService(service);
-                                                } else {
-                                                    window.location.href = '/book-a-call';
-                                                }
-                                            }}
-                                            className="px-4 py-3 bg-white/10 hover:bg-white/20 border-l border-white/10 text-white font-bold flex items-center justify-center text-sm transition-all"
-                                        >
-                                            Buy
-                                        </button>
-                                        <div className="w-[30%] px-2 py-3 bg-white/5 border border-purple-500/30 text-purple-300 font-bold flex items-center justify-center text-xs text-center leading-tight rounded-r-lg border-l-0">
-                                            {service.price.replace("Starting at ", "").replace("$1,500 / ₹1,25,000 per mo", "$1.5k / ₹1.25L")}
-                                        </div>
+                                <div style={{ marginTop: 'auto', paddingTop: '1.5rem', borderTop: `1px solid var(--c-border-subtle)`, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                                    <div>
+                                        <p style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--c-text)' }}>{s.price}</p>
+                                        <p style={{ fontSize: '0.7rem', color: 'var(--c-text-faint)' }}>{s.priceNote}</p>
                                     </div>
-                                    {service.title === "Web Design" && (
-                                        <p className="text-xs text-center text-gray-500 mt-2 italic">
-                                            * Prices vary based on add-ons
-                                        </p>
-                                    )}
+                                    <button onClick={() => setBuyService(s)} style={{ padding: '0.6rem 1.25rem', background: s.featured ? 'var(--accent)' : 'var(--c-bg-subtle)', color: s.featured ? '#fff' : 'var(--c-text)', fontWeight: 700, fontSize: '0.8rem', borderRadius: '8px', border: 'none', cursor: 'pointer' }}>
+                                        get started
+                                    </button>
                                 </div>
                             </div>
                         ))}
                     </div>
+                </div>
+            </section>
 
-                    <div className="mt-8">
-                        <a href="/services" className="w-full flex justify-center items-center gap-2 px-8 py-3 bg-white/5 border border-purple-500/30 text-white font-semibold rounded-lg hover:bg-purple-500/10 hover:border-purple-500/50 transition-all group hover:shadow-lg hover:shadow-purple-500/10">
-                            View All Services <span className="group-hover:translate-x-1 transition-transform">→</span>
-                        </a>
-                    </div>
-                </Section>
-
-                {/* Automation Tools Preview */}
-                <Section title="Built with Modern Tech" eyebrow="Powering Innovation">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-                        {[
-                            { name: "n8n", category: "Automation" },
-                            { name: "OpenAI API", category: "AI Intelligence" },
-                            { name: "Zapier", category: "Integration" },
-                            { name: "Claude", category: "AI Model" },
-                            { name: "React", category: "Framework" },
-                            { name: "Tailwind CSS", category: "Styling" },
-                            { name: "Framer Motion", category: "Animation" },
-                            { name: "Node.js", category: "Runtime" }
-                        ].map((tech, index) => (
-                            <div
-                                key={index}
-                                className="p-6 bg-gradient-to-br from-purple-900/10 to-fuchsia-900/10 hover:from-purple-600/20 hover:to-fuchsia-600/20 rounded-xl border border-purple-500/10 hover:border-purple-500/30 transition-all text-center group hover:-translate-y-1"
-                            >
-                                <h3 className="text-lg font-semibold text-white mb-1 group-hover:text-purple-300 transition-colors">
-                                    {tech.name}
-                                </h3>
-                                <p className="text-xs text-gray-500 uppercase tracking-widest">{tech.category}</p>
+            {/* ─── WHY DIFFERENT ───────────────────── */}
+            <section style={{ padding: '6rem 1.5rem', borderTop: `1px solid var(--c-divider)` }}>
+                <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+                    <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--c-text-faint)', marginBottom: '0.75rem' }}>why choose us</p>
+                    <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 3rem)', fontWeight: 800, letterSpacing: '-0.02em', marginBottom: '3rem', color: 'var(--c-text)' }}>
+                        why this is<br />
+                        <span style={{ color: 'var(--c-text-dim)' }}>different.</span>
+                    </h2>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1px', background: 'var(--c-grid)' }}>
+                        {whyUs.map(w => (
+                            <div key={w.n} style={{ background: 'var(--c-bg-card)', padding: '2rem' }}>
+                                <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.15em', color: 'var(--c-text-ghost)', marginBottom: '1.25rem' }}>{w.n}</p>
+                                <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--c-text)', marginBottom: '0.75rem', letterSpacing: '-0.01em' }}>{w.title}</h3>
+                                <p style={{ fontSize: '0.875rem', color: 'var(--c-text-muted)', lineHeight: 1.7 }}>{w.desc}</p>
                             </div>
                         ))}
                     </div>
-                </Section>
+                </div>
+            </section>
 
-
-
-
-                <Section title="Start Your Journey" eyebrow="Get in Touch">
-                    <div className="grid md:grid-cols-2 gap-8 items-center mt-8">
-                        {/* Left Side: Image */}
-                        <div className="hidden md:block relative h-full min-h-[500px] w-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl group">
-                            <img
-                                src="https://images.pexels.com/photos/3283142/pexels-photo-3283142.jpeg"
-                                alt="Start Your Journey"
-                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                            />
-                            {/* Overlay */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
-
-                            <div className="absolute bottom-0 left-0 right-0 p-8 transform transition-transform duration-500">
-                                <h3 className="text-3xl font-bold text-white mb-2">Ready to transform?</h3>
-                                <p className="text-gray-300 leading-relaxed">
-                                    Let's build something extraordinary together. Your vision, our expertise.
-                                </p>
-                            </div>
-                        </div>
-
-                        {/* Right Side: Stepper */}
-                        <div className="relative">
-                            <Stepper
-                                initialStep={1}
-                                onStepChange={(step) => {
-                                    if (step === 4) submitToGoogleSheets();
-                                }}
-                                onFinalStepCompleted={() => console.log("Form process completed")}
-                                backButtonText="Back"
-                                nextButtonText="Next"
-                                hideFooterOnLastStep={true}
-                                className="w-full" // Override default aspect ratio and centering if needed, or let it adapt
-                            >
-                                <Step>
-                                    <div className="space-y-4 w-full max-w-md mx-auto">
-                                        <h2 className="text-2xl font-bold text-white">Contact Details</h2>
-                                        <p className="text-gray-400">Please provide your contact information so we can reach you.</p>
-                                        <div className="space-y-3">
-                                            <input
-                                                type="email"
-                                                name="email"
-                                                value={formData.email}
-                                                onChange={handleInputChange}
-                                                placeholder="Email Address"
-                                                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-purple-500 focus:outline-none transition-colors placeholder-gray-500"
-                                            />
-                                            <input
-                                                type="tel"
-                                                name="phone"
-                                                value={formData.phone}
-                                                onChange={handleInputChange}
-                                                placeholder="Phone Number"
-                                                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-purple-500 focus:outline-none transition-colors placeholder-gray-500"
-                                            />
-                                        </div>
-                                    </div>
-                                </Step>
-                                <Step>
-                                    <div className="space-y-4 w-full max-w-md mx-auto">
-                                        <h2 className="text-2xl font-bold text-white">Choose a Service</h2>
-                                        <p className="text-gray-400">Select the service you are interested in.</p>
-                                        <div className="grid gap-3">
-                                            {['AI Content Creation', 'Web Design', 'Automation'].map((service) => (
-                                                <div
-                                                    key={service}
-                                                    onClick={() => handleServiceSelect(service)}
-                                                    className={`p-4 rounded-lg border cursor-pointer transition-all flex items-center justify-between ${formData.service === service
-                                                        ? 'bg-purple-500/20 border-purple-500 text-white'
-                                                        : 'bg-white/5 border-white/10 text-gray-300 hover:border-purple-500/50'
-                                                        }`}
-                                                >
-                                                    <span>{service}</span>
-                                                    {formData.service === service && <span className="text-purple-400">✓</span>}
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </Step>
-                                <Step>
-                                    <div className="space-y-4 w-full max-w-md mx-auto">
-                                        <h2 className="text-2xl font-bold text-white">Business Info</h2>
-                                        <p className="text-gray-400">Tell us a bit about your business and goals.</p>
-                                        <textarea
-                                            name="businessInfo"
-                                            value={formData.businessInfo}
-                                            onChange={handleInputChange}
-                                            placeholder="Business Name, Industry, and Project Goals..."
-                                            rows={4}
-                                            className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:border-purple-500 focus:outline-none transition-colors resize-none placeholder-gray-500"
-                                        />
-                                    </div>
-                                </Step>
-                                <Step>
-                                    <div className="text-center space-y-4 py-8 w-full max-w-md mx-auto">
-                                        <div className="h-20 w-20 bg-green-500/10 border border-green-500/20 text-green-400 rounded-full flex items-center justify-center mx-auto mb-6">
-                                            <span className="text-4xl">✓</span>
-                                        </div>
-                                        <h2 className="text-3xl font-bold text-white">Thank You!</h2>
-                                        <p className="text-gray-400 leading-relaxed mb-6">
-                                            We have received your details. Our team will review your request and respond shortly with a thank you message and next steps.
-                                        </p>
-                                        <div className="inline-flex items-center gap-2 text-yellow-400 bg-yellow-400/10 px-4 py-2 rounded-full border border-yellow-400/20 animate-pulse">
-                                            <span>⚡</span>
-                                            <span className="font-medium">Expect a reply shortly!</span>
-                                        </div>
-                                    </div>
-                                </Step>
-                            </Stepper>
-                        </div>
+            {/* ─── TECH STACK BADGES ───────────────── */}
+            <section style={{ padding: '4rem 1.5rem', borderTop: `1px solid var(--c-divider)` }}>
+                <div style={{ maxWidth: '1200px', margin: '0 auto', textAlign: 'center' }}>
+                    <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--c-text-ghost)', marginBottom: '2rem' }}>our tech stack</p>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.5rem' }}>
+                        {stackBadges.map(b => (
+                            <span key={b} style={{ padding: '0.4rem 0.9rem', border: `1px solid var(--c-border)`, borderRadius: '999px', fontSize: '0.75rem', color: 'var(--c-text-dim)', fontWeight: 500 }}>
+                                {b}
+                            </span>
+                        ))}
                     </div>
-                </Section>
+                </div>
+            </section>
 
-
-
-                {/* EXPLORE ALL PAGES */}
-                <Section id="explore" title="Explore All Pages" eyebrow="Site Navigation">
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
-                        <a href="/services?utm_source=home&utm_medium=internal&utm_content=explore_services" className="group p-6 bg-gradient-to-br from-purple-900/10 to-purple-800/10 hover:from-purple-900/20 hover:to-purple-800/20 rounded-xl border border-purple-500/20 hover:border-purple-500/40 transition-all transform hover:-translate-y-2">
-                            <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">🎨</div>
-                            <h3 className="text-xl font-bold text-white mb-2 group-hover:text-purple-300 transition-colors">Services</h3>
-                            <p className="text-gray-400 text-sm">Explore our comprehensive range of professional services</p>
-                        </a>
-
-
-
-                        <a href="/about?utm_source=home&utm_medium=internal&utm_content=explore_about" className="group p-6 bg-gradient-to-br from-purple-900/10 to-purple-800/10 hover:from-purple-900/20 hover:to-purple-800/20 rounded-xl border border-purple-500/20 hover:border-purple-500/40 transition-all transform hover:-translate-y-2">
-                            <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">👥</div>
-                            <h3 className="text-xl font-bold text-white mb-2 group-hover:text-purple-300 transition-colors">About Us</h3>
-                            <p className="text-gray-400 text-sm">Meet our team and learn about our mission</p>
-                        </a>
-
-                        <a href="/contact?utm_source=home&utm_medium=internal&utm_content=explore_contact" className="group p-6 bg-gradient-to-br from-purple-900/10 to-purple-700/10 hover:from-purple-900/20 hover:to-purple-700/20 rounded-xl border border-purple-500/20 hover:border-purple-500/40 transition-all transform hover:-translate-y-2">
-                            <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">📧</div>
-                            <h3 className="text-xl font-bold text-white mb-2 group-hover:text-purple-300 transition-colors">Contact</h3>
-                            <p className="text-gray-400 text-sm">Get in touch with our team today</p>
-                        </a>
-
-                        <a href="/high-value-addons?utm_source=home&utm_medium=internal&utm_content=explore_addons" className="group p-6 bg-gradient-to-br from-purple-900/10 to-purple-800/10 hover:from-purple-900/20 hover:to-purple-800/20 rounded-xl border border-purple-500/20 hover:border-purple-500/40 transition-all transform hover:-translate-y-2">
-                            <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">⭐</div>
-                            <h3 className="text-xl font-bold text-white mb-2 group-hover:text-purple-300 transition-colors">High-Value Add-ons</h3>
-                            <p className="text-gray-400 text-sm">Premium features to enhance your experience</p>
-                        </a>
-
-
-
-                        <a href="/tech-stack?utm_source=home&utm_medium=internal&utm_content=explore_techstack" className="group p-6 bg-gradient-to-br from-purple-900/10 to-purple-800/10 hover:from-purple-900/20 hover:to-purple-800/20 rounded-xl border border-purple-500/20 hover:border-purple-500/40 transition-all transform hover:-translate-y-2">
-                            <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">💻</div>
-                            <h3 className="text-xl font-bold text-white mb-2 group-hover:text-purple-300 transition-colors">Tech Stack</h3>
-                            <p className="text-gray-400 text-sm">Technologies we use to build amazing products</p>
-                        </a>
-
-                        <a href="/reviews?utm_source=home&utm_medium=internal&utm_content=explore_reviews" className="group p-6 bg-gradient-to-br from-purple-900/10 to-purple-700/10 hover:from-purple-900/20 hover:to-purple-700/20 rounded-xl border border-purple-500/20 hover:border-purple-500/40 transition-all transform hover:-translate-y-2">
-                            <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">⭐</div>
-                            <h3 className="text-xl font-bold text-white mb-2 group-hover:text-purple-300 transition-colors">Reviews</h3>
-                            <p className="text-gray-400 text-sm">Read what our clients say about us</p>
-                        </a>
-
-                        <a href="/book-a-call?utm_source=home&utm_medium=internal&utm_content=explore_bookcall" className="group p-6 bg-gradient-to-br from-emerald-900/10 to-teal-900/10 hover:from-emerald-900/20 hover:to-teal-900/20 rounded-xl border border-emerald-500/20 hover:border-emerald-500/40 transition-all transform hover:-translate-y-2">
-                            <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">📞</div>
-                            <h3 className="text-xl font-bold text-white mb-2 group-hover:text-emerald-300 transition-colors">Book a Call</h3>
-                            <p className="text-gray-400 text-sm">Schedule a consultation with our team</p>
-                        </a>
-
-
-
-                        <a href="/blog?utm_source=home&utm_medium=internal&utm_content=explore_blog" className="group p-6 bg-gradient-to-br from-violet-900/10 to-purple-900/10 hover:from-violet-900/20 hover:to-purple-900/20 rounded-xl border border-violet-500/20 hover:border-violet-500/40 transition-all transform hover:-translate-y-2">
-                            <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">📝</div>
-                            <h3 className="text-xl font-bold text-white mb-2 group-hover:text-violet-300 transition-colors">Blog</h3>
-                            <p className="text-gray-400 text-sm">Latest insights and articles from our team</p>
-                        </a>
-
-
-                    </div>
-                </Section>
-
-                {/* Book Call Preview */}
-                <BookCallPreview />
-
-                {/* Testimonials */}
-                <Section title="What Clients Say" eyebrow="Reviews">
+            {/* ─── TESTIMONIALS ─────────────────────── */}
+            <section style={{ padding: '6rem 1.5rem', borderTop: `1px solid var(--c-divider)` }}>
+                <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+                    <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--c-text-faint)', marginBottom: '0.75rem' }}>testimonials</p>
+                    <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 3rem)', fontWeight: 800, letterSpacing: '-0.02em', marginBottom: '3rem', color: 'var(--c-text)' }}>
+                        words from<br />
+                        <span style={{ color: 'var(--c-text-dim)' }}>our clients.</span>
+                    </h2>
                     <Testimonials />
-                </Section>
+                    <div style={{ marginTop: '2rem', textAlign: 'center' }}>
+                        <Link to="/reviews" style={{ fontSize: '0.875rem', color: 'var(--c-text-dim)', borderBottom: `1px solid var(--c-border)`, paddingBottom: '2px' }}>
+                            see all reviews →
+                        </Link>
+                    </div>
+                </div>
+            </section>
 
+            {/* ─── BOOK CALL ───────────────────────── */}
+            <section style={{ borderTop: `1px solid var(--c-divider)` }}>
+                <BookCallPreview />
+            </section>
 
-            </main>
-        </>
+            {/* ─── FAQ ─────────────────────────────── */}
+            <section style={{ padding: '6rem 1.5rem', borderTop: `1px solid var(--c-divider)` }}>
+                <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+                    <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--c-text-faint)', marginBottom: '0.75rem' }}>faq</p>
+                    <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 3rem)', fontWeight: 800, letterSpacing: '-0.02em', marginBottom: '3rem', color: 'var(--c-text)' }}>
+                        questions<br />
+                        <span style={{ color: 'var(--c-text-dim)' }}>answered.</span>
+                    </h2>
+                    <FAQ />
+                </div>
+            </section>
+
+            {/* ─── FINAL CTA ───────────────────────── */}
+            <section style={{ padding: '8rem 1.5rem', borderTop: `1px solid var(--c-divider)`, textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
+                <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: '400px', height: '400px', background: 'radial-gradient(circle, rgba(168,85,247,0.07) 0%, transparent 70%)', pointerEvents: 'none' }} />
+                <div style={{ position: 'relative', zIndex: 1, maxWidth: '600px', margin: '0 auto' }}>
+                    <h2 style={{ fontSize: 'clamp(2rem, 5vw, 4rem)', fontWeight: 900, letterSpacing: '-0.03em', marginBottom: '1.5rem', color: 'var(--c-text)', lineHeight: 1.05 }}>
+                        let's build<br />
+                        <span style={{ color: 'var(--c-text-dim)' }}>something great.</span>
+                    </h2>
+                    <p style={{ color: 'var(--c-text-muted)', marginBottom: '2.5rem', fontSize: '1rem', lineHeight: 1.7 }}>
+                        one conversation is all it takes. book a free 30-min call — no obligation.
+                    </p>
+                    <Link to="/book-a-call" style={{ padding: '0.9rem 2rem', background: 'var(--c-btn-bg)', color: 'var(--c-btn-text)', fontWeight: 700, borderRadius: '8px', fontSize: '0.9rem', display: 'inline-block' }}>
+                        book a free call →
+                    </Link>
+                </div>
+            </section>
+
+            <UserDetailsModal isOpen={!!buyService} onClose={() => setBuyService(null)} onSubmit={handleBuySubmit} serviceName={buyService?.title} />
+        </div>
     );
 }
 

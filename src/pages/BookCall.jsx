@@ -1,60 +1,52 @@
-// src/pages/BookCall.jsx
-import Section from "../components/Section";
-
 function BookCall() {
     return (
-        <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
-            <Section title="Book a Call" eyebrow="Let's Talk">
-                <div className="grid md:grid-cols-2 gap-12 items-start">
-                    <div className="space-y-6">
-                        <p className="text-gray-300 text-lg">
-                            Schedule a free consultation to discuss your project and how we can help
-                            you achieve your goals.
+        <div style={{ background: 'var(--c-bg)', minHeight: '100vh', paddingTop: '60px', transition: 'background 0.3s ease' }}>
+            <section style={{ padding: '6rem 1.5rem 4rem' }}>
+                <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5rem', alignItems: 'start' }}>
+                    <div>
+                        <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--c-text-faint)', marginBottom: '1rem' }}>book a call</p>
+                        <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 900, letterSpacing: '-0.03em', lineHeight: 1.05, color: 'var(--c-text)', marginBottom: '1.5rem' }}>
+                            let's talk<br /><span style={{ color: 'var(--c-text-dim)' }}>for free.</span>
+                        </h1>
+                        <p style={{ fontSize: '1rem', color: 'var(--c-text-muted)', lineHeight: 1.8, maxWidth: '420px', marginBottom: '2.5rem' }}>
+                            schedule a free 30-minute strategy session. no sales pressure, no obligation — just a real conversation about your goals.
                         </p>
-                        <div className="space-y-4">
-                            <div className="flex items-center gap-3">
-                                <div className="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center text-green-400">
-                                    ✓
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '2.5rem' }}>
+                            {['30-minute strategy session', 'custom solution recommendations', 'clear next steps and timeline', 'completely free, no obligation'].map(item => (
+                                <div key={item} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                                    <span style={{ width: '20px', height: '20px', borderRadius: '50%', border: '1px solid rgba(168,85,247,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.6rem', color: 'var(--accent)', flexShrink: 0 }}>✓</span>
+                                    <span style={{ fontSize: '0.9rem', color: 'var(--c-text-muted)' }}>{item}</span>
                                 </div>
-                                <span className="text-gray-300">30-minute strategy session</span>
-                            </div>
-                            <div className="flex items-center gap-3">
-                                <div className="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center text-green-400">
-                                    ✓
-                                </div>
-                                <span className="text-gray-300">Custom solution recommendations</span>
-                            </div>
-                            <div className="flex items-center gap-3">
-                                <div className="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center text-green-400">
-                                    ✓
-                                </div>
-                                <span className="text-gray-300">No obligation, completely free</span>
-                            </div>
+                            ))}
                         </div>
-                        <div className="mt-8 p-6 bg-gradient-to-br from-emerald-900/20 to-teal-900/20 rounded-xl border border-emerald-500/20">
-                            <h4 className="text-white font-semibold mb-2">What to expect:</h4>
-                            <ul className="text-gray-400 space-y-2 text-sm">
-                                <li>• Brief introduction and overview of your needs</li>
-                                <li>• Discussion of potential solutions and approaches</li>
-                                <li>• Q&A session for any questions you have</li>
-                                <li>• Next steps and timeline recommendations</li>
-                            </ul>
+                        <div style={{ padding: '1.5rem', border: `1px solid var(--c-border)`, borderRadius: '12px', background: 'var(--c-bg-subtle)' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.75rem' }}>
+                                <img src="https://github.com/harshustle.png" alt="Harsh" style={{ width: '44px', height: '44px', borderRadius: '50%', objectFit: 'cover' }} />
+                                <div>
+                                    <p style={{ fontWeight: 700, color: 'var(--c-text)', fontSize: '0.9rem' }}>harsh srivastav</p>
+                                    <p style={{ fontSize: '0.75rem', color: 'var(--c-text-dim)' }}>founder, harshustle</p>
+                                </div>
+                                <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                                    <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#22c55e', display: 'inline-block' }} />
+                                    <span style={{ fontSize: '0.7rem', color: 'var(--c-text-dim)' }}>available</span>
+                                </div>
+                            </div>
+                            <p style={{ fontSize: '0.8rem', color: 'var(--c-text-muted)', lineHeight: 1.6 }}>
+                                "i personally take every discovery call. let's find out if we're a good fit."
+                            </p>
                         </div>
                     </div>
-                    <div className="group relative w-full h-[600px] rounded-2xl bg-gradient-to-b from-white/10 to-white/5 p-[1px] shadow-2xl shadow-purple-900/20">
-                        <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/100 to-purple-500/80 blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
-                        <div className="relative h-full w-full rounded-2xl bg-black/60 overflow-hidden backdrop-blur-xl">
-                            <iframe
-                                src="https://cal.com/harshustle"
-                                style={{ width: "100%", height: "calc(100% + 50px)" }}
-                                frameBorder="0"
-                                title="Book a Call"
-                            ></iframe>
+
+                    {/* Cal.com Embed */}
+                    <div style={{ position: 'relative' }}>
+                        <div style={{ position: 'absolute', inset: '-2px', background: 'linear-gradient(135deg, rgba(168,85,247,0.2), transparent, rgba(168,85,247,0.1))', borderRadius: '18px', filter: 'blur(8px)', opacity: 0.5 }} />
+                        <div style={{ position: 'relative', border: `1px solid var(--c-border)`, borderRadius: '16px', overflow: 'hidden', background: 'var(--c-bg)', height: '620px' }}>
+                            <iframe src="https://cal.com/harshustle" style={{ width: '100%', height: 'calc(100% + 50px)', border: 'none' }} title="Book a Call" />
                         </div>
                     </div>
                 </div>
-            </Section>
-        </main>
+            </section>
+        </div>
     );
 }
 

@@ -1,13 +1,8 @@
-
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 
 function UserDetailsModal({ isOpen, onClose, onSubmit, serviceName }) {
-    const [formData, setFormData] = useState({
-        name: "",
-        phone: ""
-    });
-
+    const [formData, setFormData] = useState({ name: "", phone: "" });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const GOOGLE_SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
 
@@ -15,95 +10,57 @@ function UserDetailsModal({ isOpen, onClose, onSubmit, serviceName }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (formData.name && formData.phone) {
-            setIsSubmitting(true);
+        if (!formData.name || !formData.phone) { alert("Please fill in all details"); return; }
+        setIsSubmitting(true);
+        try {
+            await fetch(GOOGLE_SCRIPT_URL, {
+                method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain" },
+                body: JSON.stringify({ name: formData.name, phone: formData.phone, service: serviceName, sheetName: "Sheet3" }),
+            });
+        } catch { }
+        setIsSubmitting(false);
+        onSubmit(formData.name, formData.phone);
+    };
 
-            // Prepare data for Sheet 3
-            const payload = {
-                name: formData.name,
-                phone: formData.phone,
-                service: serviceName, // Changed from serviceName to service to match script key
-                sheetName: "Sheet3"
-            };
-
-            try {
-                // Fire and forget - or await if strict reliability is needed
-                await fetch(GOOGLE_SCRIPT_URL, {
-                    method: "POST",
-                    mode: "no-cors",
-                    headers: { "Content-Type": "text/plain" },
-                    body: JSON.stringify(payload),
-                });
-                console.log("Data captured to Google Sheet 3");
-            } catch (error) {
-                console.error("Sheet submission failed", error);
-                // Proceed anyway so payment isn't blocked by generic script failure
-            }
-
-            setIsSubmitting(false);
-            onSubmit(formData.name, formData.phone);
-        } else {
-            alert("Please fill in all details");
-        }
+    const inputStyle = {
+        width: '100%', padding: '0.75rem 1rem',
+        background: 'var(--c-bg-input)', border: `1px solid var(--c-border)`,
+        borderRadius: '8px', color: 'var(--c-text)', fontSize: '0.875rem',
+        outline: 'none', fontFamily: 'inherit', transition: 'border-color 0.2s',
     };
 
     return (
         <AnimatePresence>
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+            <div style={{ position: 'fixed', inset: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem', background: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(8px)' }}
+                onClick={onClose}>
                 <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
+                    initial={{ opacity: 0, scale: 0.95, y: 10 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.95 }}
-                    className="bg-gray-900 border border-purple-500/20 rounded-2xl p-6 w-full max-w-md shadow-2xl relative"
+                    style={{ background: 'var(--c-bg)', border: `1px solid var(--c-border)`, borderRadius: '16px', padding: '2rem', width: '100%', maxWidth: '400px', position: 'relative' }}
+                    onClick={e => e.stopPropagation()}
                 >
-                    <button
-                        onClick={onClose}
-                        className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
-                    >
-                        ✕
-                    </button>
+                    <button onClick={onClose} style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'none', border: 'none', color: 'var(--c-text-dim)', fontSize: '1.1rem', cursor: 'pointer' }}>✕</button>
 
-                    <div className="text-center mb-6">
-                        <div className="h-12 w-12 bg-purple-500/10 rounded-full flex items-center justify-center mx-auto mb-3 border border-purple-500/30">
-                            <span className="text-2xl">📝</span>
-                        </div>
-                        <h2 className="text-xl font-bold text-white mb-1">Enter Your Details</h2>
-                        <p className="text-sm text-gray-400">
-                            To process your payment for <span className="text-purple-400">{serviceName}</span>
-                        </p>
+                    <div style={{ textAlign: 'center', marginBottom: '1.75rem' }}>
+                        <div style={{ width: '48px', height: '48px', borderRadius: '50%', background: 'rgba(168,85,247,0.1)', border: '1px solid rgba(168,85,247,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', margin: '0 auto 1rem' }}>📝</div>
+                        <h2 style={{ fontSize: '1.2rem', fontWeight: 800, color: 'var(--c-text)', marginBottom: '0.35rem' }}>enter your details</h2>
+                        <p style={{ fontSize: '0.8rem', color: 'var(--c-text-muted)' }}>to process payment for <span style={{ color: 'var(--accent)' }}>{serviceName}</span></p>
                     </div>
 
-                    <form onSubmit={handleSubmit} className="space-y-4">
+                    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                         <div>
-                            <label className="block text-sm font-medium text-gray-400 mb-1">Full Name</label>
-                            <input
-                                type="text"
-                                required
-                                value={formData.name}
-                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                placeholder="Your Name"
-                                className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-xl text-white focus:outline-none focus:border-purple-500 transition-colors placeholder-gray-600"
-                            />
+                            <label style={{ display: 'block', fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--c-text-dim)', marginBottom: '0.5rem' }}>full name</label>
+                            <input type="text" required value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} placeholder="your name" style={inputStyle}
+                                onFocus={e => e.target.style.borderColor = 'var(--accent)'} onBlur={e => e.target.style.borderColor = 'var(--c-border)'} />
                         </div>
-
                         <div>
-                            <label className="block text-sm font-medium text-gray-400 mb-1">Phone Number</label>
-                            <input
-                                type="tel"
-                                required
-                                value={formData.phone}
-                                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                                placeholder="Used for verification later"
-                                className="w-full px-4 py-3 bg-black/50 border border-white/10 rounded-xl text-white focus:outline-none focus:border-purple-500 transition-colors placeholder-gray-600"
-                            />
+                            <label style={{ display: 'block', fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--c-text-dim)', marginBottom: '0.5rem' }}>phone number</label>
+                            <input type="tel" required value={formData.phone} onChange={e => setFormData({ ...formData, phone: e.target.value })} placeholder="used for verification later" style={inputStyle}
+                                onFocus={e => e.target.style.borderColor = 'var(--accent)'} onBlur={e => e.target.style.borderColor = 'var(--c-border)'} />
                         </div>
-
-                        <button
-                            type="submit"
-                            disabled={isSubmitting}
-                            className={`w-full py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold rounded-xl transition-all shadow-lg shadow-purple-500/20 mt-2 ${isSubmitting ? 'opacity-75 cursor-not-allowed' : ''}`}
-                        >
-                            {isSubmitting ? 'Processing...' : 'Proceed to Payment →'}
+                        <button type="submit" disabled={isSubmitting} style={{ padding: '0.85rem', background: 'var(--accent)', border: 'none', color: '#fff', fontWeight: 700, borderRadius: '8px', cursor: 'pointer', fontSize: '0.875rem', fontFamily: 'inherit', opacity: isSubmitting ? 0.7 : 1, marginTop: '0.5rem' }}>
+                            {isSubmitting ? 'processing...' : 'proceed to payment →'}
                         </button>
                     </form>
                 </motion.div>

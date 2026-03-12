@@ -1,135 +1,61 @@
-import React from 'react';
-import { Check, Clock, ArrowRight } from 'lucide-react';
-import { motion } from 'motion/react';
+import { Link } from 'react-router-dom';
 
-const BookCallPreview = () => {
-    return (
-        <section className="py-24 relative overflow-hidden">
-            {/* Background elements to blend with the dark theme */}
-            <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[500px] h-[500px] bg-purple-600/10 blur-[100px] rounded-full pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-emerald-600/5 blur-[80px] rounded-full pointer-events-none" />
+const BookCallPreview = () => (
+    <section style={{ padding: '6rem 1.5rem', background: 'var(--c-bg)' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5rem', alignItems: 'center' }}>
 
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex flex-col gap-4 mb-12">
-                    <p className="text-purple-400 font-semibold tracking-wider text-sm uppercase">LET'S TALK</p>
-                    <h2 className="text-3xl md:text-5xl font-bold text-white">Book a Call</h2>
-                </div>
-
-                <div className="grid lg:grid-cols-2 gap-12 items-center">
-                    {/* Left Column: Content */}
-                    <div className="space-y-8">
-                        <p className="text-lg text-gray-300 leading-relaxed max-w-xl">
-                            Schedule a free consultation to discuss your project and how we can help you achieve your goals.
-                        </p>
-
-                        <div className="space-y-4">
-                            {[
-                                "30-minute strategy session",
-                                "Custom solution recommendations",
-                                "No obligation, completely free"
-                            ].map((item, idx) => (
-                                <div key={idx} className="flex items-center gap-3 group">
-                                    <div className="w-6 h-6 rounded-full bg-green-500/20 flex items-center justify-center text-green-400 group-hover:bg-green-500/30 transition-colors">
-                                        <Check size={14} strokeWidth={3} />
-                                    </div>
-                                    <span className="text-gray-300 group-hover:text-white transition-colors">{item}</span>
-                                </div>
-                            ))}
+            {/* Left */}
+            <div>
+                <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--c-text-faint)', marginBottom: '1rem' }}>let's talk</p>
+                <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 900, letterSpacing: '-0.03em', lineHeight: 1.05, color: 'var(--c-text)', marginBottom: '1.5rem' }}>
+                    book a call.<br />
+                    <span style={{ color: 'var(--c-text-dim)' }}>it's free.</span>
+                </h2>
+                <p style={{ fontSize: '0.95rem', color: 'var(--c-text-muted)', lineHeight: 1.8, maxWidth: '400px', marginBottom: '2rem' }}>
+                    schedule a free 30-minute strategy session. discuss your project, get custom recommendations, no obligation.
+                </p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '2.5rem' }}>
+                    {['30-minute strategy session', 'custom solution recommendations', 'completely free, no obligation'].map(item => (
+                        <div key={item} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                            <span style={{ width: '18px', height: '18px', borderRadius: '50%', border: '1px solid rgba(168,85,247,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.6rem', color: 'var(--accent)', flexShrink: 0 }}>✓</span>
+                            <span style={{ fontSize: '0.875rem', color: 'var(--c-text-muted)' }}>{item}</span>
                         </div>
+                    ))}
+                </div>
+                <Link to="/book-a-call" style={{ display: 'inline-block', padding: '0.85rem 1.75rem', background: 'var(--c-btn-bg)', color: 'var(--c-btn-text)', fontWeight: 700, borderRadius: '8px', fontSize: '0.875rem' }}>
+                    book a free call →
+                </Link>
+            </div>
 
-                        <div className="p-6 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm hover:border-white/20 transition-colors">
-                            <h4 className="text-white font-semibold mb-3 flex items-center gap-2">
-                                What to expect:
-                            </h4>
-                            <ul className="space-y-2 text-sm text-gray-400">
-                                <li className="flex items-start gap-2">
-                                    <span className="mt-1.5 w-1 h-1 rounded-full bg-gray-500" />
-                                    Brief introduction and overview of your needs
-                                </li>
-                                <li className="flex items-start gap-2">
-                                    <span className="mt-1.5 w-1 h-1 rounded-full bg-gray-500" />
-                                    Discussion of potential solutions and approaches
-                                </li>
-                                <li className="flex items-start gap-2">
-                                    <span className="mt-1.5 w-1 h-1 rounded-full bg-gray-500" />
-                                    Q&A session for any questions you have
-                                </li>
-                                <li className="flex items-start gap-2">
-                                    <span className="mt-1.5 w-1 h-1 rounded-full bg-gray-500" />
-                                    Next steps and timeline recommendations
-                                </li>
-                            </ul>
+            {/* Right — Profile Card */}
+            <div>
+                <div style={{ border: `1px solid var(--c-border)`, borderRadius: '16px', padding: '2rem', background: 'var(--c-bg-subtle)' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem', paddingBottom: '1.5rem', borderBottom: `1px solid var(--c-border-subtle)` }}>
+                        <div style={{ position: 'relative' }}>
+                            <img src="https://github.com/harshustle.png" alt="Harsh" style={{ width: '52px', height: '52px', borderRadius: '50%', objectFit: 'cover' }} />
+                            <div style={{ position: 'absolute', bottom: '2px', right: '2px', width: '10px', height: '10px', borderRadius: '50%', background: '#22c55e', border: '2px solid var(--c-bg)' }} />
+                        </div>
+                        <div>
+                            <p style={{ fontWeight: 700, color: 'var(--c-text)' }}>harsh srivastav</p>
+                            <p style={{ fontSize: '0.78rem', color: 'var(--c-text-dim)' }}>@harshustle · available now</p>
                         </div>
                     </div>
-
-                    {/* Right Column: Profile Card */}
-                    <div className="relative">
-                        {/* Glow effect */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-blue-500/20 transform blur-xl rounded-3xl" />
-
-                        <div className="relative bg-[#111111] border border-white/10 rounded-3xl p-6 md:p-8 shadow-2xl">
-                            {/* Header with Avatar */}
-                            <div className="flex flex-col md:flex-row gap-6 mb-8">
-                                <div className="relative">
-                                    <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-white/10 shadow-lg">
-                                        <img src="https://github.com/harshustle.png" alt="Harsh Srivastav" className="w-full h-full object-cover" />
-                                    </div>
-                                    <div className="absolute bottom-1 right-1 w-4 h-4 bg-green-500 border-2 border-[#111111] rounded-full" title="Available"></div>
-                                </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                        {[{ dur: '15', label: '15 min meeting', desc: 'quick intro & fit check' }, { dur: '30', label: '30 min meeting', desc: 'full project deep-dive' }].map(opt => (
+                            <Link key={opt.dur} to="/book-a-call"
+                                style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1rem 1.25rem', border: `1px solid var(--c-border)`, borderRadius: '10px', textDecoration: 'none', transition: 'all 0.2s', background: 'transparent' }}>
                                 <div>
-                                    <h3 className="text-xl font-bold text-white mb-1">Harsh Srivastav</h3>
-                                    <p className="text-gray-400 text-sm leading-relaxed mb-2">
-                                        Hey there! 👋 I'm Harsh Srivastav<br />
-                                        harshustle — AI Automation Expert | Full-Stack Developer | SaaS | Content Creator
-                                    </p>
+                                    <p style={{ fontWeight: 600, color: 'var(--c-text)', fontSize: '0.875rem' }}>{opt.label}</p>
+                                    <p style={{ fontSize: '0.73rem', color: 'var(--c-text-dim)', marginTop: '0.15rem' }}>{opt.desc}</p>
                                 </div>
-                            </div>
-
-                            {/* Meeting Options */}
-                            <div className="space-y-3">
-                                <a
-                                    href="/book-a-call?utm_source=home&utm_medium=preview_card&utm_content=15min_meeting"
-                                    className="block group"
-                                >
-                                    <div className="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/10 hover:border-purple-500/50 hover:bg-white/10 transition-all cursor-pointer">
-                                        <div>
-                                            <h4 className="text-white font-medium group-hover:text-purple-300 transition-colors">15 Min Meeting</h4>
-                                            <div className="flex items-center gap-2 mt-1 text-xs text-gray-500">
-                                                <Clock size={12} />
-                                                <span>15m</span>
-                                            </div>
-                                        </div>
-                                        <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-gray-400 group-hover:bg-purple-500/20 group-hover:text-purple-400 transition-colors">
-                                            <ArrowRight size={16} />
-                                        </div>
-                                    </div>
-                                </a>
-
-                                <a
-                                    href="/book-a-call?utm_source=home&utm_medium=preview_card&utm_content=30min_meeting"
-                                    className="block group"
-                                >
-                                    <div className="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/10 hover:border-purple-500/50 hover:bg-white/10 transition-all cursor-pointer">
-                                        <div>
-                                            <h4 className="text-white font-medium group-hover:text-purple-300 transition-colors">30 Min Meeting</h4>
-                                            <div className="flex items-center gap-2 mt-1 text-xs text-gray-500">
-                                                <Clock size={12} />
-                                                <span>30m</span>
-                                            </div>
-                                        </div>
-                                        <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-gray-400 group-hover:bg-purple-500/20 group-hover:text-purple-400 transition-colors">
-                                            <ArrowRight size={16} />
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-
-                        </div>
+                                <span style={{ fontSize: '0.75rem', color: 'var(--c-text-faint)' }}>→</span>
+                            </Link>
+                        ))}
                     </div>
                 </div>
             </div>
-        </section>
-    );
-};
+        </div>
+    </section>
+);
 
 export default BookCallPreview;

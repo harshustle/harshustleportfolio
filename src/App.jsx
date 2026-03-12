@@ -19,10 +19,10 @@ import BookCall from "./pages/BookCall";
 
 import Careers from "./pages/Careers";
 import Blog from "./pages/Blog";
+import ProcessPage from "./pages/ProcessPage";
 
 
-import Terms from "./pages/Terms";
-import Privacy from "./pages/Privacy";
+import Terms, { Privacy } from "./pages/Terms";
 import Success from "./pages/Success";
 import VerifyPayment from "./pages/VerifyPayment";
 
@@ -47,6 +47,7 @@ function App() {
         <Route path="/book-a-call" element={<BookCall />} />
         <Route path="/careers" element={<Careers />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/process/:serviceName" element={<ProcessPage />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/success" element={<Success />} />

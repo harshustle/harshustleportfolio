@@ -1,223 +1,120 @@
-// src/pages/Blog.jsx
-import { useState, useEffect } from "react";
-import Section from "../components/Section";
+import { useState, useEffect } from 'react';
 
-function Blog() {
-    const [searchQuery, setSearchQuery] = useState("");
-    const [selectedCategory, setSelectedCategory] = useState("all");
+const posts_fallback = [
+    { id: 1, title: 'how we 3x\'d a saas startup\'s organic traffic in 60 days', excerpt: 'a deep dive into the ai content system we built that publishes 3 seo-optimized articles per week automatically.', category: 'content', readTime: '6 min read', date: 'mar 2025', tags: ['content', 'ai'], url: '#' },
+    { id: 2, title: 'n8n vs zapier: which automation platform actually scales?', excerpt: 'we\'ve built over 50 workflows on both platforms. here\'s what we\'ve learned about cost, reliability, and complexity.', category: 'automation', readTime: '8 min read', date: 'feb 2025', tags: ['automation'], url: '#' },
+    { id: 3, title: 'the web design principles behind high-converting dark sites', excerpt: 'why dark-mode sites convert better, and the specific design patterns we use for every client.', category: 'design', readTime: '5 min read', date: 'jan 2025', tags: ['design', 'webdev'], url: '#' },
+];
 
-    const categories = ["all", "development", "design", "business", "tutorials", "news"];
+const categories = ['all', 'webdev', 'javascript', 'react', 'ai', 'beginners'];
 
-    const [posts, setPosts] = useState([]);
+export default function Blog() {
+    const [posts, setPosts] = useState(posts_fallback);
     const [loading, setLoading] = useState(true);
+    const [search, setSearch] = useState('');
+    const [category, setCategory] = useState('all');
 
     useEffect(() => {
-        const fetchPosts = async () => {
-            try {
-                const response = await fetch("https://dev.to/api/articles?tag=webdev&top=30");
-                const data = await response.json();
-
-                const formattedPosts = data.map(article => ({
-                    id: article.id,
-                    title: article.title,
-                    excerpt: article.description,
-                    author: article.user.name,
-                    authorImage: article.user.profile_image,
-                    date: new Date(article.published_at).toLocaleDateString(),
-                    readTime: `${article.reading_time_minutes} min read`,
-                    category: article.tag_list[0] || "tech", // Use first tag as category
-                    image: article.cover_image || "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&auto=format", // Fallback image
-                    tags: article.tag_list,
-                    url: article.url // Link to actual article
-                }));
-
-                setPosts(formattedPosts);
+        fetch('https://dev.to/api/articles?tag=webdev&top=30')
+            .then(r => r.json())
+            .then(data => {
+                setPosts(data.map(a => ({
+                    id: a.id,
+                    title: a.title,
+                    excerpt: a.description,
+                    author: a.user.name,
+                    authorImage: a.user.profile_image,
+                    date: new Date(a.published_at).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }),
+                    readTime: `${a.reading_time_minutes} min read`,
+                    category: a.tag_list[0] || 'tech',
+                    image: a.cover_image,
+                    tags: a.tag_list,
+                    url: a.url,
+                })));
                 setLoading(false);
-            } catch (error) {
-                console.error("Error fetching posts:", error);
-                setLoading(false);
-            }
-        };
-
-        fetchPosts();
+            })
+            .catch(() => setLoading(false));
     }, []);
 
-    const filteredPosts = posts.filter(post => {
-        const matchesCategory = selectedCategory === "all" || post.tags.includes(selectedCategory);
-        const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
-        return matchesCategory && matchesSearch;
+    const filtered = posts.filter(p => {
+        const matchCat = category === 'all' || (p.tags && p.tags.includes(category));
+        const matchSearch = p.title.toLowerCase().includes(search.toLowerCase()) || (p.excerpt && p.excerpt.toLowerCase().includes(search.toLowerCase()));
+        return matchCat && matchSearch;
     });
 
     return (
-        <div className="min-h-screen">
+        <div style={{ background: '#000', minHeight: '100vh', paddingTop: '60px' }}>
+
             {/* Hero */}
-            <section className="relative py-20 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-violet-900/20 via-purple-900/20 to-fuchsia-900/20" />
-
-                <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
-                    <div className="inline-block px-4 py-2 bg-violet-500/10 border border-violet-500/20 rounded-full text-violet-300 text-sm font-semibold mb-6">
-                        Our Blog
-                    </div>
-                    <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
-                        Insights &
-                        <span className="block bg-gradient-to-r from-violet-400 via-purple-400 to-fuchsia-400 bg-clip-text text-transparent">
-                            Innovation
-                        </span>
+            <section style={{ padding: '6rem 1.5rem 4rem' }}>
+                <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+                    <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: '1rem' }}>blog</p>
+                    <h1 style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', fontWeight: 900, letterSpacing: '-0.03em', lineHeight: 1.05, color: '#fff', marginBottom: '1.5rem' }}>
+                        insights &<br />
+                        <span style={{ color: 'rgba(255,255,255,0.3)' }}>deep dives.</span>
                     </h1>
-                    <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
-                        Stay updated with the latest trends, tutorials, and insights from our team of experts.
-                    </p>
 
-                    {/* Search Bar */}
-                    <div className="max-w-2xl mx-auto">
-                        <div className="relative">
-                            <input
-                                type="text"
-                                placeholder="Search articles..."
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                                className="w-full px-6 py-4 pl-14 bg-white/5 border border-white/10 hover:border-violet-500/50 focus:border-violet-500 focus:outline-none rounded-full text-white placeholder-gray-400 transition-colors"
-                            />
-                            <span className="absolute left-5 top-1/2 -translate-y-1/2 text-2xl">🔍</span>
-                        </div>
+                    {/* Search */}
+                    <div style={{ maxWidth: '500px', marginBottom: '2rem' }}>
+                        <input
+                            type="text"
+                            placeholder="search articles..."
+                            value={search}
+                            onChange={e => setSearch(e.target.value)}
+                            style={{ width: '100%', padding: '0.75rem 1rem', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', color: '#fff', fontSize: '0.875rem', outline: 'none', fontFamily: 'inherit' }}
+                        />
+                    </div>
+
+                    {/* Category Filters */}
+                    <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                        {categories.map(c => (
+                            <button key={c} onClick={() => setCategory(c)}
+                                style={{ padding: '0.35rem 0.9rem', border: '1px solid', borderColor: category === c ? '#A855F7' : 'rgba(255,255,255,0.1)', borderRadius: '999px', fontSize: '0.75rem', fontWeight: 600, background: category === c ? 'rgba(168,85,247,0.15)' : 'transparent', color: category === c ? '#A855F7' : 'rgba(255,255,255,0.4)', cursor: 'pointer', fontFamily: 'inherit' }}>
+                                {c}
+                            </button>
+                        ))}
                     </div>
                 </div>
             </section>
 
-            <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                {/* Category Filters */}
-                <div className="flex flex-wrap justify-center gap-3 mb-12">
-                    {categories.map(cat => (
-                        <button
-                            key={cat}
-                            onClick={() => setSelectedCategory(cat)}
-                            className={`px-6 py-2 rounded-full font-semibold capitalize transition-all ${selectedCategory === cat
-                                ? "bg-gradient-to-r from-violet-600 to-purple-600 text-white"
-                                : "bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border border-white/10"
-                                }`}
-                        >
-                            {cat}
-                        </button>
-                    ))}
-                </div>
+            {/* Posts Grid */}
+            <section style={{ borderTop: '1px solid rgba(255,255,255,0.08)', padding: '4rem 1.5rem' }}>
+                <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+                    {loading && <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.875rem' }}>loading articles...</p>}
 
-                {/* Featured Post */}
-                {filteredPosts.length > 0 && (
-                    <div className="mb-16">
-                        <div className="relative group overflow-hidden rounded-3xl bg-gradient-to-br from-violet-900/20 to-purple-900/20 border border-violet-500/20 hover:border-violet-500/40 transition-all">
-                            <div className="grid md:grid-cols-2 gap-8 p-8">
-                                <div className="relative aspect-video md:aspect-auto overflow-hidden rounded-2xl">
-                                    <img
-                                        src={filteredPosts[0].image}
-                                        alt={filteredPosts[0].title}
-                                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                                    />
-                                </div>
-                                <div className="flex flex-col justify-center">
-                                    <div className="inline-block px-3 py-1 bg-violet-500/20 border border-violet-500/30 rounded-full text-violet-300 text-xs font-semibold mb-4 w-fit">
-                                        Featured Post
-                                    </div>
-                                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 group-hover:text-violet-300 transition-colors">
-                                        {filteredPosts[0].title}
-                                    </h2>
-                                    <p className="text-gray-400 mb-6">{filteredPosts[0].excerpt}</p>
-                                    <div className="flex items-center gap-4 mb-6">
-                                        <img
-                                            src={filteredPosts[0].authorImage}
-                                            alt={filteredPosts[0].author}
-                                            className="w-12 h-12 rounded-full border-2 border-violet-500/30"
-                                        />
-                                        <div>
-                                            <div className="text-white font-semibold">{filteredPosts[0].author}</div>
-                                            <div className="text-gray-500 text-sm">{filteredPosts[0].date} · {filteredPosts[0].readTime}</div>
-                                        </div>
-                                    </div>
-                                    <a
-                                        href={filteredPosts[0].url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="px-6 py-3 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white font-semibold rounded-lg transition-all w-fit block text-center"
-                                    >
-                                        Read Article →
-                                    </a>
-                                </div>
-                            </div>
+                    {!loading && filtered.length === 0 && (
+                        <div style={{ textAlign: 'center', padding: '5rem 0' }}>
+                            <p style={{ fontSize: '3rem', marginBottom: '1rem' }}>📝</p>
+                            <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.9rem' }}>no articles found. try a different search.</p>
                         </div>
-                    </div>
-                )}
+                    )}
 
-                {/* Blog Grid */}
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {filteredPosts.slice(1).map((post) => (
-                        <a
-                            href={post.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            key={post.id}
-                            className="group bg-gradient-to-br from-violet-900/10 to-purple-900/10 hover:from-violet-900/20 hover:to-purple-900/20 rounded-2xl border border-violet-500/20 hover:border-violet-500/40 overflow-hidden transition-all duration-300 transform hover:-translate-y-2 block"
-                        >
-                            <div className="relative aspect-video overflow-hidden">
-                                <img
-                                    src={post.image}
-                                    alt={post.title}
-                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                                />
-                                <div className="absolute top-4 left-4">
-                                    <span className="px-3 py-1 bg-violet-500/80 backdrop-blur-sm text-white text-xs font-semibold rounded-full capitalize">
-                                        {post.category}
-                                    </span>
-                                </div>
-                            </div>
-
-                            <div className="p-6">
-                                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-violet-300 transition-colors line-clamp-2">
-                                    {post.title}
-                                </h3>
-                                <p className="text-gray-400 text-sm mb-4 line-clamp-2">{post.excerpt}</p>
-
-                                <div className="flex flex-wrap gap-2 mb-4">
-                                    {post.tags.slice(0, 2).map((tag, i) => (
-                                        <span
-                                            key={i}
-                                            className="px-2 py-1 bg-violet-500/10 text-violet-300 text-xs rounded"
-                                        >
-                                            {tag}
-                                        </span>
-                                    ))}
-                                </div>
-
-                                <div className="flex items-center justify-between pt-4 border-t border-violet-500/20">
-                                    <div className="flex items-center gap-2">
-                                        <img
-                                            src={post.authorImage}
-                                            alt={post.author}
-                                            className="w-8 h-8 rounded-full"
-                                        />
-                                        <div className="text-xs">
-                                            <div className="text-gray-400">{post.author}</div>
+                    {!loading && filtered.length > 0 && (
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: '1px', background: 'rgba(255,255,255,0.08)' }}>
+                            {filtered.map(post => (
+                                <a key={post.id} href={post.url || '#'} target="_blank" rel="noopener noreferrer"
+                                    style={{ display: 'block', background: '#000', padding: '2rem', textDecoration: 'none', transition: 'background 0.2s' }}
+                                    onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.02)'}
+                                    onMouseLeave={e => e.currentTarget.style.background = '#000'}>
+                                    {post.image && (
+                                        <div style={{ borderRadius: '8px', overflow: 'hidden', marginBottom: '1.25rem', aspectRatio: '16/9' }}>
+                                            <img src={post.image} alt={post.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                         </div>
+                                    )}
+                                    <span style={{ fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(168,85,247,0.7)' }}>{post.category}</span>
+                                    <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#fff', marginTop: '0.5rem', marginBottom: '0.75rem', lineHeight: 1.4 }}>{post.title}</h3>
+                                    {post.excerpt && <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.4)', lineHeight: 1.7, marginBottom: '1.25rem' }}>{post.excerpt.slice(0, 120)}...</p>}
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', paddingTop: '1rem', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+                                        {post.authorImage && <img src={post.authorImage} alt={post.author} style={{ width: '28px', height: '28px', borderRadius: '50%' }} />}
+                                        <p style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.35)' }}>{post.author} · {post.readTime}</p>
+                                        <span style={{ marginLeft: 'auto', fontSize: '0.7rem', color: 'rgba(255,255,255,0.25)' }}>{post.date}</span>
                                     </div>
-                                    <span className="text-xs text-gray-500">{post.readTime}</span>
-                                </div>
-                            </div>
-                        </a>
-                    ))}
+                                </a>
+                            ))}
+                        </div>
+                    )}
                 </div>
-
-                {/* No Results */}
-                {filteredPosts.length === 0 && (
-                    <div className="text-center py-16">
-                        <div className="text-6xl mb-4">📝</div>
-                        <h3 className="text-2xl font-bold text-white mb-2">No articles found</h3>
-                        <p className="text-gray-400">Try adjusting your search or filter</p>
-                    </div>
-                )}
-
-
-            </main>
+            </section>
         </div>
     );
 }
-
-export default Blog;

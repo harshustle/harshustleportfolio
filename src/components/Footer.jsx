@@ -1,128 +1,105 @@
-// src/components/Footer.jsx
-import { Link } from "react-router-dom";
-import { Twitter, Linkedin, Instagram, Github } from "lucide-react";
+import { Link } from 'react-router-dom';
 
-function Footer() {
-    const currentYear = new Date().getFullYear();
+const Footer = () => {
+    const year = new Date().getFullYear();
 
-    const footerLinks = {
-        company: [
-            { label: "About Us", path: "/about" },
-            { label: "Careers", path: "/careers" },
-            { label: "Contact", path: "/contact" },
-            { label: "Book a Call", path: "/book-a-call" },
-            { label: "Reviews", path: "/reviews" }
-        ],
-        work: [
-            { label: "Services", path: "/services" },
-            { label: "High-Value Add-ons", path: "/high-value-addons" },
-            { label: "Verify Payment", path: "/verify-payment" }
-        ],
-        resources: [
-            { label: "Blog", path: "/blog" },
-            { label: "Tech Stack", path: "/tech-stack" }
-        ],
-        legal: [
-            { label: "Terms and Conditions", path: "/terms" },
-            { label: "Privacy Policy", path: "/privacy" }
-        ]
-    };
+    const cols = [
+        {
+            heading: 'work',
+            links: [
+                { label: 'services', to: '/services' },
+                { label: 'high-value add-ons', to: '/high-value-addons' },
+                { label: 'tech stack', to: '/tech-stack' },
+            ],
+        },
+        {
+            heading: 'company',
+            links: [
+                { label: 'about', to: '/about' },
+                { label: 'reviews', to: '/reviews' },
+                { label: 'careers', to: '/careers' },
+                { label: 'blog', to: '/blog' },
+            ],
+        },
+        {
+            heading: 'connect',
+            links: [
+                { label: 'book a call', to: '/book-a-call' },
+                { label: 'contact', to: '/contact' },
+                { label: 'verify payment', to: '/verify-payment' },
+            ],
+        },
+        {
+            heading: 'legal',
+            links: [
+                { label: 'terms', to: '/terms' },
+                { label: 'privacy', to: '/privacy' },
+            ],
+        },
+    ];
+
+    const social = [
+        { label: 'twitter', href: 'https://twitter.com/harshustle' },
+        { label: 'linkedin', href: 'https://linkedin.com/in/harshustle' },
+        { label: 'instagram', href: 'https://instagram.com/harshustle' },
+        { label: 'github', href: 'https://github.com/harshustle' },
+    ];
 
     return (
-        <footer className="border-t border-white/10 bg-black pt-16 pb-8">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 mb-12">
-                    {/* Brand Column */}
-                    <div className="col-span-2 lg:col-span-2">
-                        <Link to="/" className="text-2xl font-bold text-white mb-4 block">
-                            HARSH<span className="text-purple-500">USTLE</span>
+        <footer style={{ borderTop: `1px solid var(--c-divider)`, background: 'var(--c-bg)', paddingTop: '4rem', paddingBottom: '2rem', transition: 'background 0.3s ease' }}>
+            <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1.5rem' }}>
+
+                {/* Top Grid */}
+                <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr', gap: '2rem', marginBottom: '4rem' }}>
+                    {/* Brand */}
+                    <div style={{ gridColumn: 'span 2' }}>
+                        <Link to="/" style={{ display: 'block', fontWeight: 800, fontSize: '1.25rem', letterSpacing: '-0.02em', marginBottom: '1rem', color: 'var(--c-text)' }}>
+                            harsh<span style={{ color: 'var(--accent)' }}>ustle</span>
                         </Link>
-                        <p className="text-gray-400 mb-6 max-w-sm">
-                            Building digital experiences that transform businesses. Innovation, quality, and speed delivered.
+                        <p style={{ fontSize: '0.875rem', color: 'var(--c-text-muted)', lineHeight: 1.7, maxWidth: '280px', marginBottom: '1.5rem' }}>
+                            building digital experiences that transform businesses. ai, automation, and web design — done right.
                         </p>
-                        <div className="flex gap-4">
-                            <a href="https://twitter.com/harshustle" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-purple-500/20 hover:text-purple-400 transition-all border border-white/10 hover:border-purple-500/30">
-                                <Twitter size={18} />
-                            </a>
-                            <a href="https://www.linkedin.com/in/harshustle/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-purple-500/20 hover:text-purple-400 transition-all border border-white/10 hover:border-purple-500/30">
-                                <Linkedin size={18} />
-                            </a>
-                            <a href="https://www.instagram.com/harshustler/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-purple-500/20 hover:text-purple-400 transition-all border border-white/10 hover:border-purple-500/30">
-                                <Instagram size={18} />
-                            </a>
-                            <a href="https://github.com/harshustle" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-purple-500/20 hover:text-purple-400 transition-all border border-white/10 hover:border-purple-500/30">
-                                <Github size={18} />
-                            </a>
+                        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                            {social.map(s => (
+                                <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer"
+                                    style={{ fontSize: '0.75rem', color: 'var(--c-text-dim)', transition: 'color 0.2s' }}>
+                                    {s.label}
+                                </a>
+                            ))}
                         </div>
                     </div>
 
-                    {/* Links Columns */}
-                    <div>
-                        <h3 className="font-bold text-white mb-4">Company</h3>
-                        <ul className="space-y-3">
-                            {footerLinks.company.map((link) => (
-                                <li key={link.path}>
-                                    <Link to={link.path} className="text-gray-400 hover:text-purple-400 transition-colors text-sm">
-                                        {link.label}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    <div>
-                        <h3 className="font-bold text-white mb-4">Services</h3>
-                        <ul className="space-y-3">
-                            {footerLinks.work.map((link) => (
-                                <li key={link.path}>
-                                    {link.label === "Verify Payment" ? (
-                                        <Link to={link.path} className="inline-block px-4 py-2 mt-1 bg-white/10 hover:bg-purple-600 border border-purple-500/30 text-white text-xs font-bold rounded-lg transition-all shadow-lg hover:shadow-purple-500/20">
-                                            {link.label}
+                    {/* Link Columns */}
+                    {cols.map(col => (
+                        <div key={col.heading}>
+                            <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--c-text-faint)', marginBottom: '1rem' }}>
+                                {col.heading}
+                            </p>
+                            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                                {col.links.map(l => (
+                                    <li key={l.to}>
+                                        <Link to={l.to} style={{ fontSize: '0.875rem', color: 'var(--c-text-muted)', transition: 'color 0.2s' }}>
+                                            {l.label}
                                         </Link>
-                                    ) : (
-                                        <Link to={link.path} className="text-gray-400 hover:text-purple-400 transition-colors text-sm">
-                                            {link.label}
-                                        </Link>
-                                    )}
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    <div>
-                        <h3 className="font-bold text-white mb-4">Resources</h3>
-                        <ul className="space-y-3">
-                            {footerLinks.resources.map((link) => (
-                                <li key={link.path}>
-                                    <Link to={link.path} className="text-gray-400 hover:text-purple-400 transition-colors text-sm">
-                                        {link.label}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    <div>
-                        <h3 className="font-bold text-white mb-4">Legal</h3>
-                        <ul className="space-y-3">
-                            {footerLinks.legal.map((link) => (
-                                <li key={link.path}>
-                                    <Link to={link.path} className="text-gray-400 hover:text-purple-400 transition-colors text-sm">
-                                        {link.label}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
                 </div>
 
-                <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-gray-500">
-                    <p>© {currentYear} HarshUGC. All rights reserved.</p>
-                    <p>Designed with ❤️ for builders.</p>
+                {/* Bottom bar */}
+                <div style={{ borderTop: `1px solid var(--c-border-subtle)`, paddingTop: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+                    <p style={{ fontSize: '0.75rem', color: 'var(--c-text-ghost)' }}>
+                        © {year} harshustle. all rights reserved.
+                    </p>
+                    <p style={{ fontSize: '0.75rem', color: 'var(--c-text-ghost)' }}>
+                        made with obsession.
+                    </p>
                 </div>
             </div>
         </footer>
     );
-}
+};
 
 export default Footer;
