@@ -43,10 +43,10 @@ function Contact() {
             </section>
 
             <section style={{ borderTop: `1px solid var(--c-divider)`, padding: '4rem 1.5rem 6rem' }}>
-                <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5rem', alignItems: 'start' }}>
+                <div className="grid-2" style={{ maxWidth: '1200px', margin: '0 auto', gap: '5rem', alignItems: 'start' }}>
 
                     <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem' }}>
                             {[{ key: 'name', label: 'name', type: 'text', placeholder: 'your name' }, { key: 'email', label: 'email', type: 'email', placeholder: 'your@email.com' }].map(f => (
                                 <div key={f.key}>
                                     <label style={{ display: 'block', fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.1em', color: 'var(--c-text-dim)', marginBottom: '0.5rem', textTransform: 'uppercase' }}>{f.label}</label>

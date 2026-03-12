@@ -1,8 +1,8 @@
 function BookCall() {
     return (
         <div style={{ background: 'var(--c-bg)', minHeight: '100vh', paddingTop: '60px', transition: 'background 0.3s ease' }}>
-            <section style={{ padding: '6rem 1.5rem 4rem' }}>
-                <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5rem', alignItems: 'start' }}>
+            <section style={{ padding: '4rem 1.5rem 6rem' }}>
+                <div className="grid-2" style={{ maxWidth: '1200px', margin: '0 auto', gap: '4rem', alignItems: 'start', paddingTop: '2rem' }}>
                     <div>
                         <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--c-text-faint)', marginBottom: '1rem' }}>book a call</p>
                         <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 900, letterSpacing: '-0.03em', lineHeight: 1.05, color: 'var(--c-text)', marginBottom: '1.5rem' }}>
@@ -40,8 +40,8 @@ function BookCall() {
                     {/* Cal.com Embed */}
                     <div style={{ position: 'relative' }}>
                         <div style={{ position: 'absolute', inset: '-2px', background: 'linear-gradient(135deg, rgba(168,85,247,0.2), transparent, rgba(168,85,247,0.1))', borderRadius: '18px', filter: 'blur(8px)', opacity: 0.5 }} />
-                        <div style={{ position: 'relative', border: `1px solid var(--c-border)`, borderRadius: '16px', overflow: 'hidden', background: 'var(--c-bg)', height: '620px' }}>
-                            <iframe src="https://cal.com/harshustle" style={{ width: '100%', height: 'calc(100% + 50px)', border: 'none' }} title="Book a Call" />
+                        <div style={{ position: 'relative', border: `1px solid var(--c-border)`, borderRadius: '16px', overflow: 'hidden', background: 'var(--c-bg)', height: '580px' }}>
+                            <iframe src="https://cal.com/harshustle" style={{ width: '100%', height: '100%', border: 'none' }} title="Book a Call" />
                         </div>
                     </div>
                 </div>

@@ -22,7 +22,7 @@ function About() {
             {/* Hero */}
             <section style={{ padding: '6rem 1.5rem 4rem', position: 'relative', overflow: 'hidden' }}>
                 <div style={{ position: 'absolute', top: '40%', right: '20%', width: '400px', height: '400px', background: 'radial-gradient(circle, rgba(168,85,247,0.06) 0%, transparent 70%)', pointerEvents: 'none' }} />
-                <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5rem', alignItems: 'center' }}>
+                <div className="grid-2" style={{ maxWidth: '1200px', margin: '0 auto', gap: '4rem', alignItems: 'center' }}>
                     <div>
                         <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--c-text-faint)', marginBottom: '1rem' }}>about</p>
                         <h1 style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', fontWeight: 900, letterSpacing: '-0.03em', lineHeight: 1.05, color: 'var(--c-text)', marginBottom: '1.5rem' }}>
@@ -61,7 +61,7 @@ function About() {
                     <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 3rem)', fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--c-text)', marginBottom: '3rem' }}>
                         what i believe<br /><span style={{ color: 'var(--c-text-dim)' }}>in building.</span>
                     </h2>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1px', background: 'var(--c-grid)' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1px', background: 'var(--c-grid)' }}>
                         {values.map(v => (
                             <div key={v.n} style={{ background: 'var(--c-bg-card)', padding: '2rem' }}>
                                 <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.15em', color: 'var(--c-text-ghost)', marginBottom: '1.25rem' }}>{v.n}</p>

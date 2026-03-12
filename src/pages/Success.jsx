@@ -47,7 +47,7 @@ function Success() {
 
     return (
         <div style={{ background: 'var(--c-bg)', minHeight: '100vh', paddingTop: '60px', display: 'flex', alignItems: 'center', transition: 'background 0.3s ease' }}>
-            <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '4rem 1.5rem', width: '100%', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5rem', alignItems: 'center' }}>
+            <div className="grid-2" style={{ maxWidth: '1000px', margin: '0 auto', padding: '4rem 1.5rem', width: '100%', gap: '4rem', alignItems: 'center' }}>
 
                 <div>
                     <div style={{ width: '56px', height: '56px', borderRadius: '50%', border: '1px solid rgba(34,197,94,0.3)', background: 'rgba(34,197,94,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.75rem', marginBottom: '1.5rem' }}>🎉</div>
@@ -59,7 +59,7 @@ function Success() {
                     </p>
                     <div style={{ padding: '1.25rem', border: `1px solid var(--c-border)`, borderRadius: '10px', background: 'var(--c-bg-subtle)' }}>
                         <p style={{ fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--c-text-ghost)', marginBottom: '0.5rem' }}>transaction id</p>
-                        <p style={{ fontFamily: 'monospace', fontSize: '0.8rem', color: 'var(--c-text)', marginBottom: '0.75rem' }}>{paymentData.paymentId}</p>
+                        <p style={{ fontFamily: 'monospace', fontSize: '0.8rem', color: 'var(--c-text)', marginBottom: '0.75rem', wordBreak: 'break-all' }}>{paymentData.paymentId}</p>
                         <p style={{ fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--c-text-ghost)', marginBottom: '0.5rem' }}>amount paid</p>
                         <p style={{ fontWeight: 700, color: 'var(--c-text)' }}>{paymentData.currency} {paymentData.amount}</p>
                     </div>

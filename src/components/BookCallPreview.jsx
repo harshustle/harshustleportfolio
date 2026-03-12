@@ -2,29 +2,32 @@ import { Link } from 'react-router-dom';
 
 const BookCallPreview = () => (
     <section style={{ padding: '6rem 1.5rem', background: 'var(--c-bg)' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5rem', alignItems: 'center' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}
+            className="grid-2" >
+            <div style={{ gap: '5rem', alignItems: 'center' }}>
 
-            {/* Left */}
-            <div>
-                <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--c-text-faint)', marginBottom: '1rem' }}>let's talk</p>
-                <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 900, letterSpacing: '-0.03em', lineHeight: 1.05, color: 'var(--c-text)', marginBottom: '1.5rem' }}>
-                    book a call.<br />
-                    <span style={{ color: 'var(--c-text-dim)' }}>it's free.</span>
-                </h2>
-                <p style={{ fontSize: '0.95rem', color: 'var(--c-text-muted)', lineHeight: 1.8, maxWidth: '400px', marginBottom: '2rem' }}>
-                    schedule a free 30-minute strategy session. discuss your project, get custom recommendations, no obligation.
-                </p>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '2.5rem' }}>
-                    {['30-minute strategy session', 'custom solution recommendations', 'completely free, no obligation'].map(item => (
-                        <div key={item} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                            <span style={{ width: '18px', height: '18px', borderRadius: '50%', border: '1px solid rgba(168,85,247,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.6rem', color: 'var(--accent)', flexShrink: 0 }}>✓</span>
-                            <span style={{ fontSize: '0.875rem', color: 'var(--c-text-muted)' }}>{item}</span>
-                        </div>
-                    ))}
+                {/* Left */}
+                <div>
+                    <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--c-text-faint)', marginBottom: '1rem' }}>let's talk</p>
+                    <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 900, letterSpacing: '-0.03em', lineHeight: 1.05, color: 'var(--c-text)', marginBottom: '1.5rem' }}>
+                        book a call.<br />
+                        <span style={{ color: 'var(--c-text-dim)' }}>it's free.</span>
+                    </h2>
+                    <p style={{ fontSize: '0.95rem', color: 'var(--c-text-muted)', lineHeight: 1.8, maxWidth: '400px', marginBottom: '2rem' }}>
+                        schedule a free 30-minute strategy session. discuss your project, get custom recommendations, no obligation.
+                    </p>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '2.5rem' }}>
+                        {['30-minute strategy session', 'custom solution recommendations', 'completely free, no obligation'].map(item => (
+                            <div key={item} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                                <span style={{ width: '18px', height: '18px', borderRadius: '50%', border: '1px solid rgba(168,85,247,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.6rem', color: 'var(--accent)', flexShrink: 0 }}>✓</span>
+                                <span style={{ fontSize: '0.875rem', color: 'var(--c-text-muted)' }}>{item}</span>
+                            </div>
+                        ))}
+                    </div>
+                    <Link to="/book-a-call" style={{ display: 'inline-block', padding: '0.85rem 1.75rem', background: 'var(--c-btn-bg)', color: 'var(--c-btn-text)', fontWeight: 700, borderRadius: '8px', fontSize: '0.875rem' }}>
+                        book a free call →
+                    </Link>
                 </div>
-                <Link to="/book-a-call" style={{ display: 'inline-block', padding: '0.85rem 1.75rem', background: 'var(--c-btn-bg)', color: 'var(--c-btn-text)', fontWeight: 700, borderRadius: '8px', fontSize: '0.875rem' }}>
-                    book a free call →
-                </Link>
             </div>
 
             {/* Right — Profile Card */}

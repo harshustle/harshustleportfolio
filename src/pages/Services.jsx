@@ -80,7 +80,7 @@ function Services() {
             <section style={{ borderTop: `1px solid var(--c-divider)` }}>
                 {services.map(s => (
                     <div key={s.tag} style={{ borderBottom: `1px solid var(--c-divider)`, background: s.featured ? 'var(--accent-dim)' : 'var(--c-bg)' }}>
-                        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '3rem 1.5rem', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'start' }}>
+                        <div className="grid-2 service-row" style={{ maxWidth: '1200px', margin: '0 auto', gap: '4rem', alignItems: 'start' }}>
                             {/* Left */}
                             <div>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>

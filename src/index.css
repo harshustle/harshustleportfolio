@@ -185,3 +185,106 @@ select {
   border-color: var(--c-border-hover);
   color: var(--c-text);
 }
+
+/* ─── RESPONSIVE GRID UTILITIES ─────────────────────────── */
+
+/* 2-column split → stacks on mobile */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* 4-column stats row → 2x2 on mobile */
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* 3-column process step row */
+.grid-step {
+  display: grid;
+  grid-template-columns: 60px 1fr auto;
+}
+
+/* Footer multi-column */
+.grid-footer {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+  gap: 2rem;
+}
+
+/* ─── MOBILE RESPONSIVE ─(max 768px)─────────────────────── */
+@media (max-width: 768px) {
+
+  /* Stack all 2-col grids */
+  .grid-2 {
+    grid-template-columns: 1fr !important;
+    gap: 2.5rem !important;
+  }
+
+  /* Reverse order for sections where content should come first */
+  .grid-2.mobile-reverse>*:first-child {
+    order: 2;
+  }
+
+  .grid-2.mobile-reverse>*:last-child {
+    order: 1;
+  }
+
+  /* Stats: 2x2 */
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Process step: hide duration badge */
+  .grid-step {
+    grid-template-columns: 44px 1fr !important;
+  }
+
+  .step-duration {
+    display: none !important;
+  }
+
+  /* Footer: 2 col */
+  .grid-footer {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Section padding for mobile */
+  .section-pad {
+    padding: 4rem 1.25rem !important;
+  }
+
+  .section-pad-top {
+    padding-top: 5rem !important;
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
+
+  /* Hero h1 clamp override */
+  .hero-h1 {
+    font-size: clamp(2.25rem, 10vw, 3.5rem) !important;
+  }
+
+  /* Service row gap fix */
+  .service-row {
+    padding: 2.5rem 1.25rem !important;
+  }
+
+  /* Add default padding to grid-2 inside sections */
+  .grid-2 {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+/* ─── SMALL MOBILE (max 500px) ───────────────────────────── */
+@media (max-width: 500px) {
+  .grid-footer {
+    grid-template-columns: 1fr !important;
+  }
+
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}

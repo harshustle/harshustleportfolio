@@ -27,9 +27,9 @@ function Reviews() {
                 </div>
             </section>
 
-            {/* Stats Row */}
+            {/* Stats Row — uses grid-4 CSS class */}
             <section style={{ borderTop: `1px solid var(--c-divider)`, borderBottom: `1px solid var(--c-divider)` }}>
-                <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', background: 'var(--c-bg-subtle)' }}>
+                <div className="grid-4" style={{ maxWidth: '1200px', margin: '0 auto', background: 'var(--c-bg-subtle)' }}>
                     {stats.map((s, i) => (
                         <div key={s.label} style={{ padding: '2.5rem 2rem', borderRight: i < stats.length - 1 ? `1px solid var(--c-divider)` : 'none', textAlign: 'center' }}>
                             <p style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 900, color: 'var(--c-text)', letterSpacing: '-0.03em', marginBottom: '0.25rem' }}>{s.value}</p>
@@ -41,14 +41,14 @@ function Reviews() {
 
             {/* Reviews Grid */}
             <section style={{ padding: '5rem 1.5rem' }}>
-                <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '1px', background: 'var(--c-grid)' }}>
+                <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1px', background: 'var(--c-grid)' }}>
                     {reviews.map(r => (
                         <div key={r.name} style={{ background: 'var(--c-bg-card)', padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                             <div style={{ display: 'flex', gap: '2px' }}>
                                 {[...Array(r.rating)].map((_, i) => <span key={i} style={{ color: 'var(--accent)', fontSize: '0.875rem' }}>★</span>)}
                             </div>
                             <p style={{ fontSize: '0.9rem', color: 'var(--c-text-body)', lineHeight: 1.8, fontStyle: 'italic' }}>"{r.quote}"</p>
-                            <div style={{ marginTop: 'auto', paddingTop: '1.25rem', borderTop: `1px solid var(--c-border-subtle)`, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                            <div style={{ marginTop: 'auto', paddingTop: '1.25rem', borderTop: `1px solid var(--c-border-subtle)`, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem' }}>
                                 <div>
                                     <p style={{ fontWeight: 700, color: 'var(--c-text)', fontSize: '0.875rem' }}>{r.name}</p>
                                     <p style={{ fontSize: '0.75rem', color: 'var(--c-text-dim)' }}>{r.role}</p>

@@ -165,15 +165,16 @@ function ProcessPage() {
 
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
                         {service.steps.map((step, i) => (
-                            <div key={step.n} style={{
-                                display: 'grid',
-                                gridTemplateColumns: '60px 1fr auto',
-                                gap: '2rem',
-                                alignItems: 'start',
-                                padding: '2.5rem 0',
-                                borderTop: `1px solid var(--c-border-subtle)`,
-                                position: 'relative',
-                            }}>
+                            <div key={step.n}
+                                className="grid-step"
+                                style={{
+                                    display: 'grid',
+                                    gap: '1.5rem',
+                                    alignItems: 'start',
+                                    padding: '2.5rem 0',
+                                    borderTop: `1px solid var(--c-border-subtle)`,
+                                    position: 'relative',
+                                }}>
                                 {/* Step number */}
                                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
                                     <div style={{
@@ -201,7 +202,7 @@ function ProcessPage() {
                                 </div>
 
                                 {/* Duration badge */}
-                                <div style={{
+                                <div className="step-duration" style={{
                                     padding: '0.3rem 0.8rem', background: 'var(--c-bg-subtle)',
                                     border: `1px solid var(--c-border)`, borderRadius: '999px',
                                     fontSize: '0.7rem', color: 'var(--c-text-dim)', fontWeight: 600,
