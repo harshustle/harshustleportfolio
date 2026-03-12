@@ -7,42 +7,42 @@ const services = [
     {
         slug: 'web-design',
         tag: 'WEB DESIGN & DEV', title: 'sites that convert.', icon: '🎨',
-        price: '₹41,500', priceAmount: 41500, priceNote: 'one-time',
-        desc: 'premium dark-mode focused ui, fully responsive, seo optimized, and conversion-focused. built with react + tailwindcss. delivered in under 14 days.',
-        features: ['custom ui/ux design', 'react + vite + tailwindcss', 'seo & performance optimized', 'responsive across all devices', 'contact form + analytics', 'vercel / netlify deployment'],
+        price: 'from ₹15,000', priceAmount: 15000, priceNote: 'one-time',
+        desc: 'clean, fast, conversion-focused websites. choose your tier: static site at ₹15,000 or full-stack with notion database integration + ai chatbot at ₹30,000.',
+        features: [
+            '₹15,000 — static site (html/react, seo, responsive)',
+            '₹30,000 — + notion database integration',
+            '₹30,000 — + ai chatbot embedded',
+            'custom ui/ux design',
+            'vercel deployment + custom domain',
+            '<14 day delivery',
+        ],
     },
     {
-        slug: 'ai-content',
-        tag: 'AI CONTENT CREATION', title: 'content on autopilot.', icon: '✍️',
-        price: '₹1,25,000', priceAmount: 125000, priceNote: '/month', featured: true,
-        desc: 'blog posts · social media · seo long-form · ugc-style video scripts · multi-language. ai-generated, human-polished, published on schedule.',
-        features: ['10+ pieces of content/month', 'seo keyword research', 'ai + human polish', 'social media captions', 'ugc / short-form video scripts', 'monthly performance report'],
+        slug: 'video-editing',
+        tag: 'AI VIDEO CREATION & EDITING', title: 'videos that retain.', icon: '🎬',
+        price: '₹30,000', priceAmount: 30000, priceNote: '/ 8 videos',
+        desc: 'ai-generated + human-edited short-form content. reels, ugc ads, faceless ai videos, youtube shorts — hook-first editing engineered for maximum retention.',
+        features: ['8 videos per month', 'ai video generation (faceless)', 'reels / tiktok / youtube shorts', 'hook-optimized editing + captions', 'motion graphics & thumbnails', 'delivered in 2 rounds'],
     },
     {
         slug: 'automation',
         tag: 'AUTOMATION & AI SYSTEMS', title: 'systems, not chaos.', icon: '⚡',
-        price: '₹66,400', priceAmount: 66400, priceNote: '/month',
-        desc: 'crm integrations · lead follow-up · email & whatsapp automation · ai internal tools. we audit your workflows and automate everything possible.',
+        price: '₹45,000', priceAmount: 45000, priceNote: 'one-time',
+        desc: 'crm integrations · lead follow-up · email & whatsapp automation · ai internal tools. we audit your workflows and automate everything that slows you down.',
         features: ['full workflow audit', 'n8n / zapier / make.com', 'crm & api integrations', 'email + whatsapp automation', 'ai-powered internal tools', '30-day support included'],
-    },
-    {
-        slug: 'video-editing',
-        tag: 'VIDEO EDITING', title: 'videos that retain.', icon: '🎬',
-        price: '₹25,000', priceAmount: 25000, priceNote: '/month',
-        desc: 'short-form content · reels · youtube · ugc ads · motion graphics. high-retention editing designed for algorithms and audiences.',
-        features: ['8-12 videos/month', 'reels / tiktok / youtube shorts', 'motion graphics & captions', 'hook-optimized editing', 'thumbnail design', 'fast 3-day turnaround'],
     },
     {
         slug: 'ai-chatbots',
         tag: 'AI CHATBOTS', title: 'support that never sleeps.', icon: '🤖',
-        price: '₹33,200', priceAmount: 33200, priceNote: 'one-time',
+        price: '₹30,000', priceAmount: 30000, priceNote: 'one-time',
         desc: 'custom ai chatbots trained on your business knowledge base. embedded on your site or whatsapp. qualify leads, answer faqs, and book calls — 24/7.',
         features: ['custom knowledge base', 'gemini / gpt-4 powered', 'whatsapp or website embedded', 'lead qualification flows', 'handoff to human agent', 'analytics dashboard'],
     },
     {
         slug: 'saas-mvp',
         tag: 'SAAS & MVP', title: 'build fast. learn faster.', icon: '🚀',
-        price: '₹83,000', priceAmount: 83000, priceNote: 'one-time',
+        price: '₹80,000', priceAmount: 80000, priceNote: 'one-time',
         desc: 'full-stack saas mvps with auth, payments, dashboards, and apis. designed to ship in days — not months. built for validation and scale.',
         features: ['next.js + node.js + postgres', 'auth (clerk / supabase)', 'razorpay / stripe payments', 'admin dashboard', 'api-ready backend', '2-4 week delivery'],
     },
@@ -71,16 +71,16 @@ function Services() {
                         <span style={{ color: 'var(--c-text-dim)' }}>nothing you don't.</span>
                     </h1>
                     <p style={{ fontSize: '1rem', color: 'var(--c-text-muted)', maxWidth: '500px', lineHeight: 1.7 }}>
-                        six services. one team. built for founders, agencies, and businesses that want results — not just deliverables.
+                        five services. one team. built for founders, agencies, and businesses that want results — not just deliverables.
                     </p>
                 </div>
             </section>
 
             {/* Services List */}
-            <section style={{ borderTop: `1px solid var(--c-divider)` }}>
-                {services.map(s => (
-                    <div key={s.tag} style={{ borderBottom: `1px solid var(--c-divider)`, background: s.featured ? 'var(--accent-dim)' : 'var(--c-bg)' }}>
-                        <div className="grid-2 service-row" style={{ maxWidth: '1200px', margin: '0 auto', gap: '4rem', alignItems: 'start' }}>
+            <section style={{ borderTop: `2px solid var(--c-border)` }}>
+                {services.map((s, idx) => (
+                    <div key={s.tag} style={{ borderBottom: `2px solid var(--c-border)`, background: s.featured ? 'var(--accent-dim)' : idx % 2 === 0 ? 'var(--c-bg)' : 'var(--c-bg-subtle)' }}>
+                        <div className="grid-2 service-row" style={{ maxWidth: '1200px', margin: '0 auto', padding: '3.5rem 1.5rem', gap: '4rem', alignItems: 'start' }}>
                             {/* Left */}
                             <div>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>

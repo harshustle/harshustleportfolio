@@ -9,26 +9,28 @@ import { openRazorpayCheckout } from '../utils/razorpay';
 
 const services = [
     {
-        tag: 'WEB DESIGN',
+        tag: 'WEB DESIGN & DEV',
         title: 'sites that convert.',
-        desc: 'premium modern ui. fully responsive. seo optimized. conversion-focused. built to impress and perform — not just look good.',
-        price: '₹41,500', priceNote: 'one-time', priceAmount: 41500,
-        features: ['dark-mode focused ui', 'react + tailwindcss', 'seo optimized', '<14 day delivery'],
+        desc: 'static site at ₹15k. or go full-stack with notion database + ai chatbot for ₹30k. seo optimized, mobile-first, delivered in under 14 days.',
+        price: 'from ₹15,000', priceNote: 'one-time', priceAmount: 15000,
+        slug: 'web-design',
+        features: ['static ₹15k / with add-ons ₹30k', 'notion database integration', 'ai chatbot option', '<14 day delivery'],
     },
     {
-        tag: 'AI CONTENT',
-        title: 'content on autopilot.',
-        desc: 'blog writing · social posts · ugc-style videos · seo long-form. ai-powered content systems that scale without a large team.',
-        price: '₹1,25,000', priceNote: '/month', priceAmount: 125000,
-        features: ['ai + human polish', 'multi-platform', 'seo optimized', 'monthly retainer'],
-        featured: true,
+        tag: 'AI VIDEO & EDITING',
+        title: 'videos that retain.',
+        desc: 'ai-generated faceless videos + human-edited short-form. reels, ugc ads, youtube shorts — 8 videos delivered per month at ₹30,000.',
+        price: '₹30,000', priceNote: '/ 8 videos', priceAmount: 30000,
+        slug: 'video-editing',
+        features: ['8 videos / month', 'ai generation + human edit', 'reels / shorts / ugc ads', 'hook-first structure'],
     },
     {
         tag: 'AUTOMATION',
         title: 'systems, not chaos.',
-        desc: 'crm integrations · lead follow-ups · email & whatsapp automation · ai internal tools. eliminate manual busywork for good.',
-        price: '₹66,400', priceNote: '/month', priceAmount: 66400,
-        features: ['n8n / zapier', 'api integrations', 'workflow audit', '3-7 day setup'],
+        desc: 'crm integrations · lead follow-ups · email & whatsapp automation · ai internal tools. one-time setup, runs forever.',
+        price: '₹45,000', priceNote: 'one-time', priceAmount: 45000,
+        slug: 'automation',
+        features: ['n8n / zapier', 'api integrations', 'workflow audit', '30-day support'],
     },
 ];
 
