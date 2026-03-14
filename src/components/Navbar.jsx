@@ -86,14 +86,19 @@ const Navbar = () => {
                 padding: '0.5rem 1rem', fontSize: '0.8rem', fontWeight: 600,
                 color: 'var(--c-text-muted)', border: `1px solid var(--c-border)`,
                 borderRadius: '8px', textDecoration: 'none', transition: 'all 0.2s',
+                display: 'flex', alignItems: 'center', gap: '0.4rem',
               }}>
+                <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#22c55e', flexShrink: 0, animation: 'pulse-dot 2s infinite' }} />
                 book a call
               </Link>
               <Link to="/contact" style={{
                 padding: '0.5rem 1rem', fontSize: '0.8rem', fontWeight: 700,
-                color: 'var(--c-btn-text)', background: 'var(--c-btn-bg)',
+                color: '#fff', background: 'var(--accent)',
                 borderRadius: '8px', textDecoration: 'none', transition: 'all 0.2s',
-              }}>
+                boxShadow: '0 0 16px rgba(168,85,247,0.35)',
+              }}
+                onMouseEnter={e => e.currentTarget.style.boxShadow = '0 0 24px rgba(168,85,247,0.55)'}
+                onMouseLeave={e => e.currentTarget.style.boxShadow = '0 0 16px rgba(168,85,247,0.35)'}>
                 get started
               </Link>
             </div>
@@ -151,15 +156,18 @@ const Navbar = () => {
               padding: '0.75rem 1rem', textAlign: 'center', textDecoration: 'none',
               border: `1px solid var(--c-border)`, borderRadius: '8px',
               fontWeight: 600, color: 'var(--c-text)', fontSize: '0.9rem',
+              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem',
             }}>
-              book a call
+              <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#22c55e', animation: 'pulse-dot 2s infinite' }} />
+              book a call · 2 spots left
             </Link>
             <Link to="/contact" style={{
               padding: '0.75rem 1rem', textAlign: 'center', textDecoration: 'none',
-              background: 'var(--c-btn-bg)', color: 'var(--c-btn-text)',
+              background: 'var(--accent)', color: '#fff',
               borderRadius: '8px', fontWeight: 700, fontSize: '0.9rem',
+              boxShadow: '0 0 20px rgba(168,85,247,0.4)',
             }}>
-              get started
+              get started →
             </Link>
           </div>
         </div>

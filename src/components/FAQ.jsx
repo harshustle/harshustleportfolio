@@ -15,15 +15,37 @@ function FAQ() {
       {QUESTIONS.map((item, i) => (
         <div key={item.q} style={{ borderTop: `1px solid var(--c-border-subtle)` }}>
           <button type="button" onClick={() => setOpen(prev => prev === i ? -1 : i)}
-            style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1.5rem 0', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', fontFamily: 'inherit' }}>
-            <span style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--c-text)', paddingRight: '2rem' }}>{item.q}</span>
-            <span style={{ color: 'var(--c-text-faint)', fontSize: '1.25rem', flexShrink: 0, transform: open === i ? 'rotate(45deg)' : 'none', transition: 'transform 0.2s', display: 'inline-block' }}>+</span>
+            style={{
+              width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+              padding: '1.5rem 0', background: 'none', border: 'none', cursor: 'pointer',
+              textAlign: 'left', fontFamily: 'inherit',
+            }}>
+            <span style={{
+              fontSize: '0.95rem', fontWeight: 600, paddingRight: '2rem',
+              color: open === i ? 'var(--accent)' : 'var(--c-text)',
+              transition: 'color 0.2s',
+            }}>
+              {item.q}
+            </span>
+            <span style={{
+              width: '22px', height: '22px', borderRadius: '50%',
+              border: `1px solid ${open === i ? 'var(--accent)' : 'var(--c-border)'}`,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              fontSize: '1rem', flexShrink: 0,
+              color: open === i ? 'var(--accent)' : 'var(--c-text-faint)',
+              transform: open === i ? 'rotate(45deg)' : 'none',
+              transition: 'transform 0.25s ease, border-color 0.2s, color 0.2s',
+            }}>+</span>
           </button>
-          {open === i && (
+          <div style={{
+            overflow: 'hidden',
+            maxHeight: open === i ? '300px' : '0',
+            transition: 'max-height 0.35s ease',
+          }}>
             <div style={{ paddingBottom: '1.5rem' }}>
               <p style={{ fontSize: '0.9rem', color: 'var(--c-text-muted)', lineHeight: 1.8 }}>{item.a}</p>
             </div>
-          )}
+          </div>
         </div>
       ))}
       <div style={{ borderTop: `1px solid var(--c-border-subtle)` }} />

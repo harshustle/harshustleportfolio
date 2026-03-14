@@ -99,10 +99,14 @@ function Services() {
                                 <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.25rem)', fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--c-text)', marginBottom: '1rem' }}>{s.title}</h2>
                                 <p style={{ fontSize: '0.9rem', color: 'var(--c-text-muted)', lineHeight: 1.8, marginBottom: '1.5rem' }}>{s.desc}</p>
                                 <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                                    <button onClick={() => setBuyService(s)} style={{ padding: '0.65rem 1.25rem', background: s.featured ? 'var(--accent)' : 'var(--c-btn-bg)', color: s.featured ? '#fff' : 'var(--c-btn-text)', fontWeight: 700, fontSize: '0.8rem', borderRadius: '8px', border: 'none', cursor: 'pointer', fontFamily: 'inherit' }}>
+                                    <button onClick={() => setBuyService(s)} style={{ padding: '0.65rem 1.25rem', background: 'var(--accent)', color: '#fff', fontWeight: 700, fontSize: '0.8rem', borderRadius: '8px', border: 'none', cursor: 'pointer', fontFamily: 'inherit', boxShadow: '0 0 16px rgba(168,85,247,0.3)', transition: 'box-shadow 0.2s' }}
+                                        onMouseEnter={e => e.currentTarget.style.boxShadow = '0 0 28px rgba(168,85,247,0.55)'}
+                                        onMouseLeave={e => e.currentTarget.style.boxShadow = '0 0 16px rgba(168,85,247,0.3)'}>
                                         get started — {s.price}
                                     </button>
-                                    <Link to={`/process/${s.slug}`} style={{ display: 'inline-block', padding: '0.65rem 1.25rem', border: `1px solid var(--c-border)`, color: 'var(--c-text)', fontWeight: 600, fontSize: '0.8rem', borderRadius: '8px', textDecoration: 'none' }}>
+                                    <Link to={`/process/${s.slug}`} style={{ display: 'inline-block', padding: '0.65rem 1.25rem', border: `1px solid var(--c-border)`, color: 'var(--c-text)', fontWeight: 600, fontSize: '0.8rem', borderRadius: '8px', textDecoration: 'none', transition: 'border-color 0.2s' }}
+                                        onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--accent)'}
+                                        onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--c-border)'}>
                                         see process →
                                     </Link>
                                 </div>
@@ -143,9 +147,12 @@ function Services() {
                         not sure which service?<br />
                         <span style={{ color: 'var(--c-text-dim)' }}>let's figure it out.</span>
                     </h2>
-                    <Link to="/book-a-call" style={{ display: 'inline-block', padding: '0.85rem 2rem', background: 'var(--c-btn-bg)', color: 'var(--c-btn-text)', fontWeight: 700, borderRadius: '8px', fontSize: '0.875rem' }}>
+                    <Link to="/book-a-call" style={{ display: 'inline-block', padding: '0.9rem 2rem', background: 'var(--accent)', color: '#fff', fontWeight: 700, borderRadius: '8px', fontSize: '0.875rem', boxShadow: '0 0 20px rgba(168,85,247,0.3)' }}>
                         book a free call →
                     </Link>
+                    <p style={{ fontSize: '0.75rem', color: 'var(--c-text-faint)', marginTop: '1.25rem' }}>
+                        🔒 no commitment · free 30-min call · 100% satisfaction guaranteed
+                    </p>
                 </div>
             </section>
 

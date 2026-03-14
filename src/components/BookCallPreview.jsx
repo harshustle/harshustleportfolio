@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 const BookCallPreview = () => (
     <section style={{ padding: '6rem 1.5rem', background: 'var(--c-bg)' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}
-            className="grid-2" >
+            className="grid-2">
             <div style={{ gap: '5rem', alignItems: 'center' }}>
 
                 {/* Left */}
@@ -24,37 +24,63 @@ const BookCallPreview = () => (
                             </div>
                         ))}
                     </div>
-                    <Link to="/book-a-call" style={{ display: 'inline-block', padding: '0.85rem 1.75rem', background: 'var(--c-btn-bg)', color: 'var(--c-btn-text)', fontWeight: 700, borderRadius: '8px', fontSize: '0.875rem' }}>
+                    <Link to="/book-a-call" style={{
+                        display: 'inline-block', padding: '0.9rem 1.85rem',
+                        background: 'var(--accent)', color: '#fff',
+                        fontWeight: 700, borderRadius: '8px', fontSize: '0.875rem',
+                        boxShadow: '0 0 20px rgba(168,85,247,0.35)',
+                        transition: 'box-shadow 0.2s',
+                    }}
+                        onMouseEnter={e => e.currentTarget.style.boxShadow = '0 0 32px rgba(168,85,247,0.55)'}
+                        onMouseLeave={e => e.currentTarget.style.boxShadow = '0 0 20px rgba(168,85,247,0.35)'}>
                         book a free call →
                     </Link>
+                    {/* Risk reversal */}
+                    <p style={{ fontSize: '0.72rem', color: 'var(--c-text-faint)', marginTop: '1rem' }}>
+                        🔒 no payment required · cancel anytime
+                    </p>
                 </div>
             </div>
 
             {/* Right — Profile Card */}
             <div>
-                <div style={{ border: `1px solid var(--c-border)`, borderRadius: '16px', padding: '2rem', background: 'var(--c-bg-subtle)' }}>
+                <div style={{ border: `1px solid var(--c-border)`, borderRadius: '16px', padding: '2rem', background: 'var(--c-bg-subtle)', position: 'relative', overflow: 'hidden' }}>
+                    {/* Subtle glow */}
+                    <div style={{ position: 'absolute', top: '-30px', right: '-30px', width: '120px', height: '120px', background: 'radial-gradient(circle, rgba(168,85,247,0.12) 0%, transparent 70%)', pointerEvents: 'none' }} />
+
                     <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem', paddingBottom: '1.5rem', borderBottom: `1px solid var(--c-border-subtle)` }}>
                         <div style={{ position: 'relative' }}>
                             <img src="https://github.com/harshustle.png" alt="Harsh" style={{ width: '52px', height: '52px', borderRadius: '50%', objectFit: 'cover' }} />
-                            <div style={{ position: 'absolute', bottom: '2px', right: '2px', width: '10px', height: '10px', borderRadius: '50%', background: '#22c55e', border: '2px solid var(--c-bg)' }} />
+                            <div style={{ position: 'absolute', bottom: '2px', right: '2px', width: '10px', height: '10px', borderRadius: '50%', background: '#22c55e', border: '2px solid var(--c-bg)', animation: 'pulse-dot 2s infinite' }} />
                         </div>
                         <div>
                             <p style={{ fontWeight: 700, color: 'var(--c-text)' }}>harsh srivastav</p>
                             <p style={{ fontSize: '0.78rem', color: 'var(--c-text-dim)' }}>@harshustle · available now</p>
                         </div>
+                        {/* Urgency badge */}
+                        <div style={{ marginLeft: 'auto', padding: '0.2rem 0.6rem', background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.25)', borderRadius: '6px', fontSize: '0.65rem', fontWeight: 700, color: '#22c55e', letterSpacing: '0.08em', whiteSpace: 'nowrap' }}>
+                            2 slots left
+                        </div>
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                         {[{ dur: '15', label: '15 min meeting', desc: 'quick intro & fit check' }, { dur: '30', label: '30 min meeting', desc: 'full project deep-dive' }].map(opt => (
                             <Link key={opt.dur} to="/book-a-call"
-                                style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1rem 1.25rem', border: `1px solid var(--c-border)`, borderRadius: '10px', textDecoration: 'none', transition: 'all 0.2s', background: 'transparent' }}>
+                                style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1rem 1.25rem', border: `1px solid var(--c-border)`, borderRadius: '10px', textDecoration: 'none', transition: 'all 0.2s', background: 'transparent' }}
+                                onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.background = 'var(--accent-dim)'; }}
+                                onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--c-border)'; e.currentTarget.style.background = 'transparent'; }}>
                                 <div>
                                     <p style={{ fontWeight: 600, color: 'var(--c-text)', fontSize: '0.875rem' }}>{opt.label}</p>
                                     <p style={{ fontSize: '0.73rem', color: 'var(--c-text-dim)', marginTop: '0.15rem' }}>{opt.desc}</p>
                                 </div>
-                                <span style={{ fontSize: '0.75rem', color: 'var(--c-text-faint)' }}>→</span>
+                                <span style={{ fontSize: '0.75rem', color: 'var(--accent)' }}>→</span>
                             </Link>
                         ))}
                     </div>
+
+                    {/* Trust footnote */}
+                    <p style={{ fontSize: '0.7rem', color: 'var(--c-text-ghost)', textAlign: 'center', marginTop: '1.5rem', paddingTop: '1.25rem', borderTop: `1px solid var(--c-border-subtle)` }}>
+                        25+ founders & agencies served · 100% satisfaction rate
+                    </p>
                 </div>
             </div>
         </div>
