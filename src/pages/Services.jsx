@@ -21,9 +21,17 @@ const services = [
     {
         slug: 'video-editing',
         tag: 'AI VIDEO CREATION & EDITING', title: 'videos that retain.', icon: '🎬',
-        price: '₹30,000', priceAmount: 30000, priceNote: '/ 8 videos',
-        desc: 'ai-generated + human-edited short-form content. reels, ugc ads, faceless ai videos, youtube shorts — hook-first editing engineered for maximum retention.',
-        features: ['8 videos per month', 'ai video generation (faceless)', 'reels / tiktok / youtube shorts', 'hook-optimized editing + captions', 'motion graphics & thumbnails', 'delivered in 2 rounds'],
+        price: 'from ₹8,000', priceAmount: 8000, priceNote: '/ 2 real shoot videos',
+        priceSecondary: '₹30,000', priceSecondaryNote: '/ 8 ai videos',
+        desc: 'two formats. same hook-first strategy. choose your tier: real on-site shoot at ₹8,000 for 2 videos, or ai-generated faceless content at ₹30,000 for 8 videos — reels, ugc ads, youtube shorts, engineered for maximum retention.',
+        features: [
+            '₹8,000 — 2 real on-site shoot videos',
+            '₹30,000 — 8 ai-generated faceless videos',
+            'reels / tiktok / youtube shorts',
+            'hook-optimized editing + captions',
+            'motion graphics & thumbnails',
+            'delivered in 2 rounds',
+        ],
     },
     {
         slug: 'automation',
@@ -71,7 +79,7 @@ function Services() {
                         <span style={{ color: 'var(--c-text-dim)' }}>nothing you don't.</span>
                     </h1>
                     <p style={{ fontSize: '1rem', color: 'var(--c-text-muted)', maxWidth: '500px', lineHeight: 1.7 }}>
-                        five services. one team. built for founders, agencies, and businesses that want results — not just deliverables.
+                        five services. one team. built for founders, creators, and businesses that want results — not just deliverables.
                     </p>
                 </div>
             </section>
@@ -110,9 +118,17 @@ function Services() {
                                         </li>
                                     ))}
                                 </ul>
-                                <div style={{ marginTop: '2rem', paddingTop: '1.5rem', borderTop: `1px solid var(--c-border-subtle)`, display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}>
-                                    <span style={{ fontSize: '1.75rem', fontWeight: 900, color: 'var(--c-text)' }}>{s.price}</span>
-                                    <span style={{ fontSize: '0.8rem', color: 'var(--c-text-faint)' }}>{s.priceNote}</span>
+                                <div style={{ marginTop: '2rem', paddingTop: '1.5rem', borderTop: `1px solid var(--c-border-subtle)` }}>
+                                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}>
+                                        <span style={{ fontSize: '1.75rem', fontWeight: 900, color: 'var(--c-text)' }}>{s.price}</span>
+                                        <span style={{ fontSize: '0.8rem', color: 'var(--c-text-faint)' }}>{s.priceNote}</span>
+                                    </div>
+                                    {s.priceSecondary && (
+                                        <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem', marginTop: '0.4rem' }}>
+                                            <span style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--c-text-dim)' }}>{s.priceSecondary}</span>
+                                            <span style={{ fontSize: '0.8rem', color: 'var(--c-text-faint)' }}>{s.priceSecondaryNote}</span>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>
