@@ -37,11 +37,20 @@ function BookCall() {
                         </div>
                     </div>
 
-                    {/* Cal.com Embed */}
+                    {/* Google Calendar Appointment Scheduling */}
                     <div style={{ position: 'relative' }}>
                         <div style={{ position: 'absolute', inset: '-2px', background: 'linear-gradient(135deg, rgba(168,85,247,0.2), transparent, rgba(168,85,247,0.1))', borderRadius: '18px', filter: 'blur(8px)', opacity: 0.5 }} />
-                        <div style={{ position: 'relative', border: `1px solid var(--c-border)`, borderRadius: '16px', overflow: 'hidden', background: 'var(--c-bg)', height: '580px' }}>
-                            <iframe src="https://cal.com/harshustle" style={{ width: '100%', height: '100%', border: 'none' }} title="Book a Call" />
+                        <div style={{ position: 'relative', border: `1px solid var(--c-border)`, borderRadius: '16px', overflow: 'hidden', background: 'var(--c-bg)' }}>
+                            {/* Google Calendar Appointment Scheduling begin */}
+                            <iframe
+                                src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2YsbU2hG-oULooIrAMTyLuwp75lo1WGnRRLyKUth_zFvmVnPW6D-QqNAMmUjW-6xlBU56Fig7v?gv=true"
+                                style={{ border: 0 }}
+                                width="100%"
+                                height="600"
+                                frameBorder="0"
+                                title="Book a Call with Harsh"
+                            />
+                            {/* end Google Calendar Appointment Scheduling */}
                         </div>
                     </div>
                 </div>
