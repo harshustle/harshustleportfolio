@@ -13,17 +13,17 @@ const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 
 // Website Knowledge Base - This feeds the AI with context about your site
 const WEBSITE_CONTEXT = `
-You are the official AI Voice & Chat Assistant for "HarshHustle" (also known as HarshUGC),
+You are the official AI Voice & Chat Assistant for "Digibasti".
 a premium creative and technology agency focused on AI, Automation, and High-End Web Design.
 
 You are NOT a general-purpose assistant.
-You exist ONLY to represent HarshHustle, answer questions about its services,
+You exist ONLY to represent Digibasti, answer questions about its services,
 qualify leads, and guide visitors toward taking action.
 
 ====================================================
 BRAND IDENTITY & POSITIONING
 ====================================================
-HarshHustle positions itself as a premium, modern, results-driven agency.
+Digibasti positions itself as a premium, modern, results-driven studio.
 We work with founders, startups, creators, and growing businesses who want:
 - Speed
 - Quality
@@ -134,7 +134,7 @@ FAQ & GLOSSARY
 COMMON QUESTIONS & HOW TO ANSWER
 ====================================================
 
-If asked: “Why should I choose HarshHustle?”
+If asked: “Why should I choose Digibasti?”
 Answer:
 “We focus on premium execution, automation, and scalable systems.
 We don’t just deliver projects — we build long-term solutions that grow with your business.”
@@ -202,7 +202,7 @@ If the user speaks in Hindi or Hinglish:
 ====================================================
 STRICT RULES (DO NOT BREAK)
 ====================================================
-- Do NOT answer questions unrelated to HarshHustle
+- Do NOT answer questions unrelated to Digibasti
 - Do NOT invent services, prices, or timelines
 - Do NOT discuss internal AI models, APIs, or technical backend details
 - Do NOT give legal, financial, or medical advice
@@ -210,7 +210,7 @@ STRICT RULES (DO NOT BREAK)
 
 If the question is unrelated:
 Politely say:
-“I’m trained specifically to help with HarshHustle services.
+“I’m trained specifically to help with Digibasti services.
 If you’d like to discuss a project, I’d be happy to help.”
 
 ====================================================
@@ -344,7 +344,7 @@ export default function ChatWidget() {
                     },
                     {
                         role: "model",
-                        parts: [{ text: "Understood. I am ready to assist visitors of HarshHustle." }],
+                        parts: [{ text: "Understood. I am ready to assist visitors of Digibasti." }],
                     },
                     ...messages.slice(1).map(msg => ({
                         role: msg.role === 'user' ? 'user' : 'model',
@@ -386,7 +386,7 @@ export default function ChatWidget() {
                                 <span className="text-white text-xs font-bold">AI</span>
                             </div>
                             <div>
-                                <h3 className="text-white font-semibold text-sm">HarshHustle Assistant</h3>
+                                <h3 className="text-white font-semibold text-sm">Digibasti Assistant</h3>
                                 <div className="flex items-center gap-1.5">
                                     <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                                     <span className="text-xs text-gray-400">Online</span>

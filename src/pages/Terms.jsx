@@ -26,13 +26,13 @@ function LegalPage({ eyebrow, title, sub, lastUpdated, sections }) {
 
 export function Terms() {
     return <LegalPage eyebrow="legal" title="terms &" sub="conditions." lastUpdated="december 2025" sections={[
-        mkSection('1. agreement to terms', 'by accessing harshustle\'s website and services, you agree to be bound by these terms and conditions. if you disagree with any part, you may not access the service.'),
-        mkSection('2. intellectual property', 'all intellectual property rights for materials on this website belong to harshustle. you may not reproduce, sell, or distribute any materials without explicit written consent.'),
-        mkSection('3. services and deliverables', 'project scope, deliverables, timelines, and payment terms are defined per-project. harshustle reserves the right to refuse service to anyone.'),
+        mkSection('1. agreement to terms', 'by accessing digibasti\'s website and services, you agree to be bound by these terms and conditions. if you disagree with any part, you may not access the service.'),
+        mkSection('2. intellectual property', 'all intellectual property rights for materials on this website belong to digibasti. you may not reproduce, sell, or distribute any materials without explicit written consent.'),
+        mkSection('3. services and deliverables', 'project scope, deliverables, timelines, and payment terms are defined per-project. digibasti reserves the right to refuse service to anyone.'),
         mkSection('4. payment terms', 'projects are billed 50% upfront and 50% on completion unless otherwise agreed. all payments are non-refundable once work has commenced.'),
         mkSection('5. restrictions', 'you may not use the website in any way that damages it, publish any material without permission, or transmit any automated, harmful, or unlawful content.'),
-        mkSection('6. limitation of liability', 'harshustle shall not be held liable for any damages arising from your use of this website or services, beyond the total amount paid for the specific project.'),
-        mkSection('7. revisions', 'harshustle may revise these terms at any time. continued use of the website following any changes constitutes your acceptance of the new terms.'),
+        mkSection('6. limitation of liability', 'digibasti shall not be held liable for any damages arising from your use of this website or services, beyond the total amount paid for the specific project.'),
+        mkSection('7. revisions', 'digibasti may revise these terms at any time. continued use of the website following any changes constitutes your acceptance of the new terms.'),
         mkSection('8. governing law', 'these terms are governed by the laws of india. any disputes shall be subject to the exclusive jurisdiction of courts in delhi, india.'),
     ]} />;
 }

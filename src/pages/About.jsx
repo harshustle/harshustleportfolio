@@ -11,7 +11,7 @@ const timeline = [
     { year: '2021', event: 'started freelancing as a web developer. first client. first win.' },
     { year: '2022', event: 'expanded into automation and ai systems. started building real workflows for real businesses.' },
     { year: '2023', event: 'pivoted to content — ai ugc, short-form video, and seo content systems at scale.' },
-    { year: '2024', event: 'launched harshustle as a full-service digital studio. now serving 25+ clients globally.' },
+    { year: '2024', event: 'launched digibasti as a full-service digital studio. now serving 25+ clients globally.' },
     { year: '2025', event: 'building the next generation of ai-powered business systems. just getting started.' },
 ];
 
@@ -30,7 +30,7 @@ function About() {
                             <span style={{ color: 'var(--c-text-dim)' }}>i build things.</span>
                         </h1>
                         <p style={{ fontSize: '1rem', color: 'var(--c-text-muted)', lineHeight: 1.8, maxWidth: '480px', marginBottom: '2rem' }}>
-                            ai automation expert. full-stack developer. content strategist. founder of harshustle — a one-person studio that helps businesses scale with smart systems.
+                            ai automation expert. full-stack developer. content strategist. founder of digibasti — a one-person studio that helps businesses scale with smart systems.
                         </p>
                         <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
                             <Link to="/book-a-call" style={{ padding: '0.75rem 1.5rem', background: 'var(--c-btn-bg)', color: 'var(--c-btn-text)', fontWeight: 700, borderRadius: '8px', fontSize: '0.875rem', display: 'inline-block' }}>book a call</Link>
@@ -42,7 +42,7 @@ function About() {
                             <img src="https://github.com/harshustle.png" alt="Harsh Srivastav" style={{ width: '100%', aspectRatio: '1', objectFit: 'cover' }} />
                             <div style={{ padding: '1.5rem' }}>
                                 <p style={{ fontWeight: 700, color: 'var(--c-text)', marginBottom: '0.25rem' }}>harsh srivastav</p>
-                                <p style={{ fontSize: '0.8rem', color: 'var(--c-text-dim)' }}>@harshustle · founder, harshustle</p>
+                                <p style={{ fontSize: '0.8rem', color: 'var(--c-text-dim)' }}>@harshustle · founder, digibasti</p>
                                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: '1rem' }}>
                                     {['ai', 'automation', 'web dev', 'content', 'saas'].map(tag => (
                                         <span key={tag} style={{ padding: '0.2rem 0.6rem', border: `1px solid var(--c-border)`, borderRadius: '999px', fontSize: '0.7rem', color: 'var(--c-text-dim)' }}>{tag}</span>

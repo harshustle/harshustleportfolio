@@ -1,5 +1,5 @@
 
-export const openRazorpayCheckout = async (amount, currency = "INR", name = "Harshustle", description = "Service Payment", prefill = {}) => {
+export const openRazorpayCheckout = async (amount, currency = "INR", name = "Digibasti", description = "Service Payment", prefill = {}) => {
     const RAZORPAY_KEY_ID = import.meta.env.VITE_RAZORPAY_KEY_ID;
 
     if (!RAZORPAY_KEY_ID) {
@@ -30,7 +30,7 @@ export const openRazorpayCheckout = async (amount, currency = "INR", name = "Har
         key: RAZORPAY_KEY_ID,
         amount: amount * 100, // Amount in paise
         currency: currency,
-        name: "Harshustle",
+        name: "Digibasti",
         description: description,
         image: "/my-react-app/src/assets/logos/Harsh.png",
         handler: function (response) {

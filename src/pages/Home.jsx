@@ -107,12 +107,12 @@ function Home() {
                     </div>
 
                     <h1 style={{ fontSize: 'clamp(2.5rem, 8vw, 6rem)', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-0.03em', marginBottom: '1.5rem', color: 'var(--c-text)' }}>
-                        web. content.<br />
-                        <span style={{ color: 'var(--c-text-dim)' }}>automation.</span>
+                        digitizing<br />
+                        <span style={{ color: 'var(--c-text-dim)' }}>basti.</span>
                     </h1>
 
-                    <p style={{ fontSize: 'clamp(1rem, 2vw, 1.2rem)', color: 'var(--c-text-muted)', maxWidth: '520px', margin: '0 auto 2.5rem', lineHeight: 1.7 }}>
-                        one studio. every digital system you need. ai-powered, speed-obsessed, built to scale.
+                    <p style={{ fontSize: 'clamp(1rem, 2vw, 1.2rem)', color: 'var(--c-text-muted)', maxWidth: '550px', margin: '0 auto 2.5rem', lineHeight: 1.7 }}>
+                        on a genuine mission to bring basti into the digital age. transforming local businesses with world-class web, content, and automation systems.
                     </p>
 
                     <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>

@@ -24,7 +24,7 @@ function BookCall() {
                                 <img src="https://github.com/harshustle.png" alt="Harsh" style={{ width: '44px', height: '44px', borderRadius: '50%', objectFit: 'cover' }} />
                                 <div>
                                     <p style={{ fontWeight: 700, color: 'var(--c-text)', fontSize: '0.9rem' }}>harsh srivastav</p>
-                                    <p style={{ fontSize: '0.75rem', color: 'var(--c-text-dim)' }}>founder, harshustle</p>
+                                    <p style={{ fontSize: '0.75rem', color: 'var(--c-text-dim)' }}>founder, digibasti</p>
                                 </div>
                                 <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                                     <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#22c55e', display: 'inline-block' }} />

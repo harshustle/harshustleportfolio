@@ -52,7 +52,7 @@ const Navbar = () => {
 
           {/* Logo */}
           <Link to="/" style={{ fontWeight: 800, fontSize: '1.1rem', letterSpacing: '-0.02em', color: 'var(--c-text)', textDecoration: 'none', flexShrink: 0 }}>
-            harsh<span style={{ color: 'var(--accent)' }}>ustle</span>
+            digi<span style={{ color: 'var(--accent)' }}>basti</span>
           </Link>
 
           {/* Desktop Nav Links */}

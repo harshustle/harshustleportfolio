@@ -26,7 +26,7 @@ const Hero = () => {
           </h1>
 
           <p className="text-sm md:text-base text-gray-300 max-w-2xl mx-auto mb-4 animate-fadeIn" style={{ animationDelay: '0.4s' }}>
-            AI • AUTOMATION • HARSHUSTLE
+            AI • AUTOMATION • DIGIBASTI
             <br />
             Transforming visions into reality with cutting-edge technology
           </p>
@@ -37,7 +37,7 @@ const Hero = () => {
         {/* CURVEDLOOP LOCKED AT BOTTOM */}
         <div className="absolute bottom-0 left-0 w-full z-[5] pointer-events-none translate-y-32 md:translate-y-0">
           <CurvedLoop
-            marqueeText="AI • AUTOMATION • HARSHUSTLE •"
+            marqueeText="AI • AUTOMATION • DIGIBASTI •"
             speed={2}
             curveAmount={490}
             interactive={true}

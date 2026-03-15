@@ -8,7 +8,7 @@ const Footer = () => (
             <div className="grid-footer" style={{ marginBottom: '3rem', gap: '2rem' }}>
                 <div>
                     <p style={{ fontWeight: 800, fontSize: '1.1rem', letterSpacing: '-0.02em', color: 'var(--c-text)', marginBottom: '0.75rem' }}>
-                        harsh<span style={{ color: '#A855F7' }}>ustle</span>
+                        digi<span style={{ color: '#A855F7' }}>basti</span>
                     </p>
                     <p style={{ fontSize: '0.8rem', color: 'var(--c-text-muted)', lineHeight: 1.7, maxWidth: '220px' }}>
                         ai automation, web design, and content systems for ambitious founders.
@@ -36,7 +36,7 @@ const Footer = () => (
 
             {/* Bottom bar */}
             <div style={{ borderTop: `1px solid var(--c-divider)`, paddingTop: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem' }}>
-                <p style={{ fontSize: '0.75rem', color: 'var(--c-text-ghost)' }}>© 2025 harshustle. all rights reserved.</p>
+                <p style={{ fontSize: '0.75rem', color: 'var(--c-text-ghost)' }}>© 2026 digibasti. all rights reserved.</p>
                 <p style={{ fontSize: '0.75rem', color: 'var(--c-text-ghost)' }}>built with obsession.</p>
             </div>
         </div>
