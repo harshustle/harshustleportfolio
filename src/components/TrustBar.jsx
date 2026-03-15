@@ -1,5 +1,10 @@
+import { useLanguage } from '../context/LanguageContext';
+
 /* A slim social-proof trust bar that sits below the hero CTA */
-const TrustBar = () => (
+const TrustBar = () => {
+    const { t } = useLanguage();
+
+    return (
     <div style={{
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         gap: '1.25rem', flexWrap: 'wrap', marginTop: '2rem',
@@ -26,7 +31,7 @@ const TrustBar = () => (
             ))}
         </div>
         <p style={{ fontSize: '0.75rem', color: 'var(--c-text-muted)' }}>
-            <strong style={{ color: 'var(--c-text)' }}>25+ clients</strong> · 100% satisfaction
+            <strong style={{ color: 'var(--c-text)' }}>{t('trust.clients')}</strong> · {t('trust.satisfaction')}
         </p>
         <div style={{
             display: 'flex', alignItems: 'center', gap: '0.35rem',
@@ -34,9 +39,10 @@ const TrustBar = () => (
             paddingLeft: '1.25rem', borderLeft: '1px solid var(--c-border)',
         }}>
             <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#22c55e', display: 'inline-block', flexShrink: 0 }} />
-            available now · 2 spots left this month
+            {t('trust.available')}
         </div>
     </div>
-);
+    );
+};
 
 export default TrustBar;

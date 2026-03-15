@@ -1,6 +1,10 @@
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../context/LanguageContext';
 
-const Footer = () => (
+const Footer = () => {
+    const { t } = useLanguage();
+
+    return (
     <footer style={{ borderTop: `1px solid var(--c-divider)`, padding: '4rem 1.5rem 2rem', background: 'var(--c-bg)', transition: 'background 0.3s ease' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
 
@@ -11,7 +15,7 @@ const Footer = () => (
                         digi<span style={{ color: '#A855F7' }}>basti</span>
                     </p>
                     <p style={{ fontSize: '0.8rem', color: 'var(--c-text-muted)', lineHeight: 1.7, maxWidth: '220px' }}>
-                        ai automation, web design, and content systems for ambitious founders.
+                        {t('footer.description')}
                     </p>
                 </div>
 
@@ -22,11 +26,11 @@ const Footer = () => (
                     { heading: 'legal', links: [{ label: 'terms', href: '/terms' }, { label: 'privacy', href: '/privacy' }] },
                 ].map(col => (
                     <div key={col.heading}>
-                        <p style={{ fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--c-text-ghost)', marginBottom: '1rem' }}>{col.heading}</p>
+                        <p style={{ fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--c-text-ghost)', marginBottom: '1rem' }}>{t(`footer.headings.${col.heading}`)}</p>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
                             {col.links.map(l => (
                                 <Link key={l.label} to={l.href} style={{ fontSize: '0.82rem', color: 'var(--c-text-muted)', transition: 'color 0.15s' }}>
-                                    {l.label}
+                                    {t(`footer.labels.${l.label}`)}
                                 </Link>
                             ))}
                         </div>
@@ -36,11 +40,12 @@ const Footer = () => (
 
             {/* Bottom bar */}
             <div style={{ borderTop: `1px solid var(--c-divider)`, paddingTop: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem' }}>
-                <p style={{ fontSize: '0.75rem', color: 'var(--c-text-ghost)' }}>© 2026 digibasti. all rights reserved.</p>
-                <p style={{ fontSize: '0.75rem', color: 'var(--c-text-ghost)' }}>built with obsession.</p>
+                <p style={{ fontSize: '0.75rem', color: 'var(--c-text-ghost)' }}>{t('footer.rights')}</p>
+                <p style={{ fontSize: '0.75rem', color: 'var(--c-text-ghost)' }}>{t('footer.builtWith')}</p>
             </div>
         </div>
     </footer>
-);
+    );
+};
 
 export default Footer;

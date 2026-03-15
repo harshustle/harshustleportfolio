@@ -8,6 +8,7 @@ import UserDetailsModal from '../components/UserDetailsModal';
 import TrustBar from '../components/TrustBar';
 import StickyMobileCTA from '../components/StickyMobileCTA';
 import { openRazorpayCheckout } from '../utils/razorpay';
+import { useLanguage } from '../context/LanguageContext';
 
 const services = [
     {
@@ -78,6 +79,7 @@ function FadeSection({ children, delay = 0, style = {}, ...props }) {
 }
 
 function Home() {
+    const { t } = useLanguage();
     const [buyService, setBuyService] = useState(null);
     const [hoveredService, setHoveredService] = useState(null);
     const [hoveredWhy, setHoveredWhy] = useState(null);
@@ -103,16 +105,16 @@ function Home() {
                     {/* Live badge */}
                     <div className="hero-badge" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.3rem 0.9rem', border: `1px solid rgba(34,197,94,0.35)`, borderRadius: '999px', fontSize: '0.7rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--c-text-muted)', marginBottom: '2rem', background: 'rgba(34,197,94,0.05)' }}>
                         <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#22c55e', display: 'inline-block', animation: 'pulse-dot 2s infinite' }} />
-                        available for new projects
+                        {t('home.badge')}
                     </div>
 
                     <h1 style={{ fontSize: 'clamp(2.5rem, 8vw, 6rem)', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-0.03em', marginBottom: '1.5rem', color: 'var(--c-text)' }}>
-                        digitizing<br />
-                        <span style={{ color: 'var(--c-text-dim)' }}>basti.</span>
+                        {t('home.title1')}<br />
+                        <span style={{ color: 'var(--c-text-dim)' }}>{t('home.title2')}</span>
                     </h1>
 
                     <p style={{ fontSize: 'clamp(1rem, 2vw, 1.2rem)', color: 'var(--c-text-muted)', maxWidth: '550px', margin: '0 auto 2.5rem', lineHeight: 1.7 }}>
-                        on a genuine mission to bring basti into the digital age. transforming local businesses with world-class web, content, and automation systems.
+                        {t('home.subtitle')}
                     </p>
 
                     <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
@@ -122,13 +124,13 @@ function Home() {
                             animation: 'cta-pulse 3s ease-in-out infinite',
                             boxShadow: '0 0 0 0 rgba(168,85,247,0.4)',
                         }}>
-                            book a free call
+                            {t('home.bookFreeCall')}
                         </Link>
                         <Link to="/services" style={{
                             padding: '0.9rem 2rem', border: `1px solid var(--c-border)`,
                             color: 'var(--c-text)', fontWeight: 600, borderRadius: '8px', fontSize: '0.9rem', display: 'inline-block',
                         }}>
-                            view services →
+                            {t('home.viewServices')}
                         </Link>
                     </div>
 
@@ -150,10 +152,10 @@ function Home() {
             <section style={{ padding: '6rem 1.5rem', borderTop: `1px solid var(--c-divider)` }}>
                 <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
                     <FadeSection>
-                        <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--c-text-faint)', marginBottom: '0.75rem' }}>what we do</p>
+                        <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--c-text-faint)', marginBottom: '0.75rem' }}>{t('home.servicesIntro')}</p>
                         <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 3rem)', fontWeight: 800, letterSpacing: '-0.02em', marginBottom: '3rem', color: 'var(--c-text)' }}>
-                            three services.<br />
-                            <span style={{ color: 'var(--c-text-dim)' }}>one obsession.</span>
+                            {t('home.servicesTitle1')}<br />
+                            <span style={{ color: 'var(--c-text-dim)' }}>{t('home.servicesTitle2')}</span>
                         </h2>
                     </FadeSection>
 
@@ -214,7 +216,7 @@ function Home() {
                     {/* Secondary CTA nudge */}
                     <div style={{ textAlign: 'center', marginTop: '2.5rem' }}>
                         <p style={{ fontSize: '0.8rem', color: 'var(--c-text-muted)' }}>
-                            not sure which fits? <Link to="/book-a-call" style={{ color: 'var(--accent)', fontWeight: 600, borderBottom: '1px solid rgba(168,85,247,0.3)' }}>book a free call and we'll figure it out →</Link>
+                            {t('home.servicesNotSure')} <Link to="/book-a-call" style={{ color: 'var(--accent)', fontWeight: 600, borderBottom: '1px solid rgba(168,85,247,0.3)' }}>{t('home.servicesBookLink')}</Link>
                         </p>
                     </div>
                 </div>
@@ -224,10 +226,10 @@ function Home() {
             <section style={{ padding: '6rem 1.5rem', borderTop: `1px solid var(--c-divider)` }}>
                 <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
                     <FadeSection>
-                        <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--c-text-faint)', marginBottom: '0.75rem' }}>why choose us</p>
+                        <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--c-text-faint)', marginBottom: '0.75rem' }}>{t('home.whyUsIntro')}</p>
                         <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 3rem)', fontWeight: 800, letterSpacing: '-0.02em', marginBottom: '3rem', color: 'var(--c-text)' }}>
-                            why this is<br />
-                            <span style={{ color: 'var(--c-text-dim)' }}>different.</span>
+                            {t('home.whyUsTitle1')}<br />
+                            <span style={{ color: 'var(--c-text-dim)' }}>{t('home.whyUsTitle2')}</span>
                         </h2>
                     </FadeSection>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1px', background: 'var(--c-grid)' }}>
@@ -257,7 +259,7 @@ function Home() {
             <section style={{ padding: '4rem 1.5rem', borderTop: `1px solid var(--c-divider)` }}>
                 <div style={{ maxWidth: '1200px', margin: '0 auto', textAlign: 'center' }}>
                     <FadeSection>
-                        <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--c-text-ghost)', marginBottom: '2rem' }}>our tech stack</p>
+                        <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--c-text-ghost)', marginBottom: '2rem' }}>{t('home.stackIntro')}</p>
                         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.5rem' }}>
                             {stackBadges.map(b => (
                                 <span key={b} style={{
@@ -280,10 +282,10 @@ function Home() {
             <section style={{ padding: '6rem 1.5rem', borderTop: `1px solid var(--c-divider)` }}>
                 <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
                     <FadeSection>
-                        <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--c-text-faint)', marginBottom: '0.75rem' }}>testimonials</p>
+                        <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--c-text-faint)', marginBottom: '0.75rem' }}>{t('home.testimonialsIntro')}</p>
                         <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 3rem)', fontWeight: 800, letterSpacing: '-0.02em', marginBottom: '3rem', color: 'var(--c-text)' }}>
-                            words from<br />
-                            <span style={{ color: 'var(--c-text-dim)' }}>our clients.</span>
+                            {t('home.testimonialsTitle1')}<br />
+                            <span style={{ color: 'var(--c-text-dim)' }}>{t('home.testimonialsTitle2')}</span>
                         </h2>
                     </FadeSection>
                     <FadeSection delay={100}>
@@ -291,7 +293,7 @@ function Home() {
                     </FadeSection>
                     <div style={{ marginTop: '2rem', textAlign: 'center' }}>
                         <Link to="/reviews" style={{ fontSize: '0.875rem', color: 'var(--c-text-dim)', borderBottom: `1px solid var(--c-border)`, paddingBottom: '2px' }}>
-                            see all reviews →
+                            {t('home.seeAllReviews')}
                         </Link>
                     </div>
                 </div>
@@ -306,10 +308,10 @@ function Home() {
             <section style={{ padding: '6rem 1.5rem', borderTop: `1px solid var(--c-divider)` }}>
                 <div style={{ maxWidth: '800px', margin: '0 auto' }}>
                     <FadeSection>
-                        <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--c-text-faint)', marginBottom: '0.75rem' }}>faq</p>
+                        <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--c-text-faint)', marginBottom: '0.75rem' }}>{t('home.faqIntro')}</p>
                         <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 3rem)', fontWeight: 800, letterSpacing: '-0.02em', marginBottom: '3rem', color: 'var(--c-text)' }}>
-                            questions<br />
-                            <span style={{ color: 'var(--c-text-dim)' }}>answered.</span>
+                            {t('home.faqTitle1')}<br />
+                            <span style={{ color: 'var(--c-text-dim)' }}>{t('home.faqTitle2')}</span>
                         </h2>
                     </FadeSection>
                     <FadeSection delay={80}>
@@ -322,31 +324,31 @@ function Home() {
             <section style={{ padding: '8rem 1.5rem', borderTop: `1px solid var(--c-divider)`, textAlign: 'center', position: 'relative', overflow: 'hidden', background: 'var(--accent-dim)' }}>
                 <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: '600px', height: '600px', background: 'radial-gradient(circle, rgba(168,85,247,0.12) 0%, transparent 70%)', pointerEvents: 'none' }} />
                 <FadeSection style={{ position: 'relative', zIndex: 1, maxWidth: '600px', margin: '0 auto' }}>
-                    <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(168,85,247,0.6)', marginBottom: '1rem' }}>ready to start?</p>
+                    <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(168,85,247,0.6)', marginBottom: '1rem' }}>{t('home.readyIntro')}</p>
                     <h2 style={{ fontSize: 'clamp(2rem, 5vw, 4rem)', fontWeight: 900, letterSpacing: '-0.03em', marginBottom: '1.5rem', color: 'var(--c-text)', lineHeight: 1.05 }}>
-                        let's build<br />
-                        <span style={{ color: 'var(--c-text-dim)' }}>something great.</span>
+                        {t('home.readyTitle1')}<br />
+                        <span style={{ color: 'var(--c-text-dim)' }}>{t('home.readyTitle2')}</span>
                     </h2>
                     <p style={{ color: 'var(--c-text-muted)', marginBottom: '2.5rem', fontSize: '1rem', lineHeight: 1.7 }}>
-                        one conversation is all it takes. book a free 30-min call — no obligation.
+                        {t('home.readySub')}
                     </p>
                     <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
                         <Link to="/book-a-call" id="final-cta-primary" style={{
                             padding: '1rem 2.25rem', background: 'var(--c-btn-bg)', color: 'var(--c-btn-text)',
                             fontWeight: 700, borderRadius: '8px', fontSize: '0.95rem', display: 'inline-block',
                         }}>
-                            book a free call →
+                            {t('home.bookFreeCall')} →
                         </Link>
                         <Link to="/services" style={{
                             padding: '1rem 2.25rem', border: `1px solid var(--c-border)`,
                             color: 'var(--c-text)', fontWeight: 600, borderRadius: '8px', fontSize: '0.95rem', display: 'inline-block',
                         }}>
-                            view all services
+                            {t('home.viewAllServices')}
                         </Link>
                     </div>
                     {/* Risk reversal */}
                     <p style={{ fontSize: '0.75rem', color: 'var(--c-text-faint)', marginTop: '1.5rem' }}>
-                        🔒 no commitment · free 30-min call · payment only after you're satisfied
+                        {t('home.riskReversal')}
                     </p>
                 </FadeSection>
             </section>

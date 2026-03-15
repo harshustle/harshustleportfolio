@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
+import { useLanguage } from '../context/LanguageContext';
 
 const MOBILE_BREAKPOINT = 768;
 
@@ -9,6 +10,7 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < MOBILE_BREAKPOINT);
   const { theme, toggleTheme } = useTheme();
+  const { language, toggleLanguage, t } = useLanguage();
   const location = useLocation();
 
   useEffect(() => {
@@ -30,10 +32,10 @@ const Navbar = () => {
   useEffect(() => { setMenuOpen(false); }, [location]);
 
   const links = [
-    { label: 'services', href: '/services' },
-    { label: 'about', href: '/about' },
-    { label: 'reviews', href: '/reviews' },
-    { label: 'blog', href: '/blog' },
+    { label: t('nav.services'), href: '/services' },
+    { label: t('nav.about'), href: '/about' },
+    { label: t('nav.reviews'), href: '/reviews' },
+    { label: t('nav.blog'), href: '/blog' },
   ];
 
   const isActive = (href) => location.pathname === href;
@@ -82,6 +84,15 @@ const Navbar = () => {
               >
                 {theme === 'dark' ? '☀️' : '🌙'}
               </button>
+              <button
+                onClick={toggleLanguage}
+                className="theme-toggle"
+                title="Toggle Language"
+                aria-label="Toggle language"
+                style={{ fontSize: '0.8rem', fontWeight: 'bold' }}
+              >
+                {language === 'en' ? 'EN' : 'HIN'}
+              </button>
               <Link to="/book-a-call" style={{
                 padding: '0.5rem 1rem', fontSize: '0.8rem', fontWeight: 600,
                 color: 'var(--c-text-muted)', border: `1px solid var(--c-border)`,
@@ -89,7 +100,7 @@ const Navbar = () => {
                 display: 'flex', alignItems: 'center', gap: '0.4rem',
               }}>
                 <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#22c55e', flexShrink: 0, animation: 'pulse-dot 2s infinite' }} />
-                book a call
+                {t('nav.bookCall')}
               </Link>
               <Link to="/contact" style={{
                 padding: '0.5rem 1rem', fontSize: '0.8rem', fontWeight: 700,
@@ -99,7 +110,7 @@ const Navbar = () => {
               }}
                 onMouseEnter={e => e.currentTarget.style.boxShadow = '0 0 24px rgba(168,85,247,0.55)'}
                 onMouseLeave={e => e.currentTarget.style.boxShadow = '0 0 16px rgba(168,85,247,0.35)'}>
-                get started
+                {t('nav.getStarted')}
               </Link>
             </div>
           )}
@@ -113,6 +124,14 @@ const Navbar = () => {
                 aria-label="Toggle theme"
               >
                 {theme === 'dark' ? '☀️' : '🌙'}
+              </button>
+              <button
+                onClick={toggleLanguage}
+                className="theme-toggle"
+                aria-label="Toggle language"
+                style={{ fontSize: '0.8rem', fontWeight: 'bold' }}
+              >
+                {language === 'en' ? 'EN' : 'HIN'}
               </button>
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
@@ -159,7 +178,7 @@ const Navbar = () => {
               display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem',
             }}>
               <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#22c55e', animation: 'pulse-dot 2s infinite' }} />
-              book a call · 2 spots left
+              {t('nav.bookCall')}
             </Link>
             <Link to="/contact" style={{
               padding: '0.75rem 1rem', textAlign: 'center', textDecoration: 'none',
@@ -167,7 +186,7 @@ const Navbar = () => {
               borderRadius: '8px', fontWeight: 700, fontSize: '0.9rem',
               boxShadow: '0 0 20px rgba(168,85,247,0.4)',
             }}>
-              get started →
+              {t('nav.getStarted')} →
             </Link>
           </div>
         </div>
