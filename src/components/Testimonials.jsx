@@ -1,10 +1,21 @@
-const testimonials = [
+import { useLanguage } from '../context/LanguageContext';
+
+const testimonialsEn = [
   { name: 'rohan das', role: 'ceo, techflow', project: 'crm automation', initials: 'RD', color: '#9333ea', quote: "harsh didn't just build a website — he totally automated our lead generation. we're saving 20 hours a week thanks to his ai workflows." },
   { name: 'sarah jenkins', role: 'founder, artistry', project: 'web design', initials: 'SJ', color: '#7c3aed', quote: "i was worried about working with a developer who didn't \"get\" design. harsh proved me wrong. the visuals are stunning and the animations silky smooth." },
   { name: 'mike chen', role: 'saas entrepreneur', project: 'saas mvp', initials: 'MC', color: '#6d28d9', quote: "speed is an understatement. he delivered the mvp in 4 days, and it was cleaner than codebases i've seen from expensive agencies." },
 ];
 
+const testimonialsHin = [
+  { name: 'rohan das', role: 'ceo, techflow', project: 'crm automation', initials: 'RD', color: '#9333ea', quote: "harsh ne sirf ek website nahi banai — usne humara pura lead generation automate kar diya. uske AI workflows ki wajah se humaare har hafte 20 ghante bach rahe hain." },
+  { name: 'sarah jenkins', role: 'founder, artistry', project: 'web design', initials: 'SJ', color: '#7c3aed', quote: "mujhe darr tha ki shayad koi developer design ki samajh nahi rakhega. par harsh ne mujhe galat sabit kiya. visuals ekdum stunning hain aur animations bohot smooth hain." },
+  { name: 'mike chen', role: 'saas entrepreneur', project: 'saas mvp', initials: 'MC', color: '#6d28d9', quote: "speed ki tareef kam padegi. usne sirf 4 din mein MVP deliver kar diya, aur code expensive agencies ke code se bhi bohot zyada clean tha." },
+];
+
 function Testimonials() {
+  const { language } = useLanguage();
+  const testimonials = language === 'hin' ? testimonialsHin : testimonialsEn;
+
   return (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1px', background: 'var(--c-grid)' }}>
       {testimonials.map((t, idx) => (
@@ -15,7 +26,9 @@ function Testimonials() {
           {/* Stars */}
           <div style={{ display: 'flex', gap: '2px' }}>
             {[...Array(5)].map((_, i) => <span key={i} style={{ color: '#facc15', fontSize: '0.8rem' }}>★</span>)}
-            <span style={{ marginLeft: '0.5rem', fontSize: '0.7rem', color: 'var(--c-text-faint)', alignSelf: 'center' }}>verified client</span>
+            <span style={{ marginLeft: '0.5rem', fontSize: '0.7rem', color: 'var(--c-text-faint)', alignSelf: 'center' }}>
+              {language === 'hin' ? 'verified client' : 'verified client'}
+            </span>
           </div>
 
           <p style={{ fontSize: '0.9rem', color: 'var(--c-text-body)', lineHeight: 1.8, fontStyle: 'italic', position: 'relative', zIndex: 1 }}>"{t.quote}"</p>

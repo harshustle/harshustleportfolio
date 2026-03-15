@@ -1,6 +1,7 @@
 import { useState } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 
-const QUESTIONS = [
+const questionsEn = [
   { q: 'what benefits do i get working with a solopreneur vs an agency?', a: 'direct communication, faster execution, and higher quality control. you work directly with the builder — no project managers slowing things down. your vision is translated into code exactly as intended.' },
   { q: 'what tech stack do you specialize in?', a: 'we build with the modern web stack: next.js, react, tailwind css, and node.js. for automation and ai, we use python, openai api, anthropic claude, n8n, and zapier.' },
   { q: 'what is your typical turnaround time?', a: 'speed is a core value. standard landing pages or automations: 3-5 days. complex saas mvps or full-scale applications: 2-4 weeks depending on scope.' },
@@ -8,7 +9,17 @@ const QUESTIONS = [
   { q: 'how does payment work?', a: '50% upfront to lock in your slot and start work. remaining 50% on successful completion and handover. all payments via razorpay.' },
 ];
 
+const questionsHin = [
+  { q: 'agency ke bajaye solopreneur ke sath kaam karne ke kya fayde hain?', a: 'direct baat-cheet, tez kaam, aur behtar quality control. aap sidha builder ke sath kaam karte hain — koi project managers beech mein kaam dheema nahi karte. aapka vision jaisa hai waisa hi code mein badalta hai.' },
+  { q: 'aap kis tech stack mein specialize karte hain?', a: 'hum modern web stack use karte hain: next.js, react, tailwind css, aur node.js. automation aur ai ke liye, hum python, openai api, anthropic claude, n8n, aur zapier ka istemal karte hain.' },
+  { q: 'project ko lagbhag kitna waqt lagta hai?', a: 'tez kaam hamari pachan hai. standard landing pages aur automations ke liye: 3-5 din. complex saas mvps ya full-scale applications ke liye: 2-4 hafte, project scope ke hisaab se.' },
+  { q: 'kya aap launch ke baad bhi support dete hain?', a: 'haan. launch ke baad 30 din ka free bug-fixing support milta hai. ongoing maintenance, feature updates, aur monitoring ke liye retention packages bhi available hain.' },
+  { q: 'payment terms kaise kaam karte hain?', a: 'kam shuru karne se pehle 50% upfront payment karni hoti hai. baki 50% project successful complete hone aur handover ke baad. sabhi payments razorpay ke through hote hain.' },
+];
+
 function FAQ() {
+  const { language } = useLanguage();
+  const QUESTIONS = language === 'hin' ? questionsHin : questionsEn;
   const [open, setOpen] = useState(0);
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>

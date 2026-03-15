@@ -10,7 +10,7 @@ import StickyMobileCTA from '../components/StickyMobileCTA';
 import { openRazorpayCheckout } from '../utils/razorpay';
 import { useLanguage } from '../context/LanguageContext';
 
-const services = [
+const servicesEn = [
     {
         tag: 'WEB DESIGN & DEV',
         title: 'sites that convert.',
@@ -41,11 +41,49 @@ const services = [
     },
 ];
 
-const whyUs = [
+const servicesHin = [
+    {
+        tag: 'WEB DESIGN & DEV',
+        title: 'sites jo convert karein.',
+        desc: 'static site ₹15k mein. ya phir full-stack with notion database + ai chatbot ₹30k mein. seo optimized, mobile-first, aur 14 din ke andar delivery.',
+        price: '₹15,000 se', priceNote: 'one-time', priceAmount: 15000,
+        slug: 'web-design',
+        features: ['static ₹15k / with add-ons ₹30k', 'notion database integration', 'ai chatbot option', '<14 din me delivery'],
+        urgency: '2 slots open',
+    },
+    {
+        tag: 'AI VIDEO & EDITING',
+        title: 'videos jo hook karein.',
+        desc: 'ai-generated faceless videos + human-edited short-form. reels, ugc ads, youtube shorts — 8 videos har mahine sirft ₹30,000 mein.',
+        price: '₹30,000', priceNote: '/ 8 videos', priceAmount: 30000,
+        slug: 'video-editing',
+        features: ['8 videos / mahine', 'ai generation + human edit', 'reels / shorts / ugc ads', 'hook-first structure'],
+        featured: true,
+        urgency: 'most popular',
+    },
+    {
+        tag: 'AUTOMATION',
+        title: 'systems, chaos nahi.',
+        desc: 'crm integrations · lead follow-ups · email & whatsapp automation · ai internal tools. ek baar set karein, aur yeh hamesha chalega.',
+        price: '₹45,000', priceNote: 'one-time', priceAmount: 45000,
+        slug: 'automation',
+        features: ['n8n / zapier', 'api integrations', 'workflow audit', '30-din ka support'],
+        urgency: '1 slot bacha hai',
+    },
+];
+
+const whyUsEn = [
     { n: '01', title: 'speed is non-negotiable.', desc: 'most web projects ship in under 14 days. automations in 3-7. we run in sprints, not months.' },
     { n: '02', title: 'direct access. no layers.', desc: 'you work directly with the builder — no project managers, no miscommunication, no delays.' },
     { n: '03', title: 'built for scale.', desc: 'every system we build is designed to handle 10x growth. we\'re building assets, not deliverables.' },
     { n: '04', title: 'ai-first approach.', desc: 'we integrate ai into everything — from content generation to automation workflows to design systems.' },
+];
+
+const whyUsHin = [
+    { n: '01', title: 'speed se samjhauta nahi.', desc: 'zyaadatar web projects 14 din mein ship ho jaate hain. automations 3-7 din mein. hum sprints mein kaam karte hain, mahino mein nahi.' },
+    { n: '02', title: 'direct baat. koi bicholiya nahi.', desc: 'aap seedhe builder ke saath kaam karte hain — koi project managers nahi, koi miscommunication nahi, koi delay nahi.' },
+    { n: '03', title: 'scale karne ke liye banaya gaya hai.', desc: 'hum jo bhi system banate hain wo 10x growth handle kar sakta hai. hum assets banate hain, sirf temporary deliverables nahi.' },
+    { n: '04', title: 'ai sabse pehle.', desc: 'hum har cheez mein ai ka istemaal karte hain — chahe content likhna ho, workflows automate karna ho ya design systems banana ho.' },
 ];
 
 const stackBadges = ['react', 'next.js', 'node.js', 'tailwind', 'openai', 'anthropic', 'n8n', 'zapier', 'figma', 'typescript', 'aws', 'docker'];
@@ -79,7 +117,9 @@ function FadeSection({ children, delay = 0, style = {}, ...props }) {
 }
 
 function Home() {
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
+    const services = language === 'hin' ? servicesHin : servicesEn;
+    const whyUs = language === 'hin' ? whyUsHin : whyUsEn;
     const [buyService, setBuyService] = useState(null);
     const [hoveredService, setHoveredService] = useState(null);
     const [hoveredWhy, setHoveredWhy] = useState(null);
@@ -205,7 +245,7 @@ function Home() {
                                                 transition: 'all 0.2s ease',
                                                 transform: hoveredService === s.tag ? 'scale(1.05)' : 'scale(1)',
                                             }}>
-                                            get started
+                                            {language === 'hin' ? 'shuru karein' : 'get started'}
                                         </button>
                                     </div>
                                 </div>

@@ -1,4 +1,6 @@
-const reviews = [
+import { useLanguage } from '../context/LanguageContext';
+
+const reviewsEn = [
     { name: 'rohan das', role: 'ceo, techflow', rating: 5, project: 'automation + crm', quote: 'harsh didn\'t just build a website — he totally automated our lead generation. we\'re saving 20 hours a week thanks to his ai workflows. genuinely transformative.' },
     { name: 'sarah jenkins', role: 'founder, artistry', rating: 5, project: 'web design', quote: 'i was worried about working with a developer who didn\'t "get" design. harsh proved me completely wrong. the visuals are stunning and the animations are silky smooth.' },
     { name: 'mike chen', role: 'saas entrepreneur', rating: 5, project: 'saas mvp', quote: 'speed is an understatement. he delivered the mvp in 4 days, and it was cleaner than codebases i\'ve seen from expensive agencies charging 10x the price.' },
@@ -7,22 +9,41 @@ const reviews = [
     { name: 'neha kapoor', role: 'founder, edtech platform', rating: 5, project: 'web + automation', quote: 'he understood our vision immediately and delivered something better than what we imagined. on time, on budget, zero drama. will definitely work again.' },
 ];
 
-const stats = [
+const reviewsHin = [
+    { name: 'rohan das', role: 'ceo, techflow', rating: 5, project: 'automation + crm', quote: 'harsh ne sirf ek website nahi banai — usne humara pura lead generation automate kar diya. uske AI workflows ki wajah se humaare har hafte 20 ghante bach rahe hain. sach mein kamaal.' },
+    { name: 'sarah jenkins', role: 'founder, artistry', rating: 5, project: 'web design', quote: 'mujhe darr tha ki shayad koi developer design ko nahi samjhega. par harsh ne mujhe puri tarah galat sabit kiya. visuals ekdum stunning hain aur animations bohot smooth hain.' },
+    { name: 'mike chen', role: 'saas entrepreneur', rating: 5, project: 'saas mvp', quote: 'speed ki tareef kam padegi. usne sirf 4 din mein MVP deliver kar diya, aur code expensive agencies (jo 10x paisa leti hain) ke code se bhi bohot zyada clean tha.' },
+    { name: 'priya sharma', role: 'marketing head, d2c brand', rating: 5, project: 'ai content system', quote: 'pehle hi mahine me humara content output teen guna badh gaya. harsh ka banaya ai system apne aap seo-optimized articles publish karta hai, hume kuch nahi karna padta.' },
+    { name: 'alex turner', role: 'cto, fintech startup', rating: 5, project: 'ai chatbot', quote: 'wo chatbot ab humari 70% support queries sambhal leta hai. ye leads ko qualify karne aur sahi team tak bhejne me lajawab hai. iss quarter ka sabse best investment.' },
+    { name: 'neha kapoor', role: 'founder, edtech platform', rating: 5, project: 'web + automation', quote: 'usne humara vision turant samajh liya aur jo socha tha usse bhi badhiya banakar diya. time par, budget me, zero nakhre. aage zaroor inke sath dobara kaam karna chahungi.' },
+];
+
+const statsEn = [
     { value: '4.9', label: 'average rating' },
     { value: '50+', label: 'total reviews' },
     { value: '100%', label: 'recommend' },
     { value: '25+', label: 'global clients' },
 ];
 
+const statsHin = [
+    { value: '4.9', label: 'average rating' },
+    { value: '50+', label: 'total reviews' },
+    { value: '100%', label: 'recommend karte hain' },
+    { value: '25+', label: 'global clients' },
+];
+
 function Reviews() {
+    const { language } = useLanguage();
+    const reviews = language === 'hin' ? reviewsHin : reviewsEn;
+    const stats = language === 'hin' ? statsHin : statsEn;
     return (
         <div style={{ background: 'var(--c-bg)', minHeight: '100vh', paddingTop: '60px', transition: 'background 0.3s ease' }}>
 
             <section style={{ padding: '6rem 1.5rem 4rem' }}>
                 <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-                    <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--c-text-faint)', marginBottom: '1rem' }}>reviews</p>
+                    <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--c-text-faint)', marginBottom: '1rem' }}>{language === 'hin' ? 'reviews' : 'reviews'}</p>
                     <h1 style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', fontWeight: 900, letterSpacing: '-0.03em', lineHeight: 1.05, color: 'var(--c-text)', marginBottom: '1.5rem' }}>
-                        don't take<br /><span style={{ color: 'var(--c-text-dim)' }}>our word for it.</span>
+                        {language === 'hin' ? 'humari baaton par' : 'don\'t take'}<br /><span style={{ color: 'var(--c-text-dim)' }}>{language === 'hin' ? 'yakeen na karein.' : 'our word for it.'}</span>
                     </h1>
                 </div>
             </section>

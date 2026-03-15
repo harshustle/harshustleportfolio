@@ -1,13 +1,23 @@
 import { useEffect, useState } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 
-const metrics = [
+const metricsEn = [
   { label: 'projects delivered', value: 30, suffix: '+' },
   { label: 'years experience', value: 3, suffix: '+' },
   { label: 'client satisfaction', value: 100, suffix: '%' },
   { label: 'happy clients', value: 25, suffix: '+' },
 ];
 
+const metricsHin = [
+  { label: 'projects poore kiye', value: 30, suffix: '+' },
+  { label: 'saal ka anubhav', value: 3, suffix: '+' },
+  { label: 'client satisfaction', value: 100, suffix: '%' },
+  { label: 'khush clients', value: 25, suffix: '+' },
+];
+
 function MetricsStrip() {
+  const { language } = useLanguage();
+  const metrics = language === 'hin' ? metricsHin : metricsEn;
   const [counts, setCounts] = useState(metrics.map(() => 0));
 
   useEffect(() => {
