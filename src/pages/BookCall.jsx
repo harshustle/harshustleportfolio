@@ -1,19 +1,25 @@
+import { useLanguage } from '../context/LanguageContext';
+
 function BookCall() {
+    const { t, language } = useLanguage();
+
     return (
         <div style={{ background: 'var(--c-bg)', minHeight: '100vh', paddingTop: '60px', transition: 'background 0.3s ease' }}>
             <section style={{ padding: '4rem 1.5rem 6rem' }}>
                 <div className="grid-2" style={{ maxWidth: '1200px', margin: '0 auto', gap: '4rem', alignItems: 'start', paddingTop: '2rem' }}>
                     <div>
-                        <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--c-text-faint)', marginBottom: '1rem' }}>book a call</p>
+                        <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--c-text-faint)', marginBottom: '1rem' }}>{t('bookCallPage.intro')}</p>
                         <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 900, letterSpacing: '-0.03em', lineHeight: 1.05, color: 'var(--c-text)', marginBottom: '1.5rem' }}>
-                            let's talk<br /><span style={{ color: 'var(--c-text-dim)' }}>for free.</span>
+                            {t('bookCallPage.h1_1')}<br /><span style={{ color: 'var(--c-text-dim)' }}>{t('bookCallPage.h1_2')}</span>
                         </h1>
                         <p style={{ fontSize: '1rem', color: 'var(--c-text-muted)', lineHeight: 1.8, maxWidth: '420px', marginBottom: '2.5rem' }}>
-                            schedule a free 30-minute strategy session. no sales pressure, no obligation — just a real conversation about your goals.
+                            {t('bookCallPage.desc')}
                         </p>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '2.5rem' }}>
-                            {['30-minute strategy session', 'custom solution recommendations', 'clear next steps and timeline', 'completely free, no obligation'].map(item => (
-                                <div key={item} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                            {(language === 'hin' ? t('bookCallPage.list') : [
+                                '30-minute strategy session', 'custom solution recommendations', 'clear next steps and timeline', 'completely free, no obligation'
+                            ]).map((item, index) => (
+                                <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                                     <span style={{ width: '20px', height: '20px', borderRadius: '50%', border: '1px solid rgba(168,85,247,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.6rem', color: 'var(--accent)', flexShrink: 0 }}>✓</span>
                                     <span style={{ fontSize: '0.9rem', color: 'var(--c-text-muted)' }}>{item}</span>
                                 </div>
@@ -23,16 +29,16 @@ function BookCall() {
                             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.75rem' }}>
                                 <img src="https://github.com/harshustle.png" alt="Harsh" style={{ width: '44px', height: '44px', borderRadius: '50%', objectFit: 'cover' }} />
                                 <div>
-                                    <p style={{ fontWeight: 700, color: 'var(--c-text)', fontSize: '0.9rem' }}>harsh srivastav</p>
-                                    <p style={{ fontSize: '0.75rem', color: 'var(--c-text-dim)' }}>founder, digibasti</p>
+                                    <p style={{ fontWeight: 700, color: 'var(--c-text)', fontSize: '0.9rem' }}>{t('bookCallPage.founder')}</p>
+                                    <p style={{ fontSize: '0.75rem', color: 'var(--c-text-dim)' }}>{t('bookCallPage.role')}</p>
                                 </div>
                                 <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                                     <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#22c55e', display: 'inline-block' }} />
-                                    <span style={{ fontSize: '0.7rem', color: 'var(--c-text-dim)' }}>available</span>
+                                    <span style={{ fontSize: '0.7rem', color: 'var(--c-text-dim)' }}>{t('bookCallPage.available')}</span>
                                 </div>
                             </div>
                             <p style={{ fontSize: '0.8rem', color: 'var(--c-text-muted)', lineHeight: 1.6 }}>
-                                "i personally take every discovery call. let's find out if we're a good fit."
+                                {t('bookCallPage.quote')}
                             </p>
                         </div>
                     </div>

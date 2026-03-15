@@ -77,6 +77,89 @@ export const translations = {
         terms: "terms",
         privacy: "privacy"
       }
+    },
+    about: {
+      intro: "about",
+      h1_1: "hi, i'm harsh.",
+      h1_2: "i build things.",
+      desc: "ai automation expert. full-stack developer. content strategist. founder of digibasti — a one-person studio that helps businesses scale with smart systems.",
+      bookCall: "book a call",
+      followTw: "follow on twitter →",
+      founder: "harsh srivastav",
+      handle: "@harshustle · founder, digibasti",
+      valuesIntro: "values",
+      valuesH2_1: "what i believe",
+      valuesH2_2: "in building.",
+      timelineIntro: "timeline",
+      timelineH2_1: "the journey",
+      timelineH2_2: "so far.",
+      ctaH2_1: "let's work",
+      ctaH2_2: "together.",
+      ctaBtn: "book a call →"
+    },
+    services: {
+      intro: "services",
+      h1_1: "everything you need.",
+      h1_2: "nothing you don't.",
+      desc: "five services. one team. built for founders, creators, and businesses that want results — not just deliverables.",
+      getStarted: "get started —",
+      seeProcess: "see process →",
+      included: "included",
+      notSureH2_1: "not sure which service?",
+      notSureH2_2: "let's figure it out.",
+      bookCall: "book a free call →",
+      guarantee: "🔒 no commitment · free 30-min call · 100% satisfaction guaranteed"
+    },
+    contact: {
+      intro: "contact",
+      h1_1: "let's talk.",
+      h1_2: "seriously.",
+      desc: "fill in the form or reach out directly. we'll reply within 24 hours.",
+      labels: {
+        name: "name",
+        email: "email",
+        company: "company",
+        budget: "budget range",
+        message: "message"
+      },
+      placeholders: {
+        name: "your name",
+        email: "your@email.com",
+        company: "your company (optional)",
+        budget: "select budget",
+        message: "tell us about your project..."
+      },
+      budgetOptions: [
+        "under ₹25,000",
+        "₹25,000 – ₹75,000",
+        "₹75,000 – ₹2,00,000",
+        "₹2,00,000+"
+      ],
+      btn: {
+        idle: "send message →",
+        sending: "sending...",
+        sent: "message sent ✓",
+        error: "try again"
+      },
+      reachOut: "reach out directly",
+      responseTime: "response time",
+      responseSub: "we take every inquiry seriously. expect a real reply, not an autoresponder."
+    },
+    bookCallPage: {
+      intro: "book a call",
+      h1_1: "let's talk",
+      h1_2: "for free.",
+      desc: "schedule a free 30-minute strategy session. no sales pressure, no obligation — just a real conversation about your goals.",
+      list: [
+        "30-minute strategy session",
+        "custom solution recommendations",
+        "clear next steps and timeline",
+        "completely free, no obligation"
+      ],
+      founder: "harsh srivastav",
+      role: "founder, digibasti",
+      available: "available",
+      quote: "\"i personally take every discovery call. let's find out if we're a good fit.\""
     }
   },
   hin: {
@@ -157,6 +240,89 @@ export const translations = {
         terms: "shartein",
         privacy: "privacy"
       }
+    },
+    about: {
+      intro: "humare baare mein",
+      h1_1: "hi, main harsh hu.",
+      h1_2: "aur main chize banata hu.",
+      desc: "ai automation expert. full-stack developer. content strategist. digibasti ka founder — ek one-person studio jo businesses ko smart systems ke sath scale karne mein madad karta hai.",
+      bookCall: "call book karein",
+      followTw: "twitter par follow karein →",
+      founder: "harsh srivastav",
+      handle: "@harshustle · founder, digibasti",
+      valuesIntro: "values",
+      valuesH2_1: "main kis tarah ka",
+      valuesH2_2: "kaam karta hu.",
+      timelineIntro: "safar",
+      timelineH2_1: "ab tak ka",
+      timelineH2_2: "safar.",
+      ctaH2_1: "chaliye milkar",
+      ctaH2_2: "kaam karte hain.",
+      ctaBtn: "call book karein →"
+    },
+    services: {
+      intro: "services",
+      h1_1: "jo aapko chahiye,",
+      h1_2: "sirf vahi milega.",
+      desc: "paanch services. ek team. founders, creators, aur un businesses ke liye banaya gaya hai jinhe results chahiye — sirf deliverables nahi.",
+      getStarted: "shuru karein —",
+      seeProcess: "process dekhein →",
+      included: "kya milega",
+      notSureH2_1: "sure nahi kaunsi service?",
+      notSureH2_2: "milkar decide karte hain.",
+      bookCall: "free call book karein →",
+      guarantee: "🔒 koi commitment nahi · free 30-min call · 100% satisfaction guaranteed"
+    },
+    contact: {
+      intro: "sampark karein",
+      h1_1: "chaliye baat",
+      h1_2: "karte hain.",
+      desc: "form bhariye ya direct reach out karein. hum 24 ghante mein reply karenge.",
+      labels: {
+        name: "naam",
+        email: "email",
+        company: "company",
+        budget: "budget range",
+        message: "message"
+      },
+      placeholders: {
+        name: "aapka naam",
+        email: "aapka@email.com",
+        company: "aapki company (optional)",
+        budget: "budget chunein",
+        message: "apne project ke baare mein batayein..."
+      },
+      budgetOptions: [
+        "₹25,000 se kam",
+        "₹25,000 – ₹75,000",
+        "₹75,000 – ₹2,00,000",
+        "₹2,00,000+"
+      ],
+      btn: {
+        idle: "message bhejein →",
+        sending: "bhej rahe hain...",
+        sent: "message chala gaya ✓",
+        error: "phir try karein"
+      },
+      reachOut: "direct message karein",
+      responseTime: "response time",
+      responseSub: "hum har inquiry ko seriously lete hain. aapko ek real reply milega, koi autoresponder nahi."
+    },
+    bookCallPage: {
+      intro: "call book karein",
+      h1_1: "free mein",
+      h1_2: "baat karte hain.",
+      desc: "free 30-minute strategy session schedule karein. koi sales pressure nahi, koi tension nahi — bas aapke goals par ek real conversation.",
+      list: [
+        "30-minute strategy session",
+        "custom solution recommendations",
+        "clear next steps aur timeline",
+        "bilkul free, koi obligation nahi"
+      ],
+      founder: "harsh srivastav",
+      role: "founder, digibasti",
+      available: "available",
+      quote: "\"main personally har discovery call leta hu. aaiye milkar decide karte hain ki kya humari vibe match hoti hai.\""
     }
   }
 };

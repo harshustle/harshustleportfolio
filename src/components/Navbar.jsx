@@ -8,10 +8,16 @@ const MOBILE_BREAKPOINT = 768;
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [showLangTip, setShowLangTip] = useState(true);
   const [isMobile, setIsMobile] = useState(window.innerWidth < MOBILE_BREAKPOINT);
   const { theme, toggleTheme } = useTheme();
   const { language, toggleLanguage, t } = useLanguage();
   const location = useLocation();
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowLangTip(false), 6000);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -84,15 +90,28 @@ const Navbar = () => {
               >
                 {theme === 'dark' ? '☀️' : '🌙'}
               </button>
-              <button
-                onClick={toggleLanguage}
-                className="theme-toggle"
-                title="Toggle Language"
-                aria-label="Toggle language"
-                style={{ fontSize: '0.8rem', fontWeight: 'bold' }}
-              >
-                {language === 'en' ? 'EN' : 'HIN'}
-              </button>
+              <div style={{ position: 'relative' }} onMouseEnter={() => setShowLangTip(true)} onMouseLeave={() => setShowLangTip(false)}>
+                <button
+                  onClick={() => { toggleLanguage(); setShowLangTip(false); }}
+                  className="theme-toggle"
+                  title="Toggle Language"
+                  aria-label="Toggle language"
+                  style={{ fontSize: '0.8rem', fontWeight: 'bold' }}
+                >
+                  {language === 'en' ? 'EN' : 'HIN'}
+                </button>
+                {showLangTip && language === 'hin' && (
+                  <div style={{
+                    position: 'absolute', top: '120%', right: '0', width: 'max-content',
+                    background: 'var(--c-text)', color: 'var(--c-bg)', padding: '0.4rem 0.6rem',
+                    borderRadius: '6px', fontSize: '0.7rem', fontWeight: '600', pointerEvents: 'none',
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.15)', zIndex: 100,
+                  }}>
+                    Read in English
+                    <div style={{ position: 'absolute', top: '-3px', right: '12px', width: '6px', height: '6px', background: 'var(--c-text)', transform: 'rotate(45deg)' }} />
+                  </div>
+                )}
+              </div>
               <Link to="/book-a-call" style={{
                 padding: '0.5rem 1rem', fontSize: '0.8rem', fontWeight: 600,
                 color: 'var(--c-text-muted)', border: `1px solid var(--c-border)`,
@@ -125,14 +144,27 @@ const Navbar = () => {
               >
                 {theme === 'dark' ? '☀️' : '🌙'}
               </button>
-              <button
-                onClick={toggleLanguage}
-                className="theme-toggle"
-                aria-label="Toggle language"
-                style={{ fontSize: '0.8rem', fontWeight: 'bold' }}
-              >
-                {language === 'en' ? 'EN' : 'HIN'}
-              </button>
+              <div style={{ position: 'relative' }} onMouseEnter={() => setShowLangTip(true)} onMouseLeave={() => setShowLangTip(false)}>
+                <button
+                  onClick={() => { toggleLanguage(); setShowLangTip(false); }}
+                  className="theme-toggle"
+                  aria-label="Toggle language"
+                  style={{ fontSize: '0.8rem', fontWeight: 'bold' }}
+                >
+                  {language === 'en' ? 'EN' : 'HIN'}
+                </button>
+                {showLangTip && language === 'hin' && (
+                  <div style={{
+                    position: 'absolute', top: '120%', right: '50%', transform: 'translateX(50%)', width: 'max-content',
+                    background: 'var(--c-text)', color: 'var(--c-bg)', padding: '0.4rem 0.6rem',
+                    borderRadius: '6px', fontSize: '0.7rem', fontWeight: '600', pointerEvents: 'none',
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.15)', zIndex: 100,
+                  }}>
+                    Read in English
+                    <div style={{ position: 'absolute', top: '-3px', left: '50%', transform: 'translateX(-50%) rotate(45deg)', width: '6px', height: '6px', background: 'var(--c-text)' }} />
+                  </div>
+                )}
+              </div>
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
                 style={{

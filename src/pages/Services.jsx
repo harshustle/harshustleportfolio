@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import UserDetailsModal from '../components/UserDetailsModal';
 import { openRazorpayCheckout } from '../utils/razorpay';
+import { useLanguage } from '../context/LanguageContext';
 
 const services = [
     {
@@ -57,7 +58,61 @@ const services = [
 ];
 
 function Services() {
+    const { language, t } = useLanguage();
     const [buyService, setBuyService] = useState(null);
+
+    const servicesData = language === 'hin' ? [
+        {
+            slug: 'web-design',
+            tag: 'WEB DESIGN & DEV', title: 'sites jo convert karein.', icon: '🎨',
+            price: '₹15,000 se', priceAmount: 15000, priceNote: 'one-time',
+            desc: 'clean, fast, aur conversion-focused websites. apna tier chunein: ₹15,000 me static site ya ₹30,000 me full-stack jisme notion database aur ai chatbot ho.',
+            features: [
+                '₹15,000 — static site (html/react, seo, responsive)',
+                '₹30,000 — + notion database integration',
+                '₹30,000 — + ai chatbot embedded',
+                'custom ui/ux design',
+                'vercel deployment + custom domain',
+                '<14 day delivery',
+            ],
+        },
+        {
+            slug: 'video-editing',
+            tag: 'AI VIDEO CREATION & EDITING', title: 'videos jo rok ke rakhein.', icon: '🎬',
+            price: '₹8,000 se', priceAmount: 8000, priceNote: '/ 2 real shoot videos',
+            priceSecondary: '₹30,000', priceSecondaryNote: '/ 8 ai videos',
+            desc: 'do formats. same hook-first strategy. tier chunein: ₹8,000 me 2 videos (real shoot), ya ₹30,000 me 8 videos (ai-generated faceless) — reels, ugc ads, youtube shorts.',
+            features: [
+                '₹8,000 — 2 real on-site shoot videos',
+                '₹30,000 — 8 ai-generated faceless videos',
+                'reels / tiktok / youtube shorts',
+                'hook-optimized editing + captions',
+                'motion graphics & thumbnails',
+                'delivered in 2 rounds',
+            ],
+        },
+        {
+            slug: 'automation',
+            tag: 'AUTOMATION & AI SYSTEMS', title: 'systems, chaos nahi.', icon: '⚡',
+            price: '₹45,000', priceAmount: 45000, priceNote: 'one-time',
+            desc: 'crm integrations · lead follow-up · email & whatsapp automation. hum aapke workflows audit karke sab kuch automate karte hain.',
+            features: ['full workflow audit', 'n8n / zapier / make.com', 'crm & api integrations', 'email + whatsapp automation', 'ai-powered internal tools', '30-day support included'],
+        },
+        {
+            slug: 'ai-chatbots',
+            tag: 'AI CHATBOTS', title: 'support jo kabhi nahi sota.', icon: '🤖',
+            price: '₹30,000', priceAmount: 30000, priceNote: 'one-time',
+            desc: 'aapke business par trained custom ai chatbots. website ya whatsapp par. 24/7 leads qualify karein aur calls book karein.',
+            features: ['custom knowledge base', 'gemini / gpt-4 powered', 'whatsapp ya website embedded', 'lead qualification flows', 'handoff to human agent', 'analytics dashboard'],
+        },
+        {
+            slug: 'saas-mvp',
+            tag: 'SAAS & MVP', title: 'jaldi banayein, jaldi seekhein.', icon: '🚀',
+            price: '₹80,000', priceAmount: 80000, priceNote: 'one-time',
+            desc: 'full-stack saas mvps with auth, payments, aur dashboards. mahino nahi, dino mein ship karne ke liye.',
+            features: ['next.js + node.js + postgres', 'auth (clerk / supabase)', 'razorpay / stripe payments', 'admin dashboard', 'api-ready backend', '2-4 week delivery'],
+        },
+    ] : services;
 
     const handleBuySubmit = (name, phone) => {
         if (buyService) {
@@ -73,20 +128,20 @@ function Services() {
             <section style={{ padding: '6rem 1.5rem 4rem', position: 'relative', overflow: 'hidden' }}>
                 <div style={{ position: 'absolute', top: '50%', left: '30%', transform: 'translate(-50%,-50%)', width: '500px', height: '500px', background: 'radial-gradient(circle, rgba(168,85,247,0.06) 0%, transparent 70%)', pointerEvents: 'none' }} />
                 <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-                    <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--c-text-faint)', marginBottom: '1rem' }}>services</p>
+                    <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--c-text-faint)', marginBottom: '1rem' }}>{t('services.intro')}</p>
                     <h1 style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', fontWeight: 900, letterSpacing: '-0.03em', lineHeight: 1.05, color: 'var(--c-text)', marginBottom: '1.5rem' }}>
-                        everything you need.<br />
-                        <span style={{ color: 'var(--c-text-dim)' }}>nothing you don't.</span>
+                        {t('services.h1_1')}<br />
+                        <span style={{ color: 'var(--c-text-dim)' }}>{t('services.h1_2')}</span>
                     </h1>
                     <p style={{ fontSize: '1rem', color: 'var(--c-text-muted)', maxWidth: '500px', lineHeight: 1.7 }}>
-                        five services. one team. built for founders, creators, and businesses that want results — not just deliverables.
+                        {t('services.desc')}
                     </p>
                 </div>
             </section>
 
             {/* Services List */}
             <section style={{ borderTop: `2px solid var(--c-border)` }}>
-                {services.map((s, idx) => (
+                {servicesData.map((s, idx) => (
                     <div key={s.tag} style={{ borderBottom: `2px solid var(--c-border)`, background: s.featured ? 'var(--accent-dim)' : idx % 2 === 0 ? 'var(--c-bg)' : 'var(--c-bg-subtle)' }}>
                         <div className="grid-2 service-row" style={{ maxWidth: '1200px', margin: '0 auto', padding: '3.5rem 1.5rem', gap: '4rem', alignItems: 'start' }}>
                             {/* Left */}
@@ -102,18 +157,18 @@ function Services() {
                                     <button onClick={() => setBuyService(s)} style={{ padding: '0.65rem 1.25rem', background: 'var(--accent)', color: '#fff', fontWeight: 700, fontSize: '0.8rem', borderRadius: '8px', border: 'none', cursor: 'pointer', fontFamily: 'inherit', boxShadow: '0 0 16px rgba(168,85,247,0.3)', transition: 'box-shadow 0.2s' }}
                                         onMouseEnter={e => e.currentTarget.style.boxShadow = '0 0 28px rgba(168,85,247,0.55)'}
                                         onMouseLeave={e => e.currentTarget.style.boxShadow = '0 0 16px rgba(168,85,247,0.3)'}>
-                                        get started — {s.price}
+                                        {t('services.getStarted')} {s.price}
                                     </button>
                                     <Link to={`/process/${s.slug}`} style={{ display: 'inline-block', padding: '0.65rem 1.25rem', border: `1px solid var(--c-border)`, color: 'var(--c-text)', fontWeight: 600, fontSize: '0.8rem', borderRadius: '8px', textDecoration: 'none', transition: 'border-color 0.2s' }}
                                         onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--accent)'}
                                         onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--c-border)'}>
-                                        see process →
+                                        {t('services.seeProcess')}
                                     </Link>
                                 </div>
                             </div>
                             {/* Right */}
                             <div>
-                                <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--c-text-ghost)', marginBottom: '1.25rem' }}>included</p>
+                                <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--c-text-ghost)', marginBottom: '1.25rem' }}>{t('services.included')}</p>
                                 <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                                     {s.features.map(f => (
                                         <li key={f} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '0.875rem', color: 'var(--c-text-body)' }}>
@@ -144,14 +199,14 @@ function Services() {
             <section style={{ padding: '6rem 1.5rem', textAlign: 'center' }}>
                 <div style={{ maxWidth: '600px', margin: '0 auto' }}>
                     <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 3rem)', fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--c-text)', marginBottom: '1.5rem' }}>
-                        not sure which service?<br />
-                        <span style={{ color: 'var(--c-text-dim)' }}>let's figure it out.</span>
+                        {t('services.notSureH2_1')}<br />
+                        <span style={{ color: 'var(--c-text-dim)' }}>{t('services.notSureH2_2')}</span>
                     </h2>
                     <Link to="/book-a-call" style={{ display: 'inline-block', padding: '0.9rem 2rem', background: 'var(--accent)', color: '#fff', fontWeight: 700, borderRadius: '8px', fontSize: '0.875rem', boxShadow: '0 0 20px rgba(168,85,247,0.3)' }}>
-                        book a free call →
+                        {t('services.bookCall')}
                     </Link>
                     <p style={{ fontSize: '0.75rem', color: 'var(--c-text-faint)', marginTop: '1.25rem' }}>
-                        🔒 no commitment · free 30-min call · 100% satisfaction guaranteed
+                        {t('services.guarantee')}
                     </p>
                 </div>
             </section>
