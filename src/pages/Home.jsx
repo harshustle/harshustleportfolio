@@ -198,7 +198,7 @@ function Home() {
                                             style={{
                                                 padding: '0.6rem 1.25rem',
                                                 background: s.featured ? 'var(--accent)' : hoveredService === s.tag ? 'var(--c-btn-bg)' : 'var(--c-bg-subtle)',
-                                                color: s.featured || hoveredService === s.tag ? '#fff' : 'var(--c-text)',
+                                                color: s.featured ? '#fff' : hoveredService === s.tag ? 'var(--c-btn-text)' : 'var(--c-text)',
                                                 fontWeight: 700, fontSize: '0.8rem', borderRadius: '8px', border: 'none', cursor: 'pointer',
                                                 transition: 'all 0.2s ease',
                                                 transform: hoveredService === s.tag ? 'scale(1.05)' : 'scale(1)',
