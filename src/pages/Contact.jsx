@@ -1,227 +1,103 @@
-// src/pages/Contact.jsx
-import { useState } from "react";
-import Section from "../components/Section";
+import { useState } from 'react';
+
+const GOOGLE_SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
+
+const contactInfo = [
+    { label: 'email', value: 'harshustle@gmail.com', href: 'mailto:harshustle@gmail.com' },
+    { label: 'twitter', value: '@harshustle', href: 'https://twitter.com/harshustle' },
+    { label: 'linkedin', value: 'harshustle', href: 'https://linkedin.com/in/harshustle' },
+    { label: 'instagram', value: '@harshustle', href: 'https://instagram.com/harshustle' },
+];
 
 function Contact() {
-    const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        company: "",
-        budget: "",
-        message: ""
-    });
+    const [form, setForm] = useState({ name: '', email: '', company: '', budget: '', message: '' });
+    const [status, setStatus] = useState('idle');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Form submitted:", formData);
+        setStatus('sending');
+        try {
+            await fetch(GOOGLE_SCRIPT_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify({ ...form, sheetName: 'Sheet2' }) });
+            setStatus('sent');
+            setForm({ name: '', email: '', company: '', budget: '', message: '' });
+        } catch { setStatus('error'); }
     };
 
-    const contactInfo = [
-        { icon: "📧", label: "Email", value: "hello@company.com", link: "mailto:hello@company.com" },
-        { icon: "📞", label: "Phone", value: "+1 (555) 123-4567", link: "tel:+15551234567" },
-        { icon: "📍", label: "Office", value: "123 Innovation Street, San Francisco, CA 94105", link: "#" },
-        { icon: "💬", label: "Live Chat", value: "Available 24/7", link: "#" }
-    ];
-
-    const socialLinks = [
-        { name: "Twitter", icon: "🐦", link: "#" },
-        { name: "LinkedIn", icon: "💼", link: "#" },
-        { name: "GitHub", icon: "⚡", link: "#" },
-        { name: "Dribbble", icon: "🎨", link: "#" }
-    ];
+    const inputStyle = {
+        width: '100%', padding: '0.75rem 1rem',
+        background: 'var(--c-bg-input)', border: `1px solid var(--c-border)`,
+        borderRadius: '8px', color: 'var(--c-text)', fontSize: '0.875rem', outline: 'none', transition: 'border-color 0.2s', fontFamily: 'inherit',
+    };
 
     return (
-        <div className="min-h-screen">
-            {/* Hero */}
-            <section className="relative py-20 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/20 via-teal-900/20 to-cyan-900/20" />
+        <div style={{ background: 'var(--c-bg)', minHeight: '100vh', paddingTop: '60px', transition: 'background 0.3s ease' }}>
 
-                <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 text-center">
-                    <div className="inline-block px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-300 text-sm font-semibold mb-6">
-                        Get In Touch
-                    </div>
-                    <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
-                        Let's Build
-                        <span className="block bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 bg-clip-text text-transparent">
-                            Something Great
-                        </span>
+            <section style={{ padding: '6rem 1.5rem 4rem' }}>
+                <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+                    <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--c-text-faint)', marginBottom: '1rem' }}>contact</p>
+                    <h1 style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', fontWeight: 900, letterSpacing: '-0.03em', lineHeight: 1.05, color: 'var(--c-text)', marginBottom: '1.5rem' }}>
+                        let's talk.<br /><span style={{ color: 'var(--c-text-dim)' }}>seriously.</span>
                     </h1>
-                    <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-                        Have a project in mind? We'd love to hear about it. Get in touch and let's make it happen.
-                    </p>
+                    <p style={{ fontSize: '1rem', color: 'var(--c-text-muted)', maxWidth: '420px', lineHeight: 1.7 }}>fill in the form or reach out directly. we'll reply within 24 hours.</p>
                 </div>
             </section>
 
-            <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                <div className="grid lg:grid-cols-2 gap-12">
-                    {/* Contact Form */}
-                    <div>
-                        <div className="bg-gradient-to-br from-emerald-900/10 to-teal-900/10 rounded-2xl border border-emerald-500/20 p-8">
-                            <h2 className="text-3xl font-bold text-white mb-6">Send us a message</h2>
-                            <form onSubmit={handleSubmit} className="space-y-6">
-                                <div className="grid md:grid-cols-2 gap-4">
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-300 mb-2">
-                                            Your Name *
-                                        </label>
-                                        <input
-                                            type="text"
-                                            required
-                                            value={formData.name}
-                                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                            className="w-full px-4 py-3 bg-black/50 border border-gray-700 hover:border-emerald-500/50 focus:border-emerald-500 focus:outline-none rounded-lg text-white transition-colors"
-                                            placeholder="John Doe"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-300 mb-2">
-                                            Email Address *
-                                        </label>
-                                        <input
-                                            type="email"
-                                            required
-                                            value={formData.email}
-                                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                            className="w-full px-4 py-3 bg-black/50 border border-gray-700 hover:border-emerald-500/50 focus:border-emerald-500 focus:outline-none rounded-lg text-white transition-colors"
-                                            placeholder="john@example.com"
-                                        />
-                                    </div>
+            <section style={{ borderTop: `1px solid var(--c-divider)`, padding: '4rem 1.5rem 6rem' }}>
+                <div className="grid-2" style={{ maxWidth: '1200px', margin: '0 auto', gap: '5rem', alignItems: 'start' }}>
+
+                    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem' }}>
+                            {[{ key: 'name', label: 'name', type: 'text', placeholder: 'your name' }, { key: 'email', label: 'email', type: 'email', placeholder: 'your@email.com' }].map(f => (
+                                <div key={f.key}>
+                                    <label style={{ display: 'block', fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.1em', color: 'var(--c-text-dim)', marginBottom: '0.5rem', textTransform: 'uppercase' }}>{f.label}</label>
+                                    <input required={f.key !== 'company'} type={f.type} style={inputStyle} placeholder={f.placeholder} value={form[f.key]} onChange={e => setForm({ ...form, [f.key]: e.target.value })}
+                                        onFocus={e => e.target.style.borderColor = 'var(--accent)'} onBlur={e => e.target.style.borderColor = 'var(--c-border)'} />
                                 </div>
-
-                                <div className="grid md:grid-cols-2 gap-4">
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-300 mb-2">
-                                            Company
-                                        </label>
-                                        <input
-                                            type="text"
-                                            value={formData.company}
-                                            onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                                            className="w-full px-4 py-3 bg-black/50 border border-gray-700 hover:border-emerald-500/50 focus:border-emerald-500 focus:outline-none rounded-lg text-white transition-colors"
-                                            placeholder="Your Company"
-                                        />
-                                    </div>
-                                    <div>
-                                        <label className="block text-sm font-medium text-gray-300 mb-2">
-                                            Budget Range
-                                        </label>
-                                        <select
-                                            value={formData.budget}
-                                            onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                                            className="w-full px-4 py-3 bg-black/50 border border-gray-700 hover:border-emerald-500/50 focus:border-emerald-500 focus:outline-none rounded-lg text-white transition-colors"
-                                        >
-                                            <option value="">Select budget</option>
-                                            <option value="5k-10k">$5,000 - $10,000</option>
-                                            <option value="10k-25k">$10,000 - $25,000</option>
-                                            <option value="25k-50k">$25,000 - $50,000</option>
-                                            <option value="50k+">$50,000+</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-300 mb-2">
-                                        Project Details *
-                                    </label>
-                                    <textarea
-                                        required
-                                        rows="6"
-                                        value={formData.message}
-                                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                                        className="w-full px-4 py-3 bg-black/50 border border-gray-700 hover:border-emerald-500/50 focus:border-emerald-500 focus:outline-none rounded-lg text-white transition-colors resize-none"
-                                        placeholder="Tell us about your project..."
-                                    ></textarea>
-                                </div>
-
-                                <button
-                                    type="submit"
-                                    className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-semibold py-4 px-6 rounded-lg transition-all transform hover:scale-105"
-                                >
-                                    Send Message →
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-
-                    {/* Contact Info */}
-                    <div className="space-y-6">
-                        <div>
-                            <h2 className="text-3xl font-bold text-white mb-6">Contact Information</h2>
-                            <p className="text-gray-400 mb-8">
-                                Reach out to us through any of these channels. We typically respond within 24 hours.
-                            </p>
-                        </div>
-
-                        {/* Contact Methods */}
-                        <div className="space-y-4">
-                            {contactInfo.map((item, i) => (
-                                <a
-                                    key={i}
-                                    href={item.link}
-                                    className="flex items-start gap-4 p-4 bg-gradient-to-br from-emerald-900/10 to-teal-900/10 hover:from-emerald-900/20 hover:to-teal-900/20 rounded-xl border border-emerald-500/20 hover:border-emerald-500/40 transition-all group"
-                                >
-                                    <div className="w-12 h-12 rounded-lg bg-emerald-500/10 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
-                                        {item.icon}
-                                    </div>
-                                    <div>
-                                        <h4 className="text-white font-semibold mb-1">{item.label}</h4>
-                                        <p className="text-gray-400 text-sm">{item.value}</p>
-                                    </div>
-                                </a>
                             ))}
                         </div>
-
-                        {/* Social Links */}
-                        <div className="pt-6">
-                            <h3 className="text-lg font-semibold text-white mb-4">Follow Us</h3>
-                            <div className="flex gap-3">
-                                {socialLinks.map((social, i) => (
-                                    <a
-                                        key={i}
-                                        href={social.link}
-                                        className="w-12 h-12 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/20 hover:border-emerald-500/40 flex items-center justify-center text-2xl transition-all hover:scale-110"
-                                        title={social.name}
-                                    >
-                                        {social.icon}
-                                    </a>
-                                ))}
-                            </div>
+                        <div>
+                            <label style={{ display: 'block', fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.1em', color: 'var(--c-text-dim)', marginBottom: '0.5rem', textTransform: 'uppercase' }}>company</label>
+                            <input style={inputStyle} placeholder="your company (optional)" value={form.company} onChange={e => setForm({ ...form, company: e.target.value })}
+                                onFocus={e => e.target.style.borderColor = 'var(--accent)'} onBlur={e => e.target.style.borderColor = 'var(--c-border)'} />
                         </div>
+                        <div>
+                            <label style={{ display: 'block', fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.1em', color: 'var(--c-text-dim)', marginBottom: '0.5rem', textTransform: 'uppercase' }}>budget range</label>
+                            <select style={{ ...inputStyle, cursor: 'pointer' }} value={form.budget} onChange={e => setForm({ ...form, budget: e.target.value })}
+                                onFocus={e => e.target.style.borderColor = 'var(--accent)'} onBlur={e => e.target.style.borderColor = 'var(--c-border)'}>
+                                <option value="">select budget</option>
+                                <option>under ₹25,000</option>
+                                <option>₹25,000 – ₹75,000</option>
+                                <option>₹75,000 – ₹2,00,000</option>
+                                <option>₹2,00,000+</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style={{ display: 'block', fontSize: '0.7rem', fontWeight: 600, letterSpacing: '0.1em', color: 'var(--c-text-dim)', marginBottom: '0.5rem', textTransform: 'uppercase' }}>message</label>
+                            <textarea required rows={5} style={{ ...inputStyle, resize: 'none' }} placeholder="tell us about your project..." value={form.message} onChange={e => setForm({ ...form, message: e.target.value })}
+                                onFocus={e => e.target.style.borderColor = 'var(--accent)'} onBlur={e => e.target.style.borderColor = 'var(--c-border)'} />
+                        </div>
+                        <button type="submit" disabled={status === 'sending' || status === 'sent'} style={{ padding: '0.85rem', background: status === 'sent' ? 'rgba(34,197,94,0.1)' : 'var(--c-btn-bg)', color: status === 'sent' ? '#22c55e' : 'var(--c-btn-text)', fontWeight: 700, borderRadius: '8px', border: status === 'sent' ? '1px solid rgba(34,197,94,0.3)' : 'none', cursor: 'pointer', fontSize: '0.875rem', fontFamily: 'inherit', transition: 'all 0.2s' }}>
+                            {status === 'idle' && 'send message →'}{status === 'sending' && 'sending...'}{status === 'sent' && 'message sent ✓'}{status === 'error' && 'try again'}
+                        </button>
+                    </form>
 
-                        {/* Office Hours */}
-                        <div className="p-6 bg-gradient-to-br from-teal-900/20 to-cyan-900/20 rounded-xl border border-teal-500/20">
-                            <h3 className="text-lg font-semibold text-white mb-4">Office Hours</h3>
-                            <div className="space-y-2 text-gray-300">
-                                <div className="flex justify-between">
-                                    <span>Monday - Friday</span>
-                                    <span className="text-emerald-400">9:00 AM - 6:00 PM</span>
-                                </div>
-                                <div className="flex justify-between">
-                                    <span>Saturday</span>
-                                    <span className="text-emerald-400">10:00 AM - 4:00 PM</span>
-                                </div>
-                                <div className="flex justify-between">
-                                    <span>Sunday</span>
-                                    <span className="text-gray-500">Closed</span>
-                                </div>
-                            </div>
+                    <div>
+                        <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--c-text-ghost)', marginBottom: '1.5rem' }}>reach out directly</p>
+                        {contactInfo.map(c => (
+                            <a key={c.label} href={c.href} target="_blank" rel="noopener noreferrer"
+                                style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1.25rem 0', borderTop: `1px solid var(--c-border-subtle)`, textDecoration: 'none' }}>
+                                <p style={{ fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--c-text-faint)' }}>{c.label}</p>
+                                <p style={{ fontSize: '0.9rem', color: 'var(--c-text-strong)', fontWeight: 500 }}>{c.value}</p>
+                            </a>
+                        ))}
+                        <div style={{ marginTop: '3rem', padding: '2rem', border: `1px solid var(--c-border)`, borderRadius: '12px' }}>
+                            <p style={{ fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--c-text-ghost)', marginBottom: '0.75rem' }}>response time</p>
+                            <p style={{ fontSize: '2rem', fontWeight: 900, color: 'var(--c-text)', marginBottom: '0.5rem' }}>{'< 24 hrs'}</p>
+                            <p style={{ fontSize: '0.85rem', color: 'var(--c-text-muted)' }}>we take every inquiry seriously. expect a real reply, not an autoresponder.</p>
                         </div>
                     </div>
                 </div>
-
-                {/* Map Section (Placeholder) */}
-                <section className="mt-16">
-                    <div className="relative h-96 rounded-2xl overflow-hidden border border-emerald-500/20">
-                        <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/20 to-teal-900/20 flex items-center justify-center">
-                            <div className="text-center">
-                                <div className="text-6xl mb-4">🗺️</div>
-                                <p className="text-gray-400">Map integration placeholder</p>
-                                <p className="text-sm text-gray-500 mt-2">San Francisco, CA</p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </main>
+            </section>
         </div>
     );
 }

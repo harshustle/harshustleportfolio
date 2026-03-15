@@ -2,24 +2,30 @@
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import ChatWidget from "./components/ChatWidget";
 
 // Import all pages
 import Home from "./pages/Home";
 import Services from "./pages/Services";
-import Portfolio from "./pages/Portfolio";
+
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import HighValueAddons from "./pages/HighValueAddons";
-import CaseStudies from "./pages/CaseStudies";
+
 
 import TechStack from "./pages/TechStack";
 import Reviews from "./pages/Reviews";
 import BookCall from "./pages/BookCall";
+
 import Careers from "./pages/Careers";
 import Blog from "./pages/Blog";
-import FAQPage from "./pages/FAQPage";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import TermsConditions from "./pages/TermsConditions";
+import ProcessPage from "./pages/ProcessPage";
+
+
+import Terms, { Privacy } from "./pages/Terms";
+import Success from "./pages/Success";
+import VerifyPayment from "./pages/VerifyPayment";
+
 
 function App() {
   return (
@@ -29,11 +35,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />
-        <Route path="/portfolio" element={<Portfolio />} />
+
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/high-value-addons" element={<HighValueAddons />} />
-        <Route path="/case-studies" element={<CaseStudies />} />
+
 
 
         <Route path="/tech-stack" element={<TechStack />} />
@@ -41,12 +47,16 @@ function App() {
         <Route path="/book-a-call" element={<BookCall />} />
         <Route path="/careers" element={<Careers />} />
         <Route path="/blog" element={<Blog />} />
-        <Route path="/faq" element={<FAQPage />} />
-        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-        <Route path="/terms-conditions" element={<TermsConditions />} />
+        <Route path="/process/:serviceName" element={<ProcessPage />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/success" element={<Success />} />
+        <Route path="/verify-payment" element={<VerifyPayment />} />
+
       </Routes>
 
       <Footer />
+      <ChatWidget />
     </div>
   );
 }

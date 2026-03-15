@@ -1,17 +1,321 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
-@layer utilities {
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 4px;
+/* ─── LIGHT THEME (default) ─────────────────────────────── */
+:root {
+  --c-bg: #ffffff;
+  --c-bg-card: #fafafa;
+  --c-bg-subtle: rgba(0, 0, 0, 0.03);
+  --c-bg-input: rgba(0, 0, 0, 0.04);
+  --c-bg-hover: rgba(0, 0, 0, 0.04);
+  --c-text: #000000;
+  --c-text-strong: rgba(0, 0, 0, 0.82);
+  --c-text-body: rgba(0, 0, 0, 0.65);
+  --c-text-muted: rgba(0, 0, 0, 0.52);
+  --c-text-dim: rgba(0, 0, 0, 0.40);
+  --c-text-faint: rgba(0, 0, 0, 0.30);
+  --c-text-ghost: rgba(0, 0, 0, 0.18);
+  --c-border: rgba(0, 0, 0, 0.12);
+  --c-border-hover: rgba(0, 0, 0, 0.24);
+  --c-border-subtle: rgba(0, 0, 0, 0.07);
+  --c-divider: rgba(0, 0, 0, 0.08);
+  --c-grid: rgba(0, 0, 0, 0.07);
+  --c-nav-bg: rgba(255, 255, 255, 0.97);
+  --c-btn-bg: #000000;
+  --c-btn-text: #ffffff;
+  --accent: #A855F7;
+  --accent-dim: rgba(168, 85, 247, 0.12);
+}
+
+/* ─── DARK THEME ───────────────────────────────────────── */
+[data-theme="dark"] {
+  --c-bg: #000000;
+  --c-bg-card: #000000;
+  --c-bg-subtle: rgba(255, 255, 255, 0.03);
+  --c-bg-input: rgba(255, 255, 255, 0.04);
+  --c-bg-hover: rgba(255, 255, 255, 0.04);
+  --c-text: #ffffff;
+  --c-text-strong: rgba(255, 255, 255, 0.75);
+  --c-text-body: rgba(255, 255, 255, 0.6);
+  --c-text-muted: rgba(255, 255, 255, 0.45);
+  --c-text-dim: rgba(255, 255, 255, 0.35);
+  --c-text-faint: rgba(255, 255, 255, 0.25);
+  --c-text-ghost: rgba(255, 255, 255, 0.15);
+  --c-border: rgba(255, 255, 255, 0.10);
+  --c-border-hover: rgba(255, 255, 255, 0.22);
+  --c-border-subtle: rgba(255, 255, 255, 0.06);
+  --c-divider: rgba(255, 255, 255, 0.08);
+  --c-grid: rgba(255, 255, 255, 0.08);
+  --c-nav-bg: rgba(0, 0, 0, 0.95);
+  --c-btn-bg: #ffffff;
+  --c-btn-text: #000000;
+  --accent: #A855F7;
+  --accent-dim: rgba(168, 85, 247, 0.15);
+}
+
+/* ─── BASE RESET ───────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--c-bg);
+  color: var(--c-text);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+
+/* ─── SCROLLBAR ────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(168, 85, 247, 0.4);
+  border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(168, 85, 247, 0.7);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: var(--c-bg-subtle);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--c-border);
+  border-radius: 2px;
+}
+
+/* ─── ANIMATIONS ───────────────────────────────────────── */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
   }
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.02);
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 2px;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+@keyframes themePop {
+  0% {
+    transform: scale(1);
   }
-  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.2);
+
+  50% {
+    transform: scale(1.15) rotate(20deg);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.theme-icon-spin {
+  animation: themePop 0.4s ease-out;
+}
+
+/* ─── CRO ANIMATIONS ──────────────────────────────────── */
+
+/* Pulsing green availability dot */
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5); opacity: 1; }
+  50%       { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);  opacity: 0.85; }
+}
+
+/* Gentle attention pulse on primary CTA button */
+@keyframes cta-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(168, 85, 247, 0); }
+  50%       { box-shadow: 0 0 0 8px rgba(168, 85, 247, 0.18); }
+}
+
+/* Hero availability badge gentle fade-in */
+.hero-badge {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* ─── THEME TOGGLE BUTTON ──────────────────────────────── */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--c-bg-subtle);
+  border: 1px solid var(--c-border);
+  color: var(--c-text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+}
+
+.theme-toggle:hover {
+  background: var(--c-bg-hover);
+  border-color: var(--c-border-hover);
+  color: var(--c-text);
+}
+
+/* ─── RESPONSIVE GRID UTILITIES ─────────────────────────── */
+
+/* 2-column split → stacks on mobile */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* 4-column stats row → 2x2 on mobile */
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* 3-column process step row */
+.grid-step {
+  display: grid;
+  grid-template-columns: 60px 1fr auto;
+}
+
+/* Footer multi-column */
+.grid-footer {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+  gap: 2rem;
+}
+
+/* ─── MOBILE RESPONSIVE ─(max 768px)─────────────────────── */
+@media (max-width: 768px) {
+
+  /* Stack all 2-col grids */
+  .grid-2 {
+    grid-template-columns: 1fr !important;
+    gap: 2.5rem !important;
+  }
+
+  /* Reverse order for sections where content should come first */
+  .grid-2.mobile-reverse>*:first-child {
+    order: 2;
+  }
+
+  .grid-2.mobile-reverse>*:last-child {
+    order: 1;
+  }
+
+  /* Stats: 2x2 */
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Process step: hide duration badge */
+  .grid-step {
+    grid-template-columns: 44px 1fr !important;
+  }
+
+  .step-duration {
+    display: none !important;
+  }
+
+  /* Footer: 2 col */
+  .grid-footer {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Section padding for mobile */
+  .section-pad {
+    padding: 4rem 1.25rem !important;
+  }
+
+  .section-pad-top {
+    padding-top: 5rem !important;
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
+
+  /* Hero h1 clamp override */
+  .hero-h1 {
+    font-size: clamp(2.25rem, 10vw, 3.5rem) !important;
+  }
+
+  /* Service row gap fix */
+  .service-row {
+    padding: 2.5rem 1.25rem !important;
+  }
+
+  /* Add default padding to grid-2 inside sections */
+  .grid-2 {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+/* ─── SMALL MOBILE (max 500px) ───────────────────────────── */
+@media (max-width: 500px) {
+  .grid-footer {
+    grid-template-columns: 1fr !important;
+  }
+
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* ─── STICKY MOBILE CTA ─────────────────────────────────── */
+@media (max-width: 768px) {
+  .sticky-mobile-cta {
+    display: flex !important;
+  }
+
+  /* Add bottom padding so content isn't hidden behind sticky bar */
+  body {
+    padding-bottom: 72px;
   }
 }

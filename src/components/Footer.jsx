@@ -1,124 +1,46 @@
-// src/components/Footer.jsx
-import { Link } from "react-router-dom";
-import { Twitter, Linkedin, Instagram, Github } from "lucide-react";
+import { Link } from 'react-router-dom';
 
-function Footer() {
-    const currentYear = new Date().getFullYear();
+const Footer = () => (
+    <footer style={{ borderTop: `1px solid var(--c-divider)`, padding: '4rem 1.5rem 2rem', background: 'var(--c-bg)', transition: 'background 0.3s ease' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
 
-    const footerLinks = {
-        company: [
-            { label: "About Us", path: "/about" },
-            { label: "Careers", path: "/careers" },
-            { label: "Contact", path: "/contact" },
-            { label: "Book a Call", path: "/book-a-call" },
-            { label: "Reviews", path: "/reviews" }
-        ],
-        work: [
-            { label: "Services", path: "/services" },
-            { label: "Portfolio", path: "/portfolio" },
-            { label: "Case Studies", path: "/case-studies" },
+            {/* Top grid */}
+            <div className="grid-footer" style={{ marginBottom: '3rem', gap: '2rem' }}>
+                <div>
+                    <p style={{ fontWeight: 800, fontSize: '1.1rem', letterSpacing: '-0.02em', color: 'var(--c-text)', marginBottom: '0.75rem' }}>
+                        digi<span style={{ color: '#A855F7' }}>basti</span>
+                    </p>
+                    <p style={{ fontSize: '0.8rem', color: 'var(--c-text-muted)', lineHeight: 1.7, maxWidth: '220px' }}>
+                        ai automation, web design, and content systems for ambitious founders.
+                    </p>
+                </div>
 
-            { label: "High-Value Add-ons", path: "/high-value-addons" }
-        ],
-        resources: [
-            { label: "Blog", path: "/blog" },
-
-            { label: "Tech Stack", path: "/tech-stack" },
-            { label: "FAQ", path: "/faq" }
-        ],
-        legal: [
-            { label: "Privacy Policy", path: "/privacy-policy" },
-            { label: "Terms & Conditions", path: "/terms-conditions" }
-        ]
-    };
-
-    return (
-        <footer className="border-t border-white/10 bg-black pt-16 pb-8">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-12">
-                    {/* Brand Column */}
-                    <div className="col-span-2 lg:col-span-2">
-                        <Link to="/" className="text-2xl font-bold text-white mb-4 block">
-                            HARSH<span className="text-purple-500">UGC</span>
-                        </Link>
-                        <p className="text-gray-400 mb-6 max-w-sm">
-                            Building digital experiences that transform businesses. Innovation, quality, and speed delivered.
-                        </p>
-                        <div className="flex gap-4">
-                            <a href="https://twitter.com/harshustle" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-purple-500/20 hover:text-purple-400 transition-all border border-white/10 hover:border-purple-500/30">
-                                <Twitter size={18} />
-                            </a>
-                            <a href="https://www.linkedin.com/in/harshustle/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-purple-500/20 hover:text-purple-400 transition-all border border-white/10 hover:border-purple-500/30">
-                                <Linkedin size={18} />
-                            </a>
-                            <a href="https://www.instagram.com/harshustle/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-purple-500/20 hover:text-purple-400 transition-all border border-white/10 hover:border-purple-500/30">
-                                <Instagram size={18} />
-                            </a>
-                            <a href="https://github.com/harshustle" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:bg-purple-500/20 hover:text-purple-400 transition-all border border-white/10 hover:border-purple-500/30">
-                                <Github size={18} />
-                            </a>
+                {[
+                    { heading: 'work', links: [{ label: 'services', href: '/services' }, { label: 'process', href: '/process/web-design' }, { label: 'add-ons', href: '/addons' }, { label: 'tech stack', href: '/tech-stack' }] },
+                    { heading: 'company', links: [{ label: 'about', href: '/about' }, { label: 'reviews', href: '/reviews' }, { label: 'blog', href: '/blog' }, { label: 'careers', href: '/careers' }] },
+                    { heading: 'connect', links: [{ label: 'book a call', href: '/book-a-call' }, { label: 'contact', href: '/contact' }, { label: 'twitter', href: 'https://twitter.com/harshustle' }, { label: 'linkedin', href: 'https://linkedin.com/in/harshustle' }] },
+                    { heading: 'legal', links: [{ label: 'terms', href: '/terms' }, { label: 'privacy', href: '/privacy' }] },
+                ].map(col => (
+                    <div key={col.heading}>
+                        <p style={{ fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--c-text-ghost)', marginBottom: '1rem' }}>{col.heading}</p>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+                            {col.links.map(l => (
+                                <Link key={l.label} to={l.href} style={{ fontSize: '0.82rem', color: 'var(--c-text-muted)', transition: 'color 0.15s' }}>
+                                    {l.label}
+                                </Link>
+                            ))}
                         </div>
                     </div>
-
-                    {/* Links Columns */}
-                    <div>
-                        <h3 className="font-bold text-white mb-4">Company</h3>
-                        <ul className="space-y-3">
-                            {footerLinks.company.map((link) => (
-                                <li key={link.path}>
-                                    <Link to={link.path} className="text-gray-400 hover:text-purple-400 transition-colors text-sm">
-                                        {link.label}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    <div>
-                        <h3 className="font-bold text-white mb-4">Work</h3>
-                        <ul className="space-y-3">
-                            {footerLinks.work.map((link) => (
-                                <li key={link.path}>
-                                    <Link to={link.path} className="text-gray-400 hover:text-purple-400 transition-colors text-sm">
-                                        {link.label}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    <div>
-                        <h3 className="font-bold text-white mb-4">Resources</h3>
-                        <ul className="space-y-3">
-                            {footerLinks.resources.map((link) => (
-                                <li key={link.path}>
-                                    <Link to={link.path} className="text-gray-400 hover:text-purple-400 transition-colors text-sm">
-                                        {link.label}
-                                    </Link>
-                                </li>
-                            ))}
-                            {/* Legal Links embedded here or separate? Let's separate if space, else append */}
-                            <li className="pt-4 mt-4 border-t border-white/10">
-                                <h4 className="font-bold text-white mb-3 text-xs uppercase tracking-wider">Legal</h4>
-                            </li>
-                            {footerLinks.legal.map((link) => (
-                                <li key={link.path}>
-                                    <Link to={link.path} className="text-gray-400 hover:text-purple-400 transition-colors text-sm">
-                                        {link.label}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                </div>
-
-                <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-gray-500">
-                    <p>© {currentYear} HarshUGC. All rights reserved.</p>
-                    <p>Designed with ❤️ for builders.</p>
-                </div>
+                ))}
             </div>
-        </footer>
-    );
-}
+
+            {/* Bottom bar */}
+            <div style={{ borderTop: `1px solid var(--c-divider)`, paddingTop: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem' }}>
+                <p style={{ fontSize: '0.75rem', color: 'var(--c-text-ghost)' }}>© 2026 digibasti. all rights reserved.</p>
+                <p style={{ fontSize: '0.75rem', color: 'var(--c-text-ghost)' }}>built with obsession.</p>
+            </div>
+        </div>
+    </footer>
+);
 
 export default Footer;

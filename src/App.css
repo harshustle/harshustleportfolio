@@ -1,20 +1,11 @@
-/* src/index.css */
-@import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Cubio+Wide:wght@400;500;600;700&display=swap');
+/* App-level overrides — Ravan.ai aesthetic */
 
-body {
-  font-family: 'Cubio Wide', sans-serif;
-}
-@layer utilities {
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .animate-fadeIn {
-    animation: fadeIn 0.5s ease-out forwards;
-  }
-}
+/* Remove all non-black backgrounds from every element */
+/* NOTE: We purposely DO NOT use !important blanket override anymore */
+/* Each component manages its own background */
 
-*{
-  background-color: black !important;
+/* Smooth page transitions */
+.page-wrapper {
+  min-height: 100vh;
+  background: #000;
 }

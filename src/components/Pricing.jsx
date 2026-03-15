@@ -3,11 +3,32 @@ import React from "react";
 import { Check } from "lucide-react";
 import { motion } from "motion/react";
 
+import { openRazorpayCheckout } from "../utils/razorpay";
+import UserDetailsModal from "./UserDetailsModal";
+import { useState } from "react";
+
 function Pricing() {
+  const [buyTier, setBuyTier] = useState(null);
+
+  const handleBuySubmit = (name, phone) => {
+    if (buyTier && buyTier.priceAmount) {
+      openRazorpayCheckout(
+        buyTier.priceAmount,
+        buyTier.currency || "INR",
+        buyTier.name,
+        buyTier.tagline,
+        { name, contact: phone }
+      );
+      setBuyTier(null);
+    }
+  };
+
   const tiers = [
     {
       name: "Starter",
-      price: "$99",
+      price: "$99 / ₹8,500",
+      priceAmount: 8500,
+      currency: "INR",
       tagline: "Perfect for quick prototypes.",
       features: [
         "Core layout components",
@@ -18,7 +39,9 @@ function Pricing() {
     },
     {
       name: "Pro",
-      price: "$199",
+      price: "$199 / ₹17,000",
+      priceAmount: 17000,
+      currency: "INR",
       tagline: "For serious indie projects & agencies.",
       features: [
         "All components & sections",
@@ -29,7 +52,9 @@ function Pricing() {
     },
     {
       name: "Team",
-      price: "$249",
+      price: "$249 / ₹21,000",
+      priceAmount: 21000,
+      currency: "INR",
       tagline: "For product teams that ship weekly.",
       features: [
         "Seat-based licensing",
@@ -169,6 +194,11 @@ function Pricing() {
                   ? "bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-700 hover:to-purple-600 text-white shadow-lg hover:shadow-purple-500/25"
                   : "bg-white/10 hover:bg-white/20 text-white border border-white/10"
                   }`}
+                onClick={() => {
+                  if (tier.priceAmount) {
+                    setBuyTier(tier);
+                  }
+                }}
               >
                 Get {tier.name}
               </motion.button>
@@ -176,7 +206,15 @@ function Pricing() {
           ))}
         </motion.div>
       </div>
-    </motion.section>
+
+
+      <UserDetailsModal
+        isOpen={!!buyTier}
+        onClose={() => setBuyTier(null)}
+        onSubmit={handleBuySubmit}
+        serviceName={buyTier?.name + " Plan"}
+      />
+    </motion.section >
   );
 }
 
