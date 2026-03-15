@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useLayoutEffect } from 'react';
+import gsap from 'gsap';
 import MetricsStrip from '../components/MetricsStrip';
 import Testimonials from '../components/Testimonials';
 import FAQ from '../components/FAQ';
@@ -131,33 +132,50 @@ function Home() {
         }
     };
 
+    const heroRef = useRef(null);
+    const q = gsap.utils.selector(heroRef);
+
+    useLayoutEffect(() => {
+        const ctx = gsap.context(() => {
+            gsap.fromTo(q('.hero-reveal'), 
+                { y: 40, opacity: 0 }, 
+                { y: 0, opacity: 1, duration: 0.8, stagger: 0.15, ease: 'power3.out', delay: 0.1 }
+            );
+            gsap.fromTo(q('.hero-orb'), 
+                { scale: 0.8, opacity: 0 }, 
+                { scale: 1, opacity: 1, duration: 1.5, ease: 'power2.out' }
+            );
+        }, heroRef);
+        return () => ctx.revert();
+    }, []);
+
     return (
         <div style={{ background: 'var(--c-bg)', minHeight: '100vh', transition: 'background 0.3s ease' }}>
 
             {/* ─── HERO ─────────────────────────────── */}
-            <section style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '8rem 1.5rem 4rem', position: 'relative', overflow: 'hidden' }}>
+            <section ref={heroRef} style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '8rem 1.5rem 4rem', position: 'relative', overflow: 'hidden' }}>
                 {/* Background gradient orb */}
-                <div style={{ position: 'absolute', top: '30%', left: '50%', transform: 'translate(-50%,-50%)', width: '700px', height: '700px', background: 'radial-gradient(circle, rgba(168,85,247,0.10) 0%, transparent 70%)', pointerEvents: 'none' }} />
+                <div className="hero-orb" style={{ position: 'absolute', top: '30%', left: '50%', transform: 'translate(-50%,-50%)', width: '700px', height: '700px', background: 'radial-gradient(circle, rgba(168,85,247,0.10) 0%, transparent 70%)', pointerEvents: 'none' }} />
                 {/* Subtle grid overlay */}
                 <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(var(--c-grid) 1px, transparent 1px), linear-gradient(90deg, var(--c-grid) 1px, transparent 1px)', backgroundSize: '60px 60px', opacity: 0.4, pointerEvents: 'none' }} />
 
                 <div style={{ maxWidth: '900px', position: 'relative', zIndex: 1 }}>
                     {/* Live badge */}
-                    <div className="hero-badge" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.3rem 0.9rem', border: `1px solid rgba(34,197,94,0.35)`, borderRadius: '999px', fontSize: '0.7rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--c-text-muted)', marginBottom: '2rem', background: 'rgba(34,197,94,0.05)' }}>
+                    <div className="hero-badge hero-reveal" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.3rem 0.9rem', border: `1px solid rgba(34,197,94,0.35)`, borderRadius: '999px', fontSize: '0.7rem', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--c-text-muted)', marginBottom: '2rem', background: 'rgba(34,197,94,0.05)' }}>
                         <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#22c55e', display: 'inline-block', animation: 'pulse-dot 2s infinite' }} />
                         {t('home.badge')}
                     </div>
 
-                    <h1 style={{ fontSize: 'clamp(2.5rem, 8vw, 6rem)', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-0.03em', marginBottom: '1.5rem', color: 'var(--c-text)' }}>
+                    <h1 className="hero-reveal" style={{ fontSize: 'clamp(2.5rem, 8vw, 6rem)', fontWeight: 900, lineHeight: 1.05, letterSpacing: '-0.03em', marginBottom: '1.5rem', color: 'var(--c-text)' }}>
                         {t('home.title1')}<br />
                         <span style={{ color: 'var(--c-text-dim)' }}>{t('home.title2')}</span>
                     </h1>
 
-                    <p style={{ fontSize: 'clamp(1rem, 2vw, 1.2rem)', color: 'var(--c-text-muted)', maxWidth: '550px', margin: '0 auto 2.5rem', lineHeight: 1.7 }}>
+                    <p className="hero-reveal" style={{ fontSize: 'clamp(1rem, 2vw, 1.2rem)', color: 'var(--c-text-muted)', maxWidth: '550px', margin: '0 auto 2.5rem', lineHeight: 1.7 }}>
                         {t('home.subtitle')}
                     </p>
 
-                    <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+                    <div className="hero-reveal" style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
                         <Link to="/book-a-call" id="hero-cta-primary" style={{
                             padding: '0.9rem 2rem', background: 'var(--c-btn-bg)', color: 'var(--c-btn-text)',
                             fontWeight: 700, borderRadius: '8px', fontSize: '0.9rem', display: 'inline-block',
@@ -175,7 +193,9 @@ function Home() {
                     </div>
 
                     {/* Trust bar — social proof right under CTAs */}
-                    <TrustBar />
+                    <div className="hero-reveal">
+                       <TrustBar />
+                    </div>
                 </div>
             </section>
 
